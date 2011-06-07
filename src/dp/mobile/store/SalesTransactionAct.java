@@ -1,5 +1,11 @@
 package dp.mobile.store;
 
-public class SalesTransactionAct {
+import android.app.Activity;
+import android.os.Bundle;
 
+public class SalesTransactionAct extends Activity {
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+	}
 }

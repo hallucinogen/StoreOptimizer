@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<style name="title_style" parent="android:style/TextAppearance">
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:layout_width">wrap_content</item>
+		<item name="android:layout_margin">20dip</item>
+        <item name="android:gravity">center</item>
+        <item name="android:typeface">serif</item>
+        <item name="android:textColor">#FF6666FF</item>
+        <item name="android:textColorHighlight">#FFFFFFFF</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+	</style>
+</resources>

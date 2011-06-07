@@ -1,5 +1,11 @@
 package dp.mobile.store;
 
-public class DownloadDataAct {
+import android.app.Activity;
+import android.os.Bundle;
 
+public class DownloadDataAct extends Activity {
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+	}
 }
