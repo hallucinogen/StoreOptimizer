@@ -6,7 +6,30 @@
     <uses-sdk android:minSdkVersion="7" />
 
     <application android:icon="@drawable/icon" android:label="@string/app_name">
-
+		<activity android:name=".LoginAct">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        
+		<activity android:name="CashReportAct" />
+		<activity android:name="CheckRouteAct" />
+		<activity android:name="DailyNewsAct" />
+		<activity android:name="DownloadDataAct" />
+		<activity android:name="GiroReportAct" />
+		<activity android:name="KanvasingAct" />
+		<activity android:name="MainMenuAct" />
+		<activity android:name="OtherTransactionAct" />
+		<activity android:name="ReceivablePaymentAct" />
+		<activity android:name="ReceivingAct" />
+		<activity android:name="ReturnAct" />
+		<activity android:name="SalesInformationAct" />
+		<activity android:name="SalesTransactionAct" />
+		<activity android:name="SettingAct" />
+		<activity android:name="StockReportAct" />
+		<activity android:name="StockRequestAct" />
+		<activity android:name="StockTransactionAct" />
 
     </application>
 </manifest>
