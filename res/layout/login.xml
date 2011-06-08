@@ -1,51 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:stretchColumns="1"
-    >
-    <TableRow>
-    	<TextView
-    		android:gravity="left"
-    		android:text="Host String"
-    		android:paddingRight="5dip" />
-    	<EditText
-    		android:gravity="left"
-    		android:text="116.90.165.82"
-    		android:id="@+id/host_string" />
-    </TableRow>
-    <TableRow>
-    	<TextView
-    		android:gravity="left"
-    		android:text="Username"
-    		android:paddingRight="5dip" />
-    	<EditText
-    		android:gravity="left"
-    		android:text=""
-    		android:id="@+id/username" />
-    </TableRow>
+    android:gravity="center"
+    android:layout_height="fill_parent" >
     
-    <TableRow>
-    	<TextView
-    		android:gravity="left"
-    		android:text="Password"
-    		android:paddingRight="5dip" />
-    	<EditText
-    		android:gravity="left"
-    		android:text=""
-    		android:inputType="textPassword"
-    		android:id="@+id/password" />
-    </TableRow>
+    <TextView 
+		style="@style/title_style"
+		android:text="Login"/>
     
-    <TableRow>
-    	<Button
-    		android:text="Setting"
-    		android:paddingRight="5dip"
-    		android:id="@+id/setting" />
-    	<Button
-    		android:text="Login"
-    		android:paddingRight="5dip"
-    		android:id="@+id/login" />
-    </TableRow>
-</TableLayout>
+	<TableLayout 
+	    android:orientation="vertical"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:stretchColumns="1"
+	    >
+	    <TableRow>
+	    	<TextView
+	    		android:gravity="left"
+	    		android:text="Host String"
+	    		android:paddingRight="5dip" />
+	    	<EditText
+	    		android:gravity="left"
+	    		android:text="116.90.165.82"
+	    		android:id="@+id/host_string" />
+	    </TableRow>
+	    <TableRow>
+	    	<TextView
+	    		android:gravity="left"
+	    		android:text="Username"
+	    		android:paddingRight="5dip" />
+	    	<EditText
+	    		android:gravity="left"
+	    		android:text=""
+	    		android:id="@+id/username" />
+	    </TableRow>
+	    
+	    <TableRow>
+	    	<TextView
+	    		android:gravity="left"
+	    		android:text="Password"
+	    		android:paddingRight="5dip" />
+	    	<EditText
+	    		android:gravity="left"
+	    		android:text=""
+	    		android:inputType="textPassword"
+	    		android:id="@+id/password" />
+	    </TableRow>
+	    
+	    <TableRow>
+	    	
+	    	<LinearLayout>
+	    	<Button
+	    		style="@style/table_button_style"
+	    		android:text="Setting"
+	    		android:id="@+id/setting" />
+	    	</LinearLayout>
+	    	<LinearLayout
+	    		android:gravity="right">
+	    	<Button
+	    		style="@style/table_button_style"
+	    		android:text="Login"
+	    		android:id="@+id/login" />
+	    	</LinearLayout>
+	    </TableRow>
+	</TableLayout>
+</LinearLayout>

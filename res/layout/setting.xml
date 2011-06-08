@@ -1,86 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:stretchColumns="1"
-    >
-    <TableRow>
-    	<TextView
-    		android:gravity="left"
-    		android:text="Host Name"
-    		android:paddingRight="5dip" />
-    	<EditText
-    		android:gravity="left"
-    		android:text=""
-    		android:inputType="textUri"
-    		android:id="@+id/host_name" />
-    </TableRow>
-    <TableRow>
-    	<TextView
-    		android:gravity="left"
-    		android:text="IP Server"
-    		android:paddingRight="5dip" />
-    	<EditText
-    		android:gravity="left"
-    		android:text=""
-    		android:inputType="textUri"
-    		android:id="@+id/ip_server" />
-    </TableRow>
+    android:gravity="center"
+    android:layout_height="fill_parent" >
     
-    <TableRow>
-    	<TextView
-    		android:gravity="left"
-    		android:text="Host String"
-    		android:paddingRight="5dip" />
-    	<EditText
-    		android:gravity="left"
-    		android:text=""
-    		android:inputType="textUri"
-    		android:id="@+id/host_string" />
-    </TableRow>
+    <TextView 
+		style="@style/title_style"
+		android:text="Setting"/>
     
-    <TableRow>
-    	<TextView
-    		android:gravity="left"
-    		android:text="Default User"
-    		android:paddingRight="5dip" />
-    	<EditText
-    		android:gravity="left"
-    		android:text=""
-    		android:id="@+id/default_user" />
-    </TableRow>
-    
-    <TableRow>
-    	<TextView
-    		android:gravity="left"
-    		android:text="Phone Number"
-    		android:paddingRight="5dip" />
-    	<TextView
-    		android:gravity="left"
-    		android:text=""
-    		android:id="@+id/phone_number" />
-    </TableRow>
-    
-    <TableRow>
-    	<TextView
-    		android:gravity="left"
-    		android:text="IMEI"
-    		android:paddingRight="5dip" />
-    	<TextView
-    		android:gravity="left"
-    		android:text=""
-    		android:id="@+id/imei" />
-    </TableRow>
-    
-    <TableRow>
-    	<Button
-    		android:text="Default"
-    		android:paddingRight="5dip"
-    		android:id="@+id/default_setting" />
-    	<Button
-    		android:text="Confirm"
-    		android:paddingRight="5dip"
-    		android:id="@+id/confirm" />
-    </TableRow>
-</TableLayout>
+	<TableLayout 
+	    android:orientation="vertical"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:stretchColumns="1"
+	    >
+	    
+	    <TableRow>
+	    	<TextView
+	    		android:gravity="left"
+	    		android:text="Host Name"
+	    		android:paddingRight="5dip" />
+	    	<EditText
+	    		android:gravity="left"
+	    		android:text=""
+	    		android:inputType="textUri"
+	    		android:id="@+id/host_name" />
+	    </TableRow>
+	    <TableRow>
+	    	<TextView
+	    		android:gravity="left"
+	    		android:text="IP Server"
+	    		android:paddingRight="5dip" />
+	    	<EditText
+	    		android:gravity="left"
+	    		android:text=""
+	    		android:inputType="textUri"
+	    		android:id="@+id/ip_server" />
+	    </TableRow>
+	    
+	    <TableRow>
+	    	<TextView
+	    		android:gravity="left"
+	    		android:text="Host String"
+	    		android:paddingRight="5dip" />
+	    	<EditText
+	    		android:gravity="left"
+	    		android:text=""
+	    		android:inputType="textUri"
+	    		android:id="@+id/host_string" />
+	    </TableRow>
+	    
+	    <TableRow>
+	    	<TextView
+	    		android:gravity="left"
+	    		android:text="Default User"
+	    		android:paddingRight="5dip" />
+	    	<EditText
+	    		android:gravity="left"
+	    		android:text=""
+	    		android:id="@+id/default_user" />
+	    </TableRow>
+	    
+	    <TableRow>
+	    	<TextView
+	    		android:gravity="left"
+	    		android:text="Phone Number"
+	    		android:paddingRight="5dip" />
+	    	<TextView
+	    		android:gravity="left"
+	    		android:text=""
+	    		android:id="@+id/phone_number" />
+	    </TableRow>
+	    
+	    <TableRow>
+	    	<TextView
+	    		android:gravity="left"
+	    		android:text="IMEI"
+	    		android:paddingRight="5dip" />
+	    	<TextView
+	    		android:gravity="left"
+	    		android:text=""
+	    		android:id="@+id/imei" />
+	    </TableRow>
+	    
+	    <TableRow>
+	    	
+	    	<LinearLayout>
+	    	<Button
+	    		style="@style/table_button_style"
+	    		android:text="Default"
+	    		android:id="@+id/default_setting" />
+	    	</LinearLayout>
+	    	<LinearLayout
+	    		android:gravity="right">
+	    	<Button
+	    		style="@style/table_button_style"
+	    		android:text="Confirm"
+	    		android:id="@+id/confirm" />
+	    	</LinearLayout>
+	    </TableRow>
+	</TableLayout>
+</LinearLayout>

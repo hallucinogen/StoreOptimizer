@@ -8,17 +8,52 @@
     <TextView 
 		style="@style/title_style"
 		android:text="Receiving"/>
+	<TableLayout
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content">
+		<TableRow>
+			<TextView 
+				android:layout_weight="1"
+				android:gravity="center"
+				android:text="Item"
+				android:textStyle="bold" />
+			<TextView 
+				android:layout_weight="1"
+				android:gravity="center"
+				android:textStyle="bold"
+				android:text="Request" />
+			<TextView 
+				android:layout_weight="1"
+				android:gravity="center"
+				android:textStyle="bold"
+				android:text="Receive" />
+		</TableRow>
+		
+		<TableRow>
+			<TextView 
+				android:layout_weight="1"
+				android:gravity="center"
+				android:text="Rokok Merah Jitu"
+				android:height="0dp" />
+			<TextView 
+				android:layout_weight="1"
+				android:gravity="center"
+				android:text="100000"
+				android:height="0dp" />
+			<TextView 
+				android:layout_weight="1"
+				android:gravity="center"
+				android:text="100000"
+				android:height="0dp" />
+		</TableRow>
+	</TableLayout>
 	<ScrollView
 		android:layout_width="fill_parent"
-	    android:layout_height="wrap_content">
-    <LinearLayout
-    	android:orientation="vertical"
-	    android:layout_width="fill_parent"
-	    android:layout_height="fill_parent"
-    	android:gravity="center_horizontal"
-    	android:layout_margin="20dip"
-    	android:id="@+id/news_linear">
-    	
-	</LinearLayout>
+		android:layout_height="wrap_content">
+		<TableLayout
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent"
+			android:id="@+id/stock_table">
+		</TableLayout>
 	</ScrollView>
 </LinearLayout>

@@ -15,10 +15,29 @@
     	android:orientation="vertical"
 	    android:layout_width="fill_parent"
 	    android:layout_height="fill_parent"
-    	android:gravity="center_horizontal"
+    	android:layout_gravity="center"
     	android:layout_margin="20dip"
     	android:id="@+id/news_linear">
-    	
+    <Button 
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:id="@+id/check_route"
+		android:text="Check Route"/>
+	<Button 
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:id="@+id/stock_report"
+		android:text="Stock Report"/>
+	<Button 
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:id="@+id/cash_report"
+		android:text="Cash Report"/>
+	<Button 
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:id="@+id/giro_report"
+		android:text="Check / Giro Report"/>
 	</LinearLayout>
 	</ScrollView>
 </LinearLayout>

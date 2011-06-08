@@ -7,10 +7,18 @@
     >
     <TextView 
 		style="@style/title_style"
-		android:text="Daily News"/>
-	<ExpandableListView
-		android:id="@+id/expandable"
+		android:text="Kanvasing : Store Info"/>
+	<ScrollView
 		android:layout_width="fill_parent"
 	    android:layout_height="wrap_content">
-	</ExpandableListView>
+    <LinearLayout
+    	android:orientation="vertical"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+    	android:gravity="center_horizontal"
+    	android:layout_margin="20dip"
+    	android:id="@+id/news_linear">
+    	
+	</LinearLayout>
+	</ScrollView>
 </LinearLayout>

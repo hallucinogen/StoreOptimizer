@@ -18,7 +18,11 @@
 		<activity android:name="DailyNewsAct" />
 		<activity android:name="DownloadDataAct" />
 		<activity android:name="GiroReportAct" />
-		<activity android:name="KanvasingAct" />
+		<activity android:name="KanvasingFinishAct" />
+		<activity android:name="KanvasingStoreHistoryAct" />
+		<activity android:name="KanvasingStoreInformationAct" />
+		<activity android:name="KanvasingStoreListAct" />
+		<activity android:name="KanvasingTransactionAct" />
 		<activity android:name="MainMenuAct" />
 		<activity android:name="OtherTransactionAct" />
 		<activity android:name="ReceivablePaymentAct" />
