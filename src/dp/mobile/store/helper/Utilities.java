@@ -20,4 +20,10 @@ public class Utilities {
 	public static final String INTENT_ITEM_NAME		= "item_name";
 	public static final String INTENT_ITEM_ID		= "item_id";
 	public static final String INTENT_ITEM_COUNT	= "item_count";
+	
+	public static final int KANVASING_STOREINFO_RC		= 0;
+	public static final int KANVASING_STOREHISTORY_RC	= 1;
+	public static final int KANVASING_TRANSACTION_RC	= 2;
+	public static final int KANVASING_FINISH_RC			= 3;
+	public static final int KANVASING_STORELIST_RC		= 4;
 }

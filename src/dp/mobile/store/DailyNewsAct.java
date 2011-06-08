@@ -14,7 +14,6 @@ import android.widget.TextView;
 
 public class DailyNewsAct extends Activity {
 
-    ExpandableListAdapter mAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -107,4 +106,6 @@ public class DailyNewsAct extends Activity {
         }
 
     }
+    
+    private ExpandableListAdapter mAdapter;
 }

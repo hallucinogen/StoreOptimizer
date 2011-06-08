@@ -1,5 +1,6 @@
 package dp.mobile.store;
 
+import dp.mobile.store.helper.Utilities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,12 +26,18 @@ public class SalesTransactionAct extends Activity implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		if (v == mKanvasingButton) {
-			startActivity(new Intent(this, KanvasingStoreListAct.class));
+			startActivityForResult(new Intent(this, KanvasingStoreListAct.class), Utilities.KANVASING_STORELIST_RC);
 		} else if (v == mOtherTransaction) {
 			startActivity(new Intent(this, OtherTransactionAct.class));
 		} else if ( v == mReceivableButton) {
 			startActivity(new Intent(this, ReceivablePaymentAct.class));
 		}
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (requestCode == Utilities.KANVASING_STORELIST_RC && resultCode == RESULT_OK)
+			finish();
 	}
 
 	private Button mKanvasingButton, mOtherTransaction, mReceivableButton; 

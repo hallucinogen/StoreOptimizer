@@ -8,17 +8,9 @@
     <TextView 
 		style="@style/title_style"
 		android:text="Kanvasing : Store History"/>
-	<ScrollView
+	<ExpandableListView
+		android:id="@+id/expandable"
 		android:layout_width="fill_parent"
 	    android:layout_height="wrap_content">
-    <LinearLayout
-    	android:orientation="vertical"
-	    android:layout_width="fill_parent"
-	    android:layout_height="fill_parent"
-    	android:gravity="center_horizontal"
-    	android:layout_margin="20dip"
-    	android:id="@+id/news_linear">
-    	
-	</LinearLayout>
-	</ScrollView>
+	</ExpandableListView>
 </LinearLayout>
