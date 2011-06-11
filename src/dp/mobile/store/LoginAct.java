@@ -3,9 +3,12 @@ package dp.mobile.store;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import dp.mobile.store.helper.tables.DailyNewsAdapter;
+import dp.mobile.store.helper.tables.TrnRouteAdapter;
 
 public class LoginAct extends Activity implements OnClickListener {
 	@Override
@@ -17,6 +20,18 @@ public class LoginAct extends Activity implements OnClickListener {
 		mLoginButton	= (Button) findViewById(R.id.login);
 		mSettingButton.setOnClickListener(this);
 		mLoginButton.setOnClickListener(this);
+		
+		//Tes database
+		DailyNewsAdapter mDailyNews = new DailyNewsAdapter(getBaseContext());
+		TrnRouteAdapter mTrnRoute = new TrnRouteAdapter(getBaseContext());
+		
+		mDailyNews.open();
+		mTrnRoute.open();
+		
+		Log.d("DAILY NEWS CREATE", "rowID = " + mDailyNews.create("1", null, null, "short description", "long descr"));
+		
+		mDailyNews.close();
+		mTrnRoute.close();
 	}
 	
 	public void onClick(View v) {
