@@ -73,7 +73,7 @@ public class DailyNewsAdapter extends DatabaseAdapter {
     			KEY_ROWID + "=" + rowID, null, null, null, null, null);
     	if(retval != null)
     		retval.moveToFirst();
-    	
+
     	return retval;
     }
 }

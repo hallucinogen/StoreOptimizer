@@ -21,6 +21,7 @@ public class DatabaseAdapter {
 		mDBHelper = new DatabaseHelper(mContext);
 		mDatabase = mDBHelper.getWritableDatabase();
 		
+		Log.d(TAG, "OPENING DATABASE " + DATABASE_NAME + "version " + DATABASE_VERSION);
 		return this;
 	}
 	
@@ -56,6 +57,7 @@ public class DatabaseAdapter {
 			db.execSQL(TABLE_CREATE_MOBILE_TRNSALES);
 			db.execSQL(TABLE_CREATE_MOBILE_DTLSALES);
 			
+			Log.d("DB HELPER", "DBHelper onCreate");
 			//TODO: create the view ?
 		}
 

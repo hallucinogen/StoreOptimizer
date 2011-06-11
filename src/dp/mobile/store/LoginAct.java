@@ -26,9 +26,10 @@ public class LoginAct extends Activity implements OnClickListener {
 		TrnRouteAdapter mTrnRoute = new TrnRouteAdapter(getBaseContext());
 		
 		mDailyNews.open();
-		mTrnRoute.open();
-		
 		Log.d("DAILY NEWS CREATE", "rowID = " + mDailyNews.create("1", null, null, "short description", "long descr"));
+		
+		mTrnRoute.open();
+		Log.d("DAILY NEWS CREATE", "rowID = " + mDailyNews.create("2", null, null, "second short description", "second long descr"));
 		
 		mDailyNews.close();
 		mTrnRoute.close();
