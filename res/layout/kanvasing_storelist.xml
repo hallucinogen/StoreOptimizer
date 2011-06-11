@@ -7,34 +7,18 @@
     >
     <TextView 
 		style="@style/title_style"
-		android:text="Check / Giro Report"/>
+		android:text="Kanvasing : Store List"/>
 	<ScrollView
 		android:layout_width="fill_parent"
-	    android:layout_height="280dip">
+	    android:layout_height="wrap_content">
     <LinearLayout
     	android:orientation="vertical"
 	    android:layout_width="fill_parent"
 	    android:layout_height="fill_parent"
     	android:gravity="center_horizontal"
     	android:layout_margin="20dip"
-    	android:id="@+id/giro_linear">
+    	android:id="@+id/storelist_linear">
     	
 	</LinearLayout>
 	</ScrollView>
-	
-	<TableLayout
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:stretchColumns="1">
-		<TableRow>
-			<TextView 
-				android:text="TOTAL"
-				android:textStyle="bold" />
-			<TextView 
-				android:id="@+id/total"
-				android:gravity="right"
-				android:textStyle="bold"
-				android:text="Rp 0" />
-		</TableRow>
-	</TableLayout>
 </LinearLayout>

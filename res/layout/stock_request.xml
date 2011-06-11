@@ -1,6 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:layout_width="fill_parent"
-  android:layout_height="fill_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    >
+    <TextView 
+		style="@style/title_style"
+		android:text="Stock Request"/>
+	<TableLayout
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content">
+		<TableRow>
+			<TextView 
+				android:layout_weight="1"
+				android:gravity="center"
+				android:text="Item"
+				android:textStyle="bold" />
+			<TextView 
+				android:layout_weight="1"
+				android:gravity="center"
+				android:textStyle="bold"
+				android:text="Count" />
+		</TableRow>
+		
+		<TableRow>
+			<TextView 
+				android:layout_weight="1"
+				android:gravity="center"
+				android:text="Rokok Merah Jitu"
+				android:height="0dp" />
+			<TextView 
+				android:layout_weight="1"
+				android:gravity="center"
+				android:text="100000"
+				android:height="0dp" />
+		</TableRow>
+	</TableLayout>
+	<ScrollView
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content">
+		<TableLayout
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent"
+			android:id="@+id/stock_table">
+		</TableLayout>
+	</ScrollView>
 </LinearLayout>

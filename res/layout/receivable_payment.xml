@@ -17,7 +17,7 @@
 	    android:layout_height="fill_parent"
     	android:gravity="center_horizontal"
     	android:layout_margin="20dip"
-    	android:id="@+id/news_linear">
+    	android:id="@+id/payment_linear">
     	
 	</LinearLayout>
 	</ScrollView>

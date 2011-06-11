@@ -15,10 +15,24 @@
     	android:orientation="vertical"
 	    android:layout_width="fill_parent"
 	    android:layout_height="fill_parent"
-    	android:gravity="center_horizontal"
+    	android:layout_gravity="center"
     	android:layout_margin="20dip"
-    	android:id="@+id/news_linear">
-    	
+    	android:id="@+id/stock_linear">
+   	<Button 
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:id="@+id/stock_request"
+		android:text="Stock Request"/>
+	<Button 
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:id="@+id/receiving"
+		android:text="Receiving"/>
+	<Button 
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:id="@+id/return_stock"
+		android:text="Return"/>
 	</LinearLayout>
 	</ScrollView>
 </LinearLayout>

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    >
+    <TextView 
+		style="@style/title_style"
+		android:text="Kanvasing : Store Info"/>
+	<ScrollView
+		android:layout_width="fill_parent"
+	    android:layout_height="wrap_content">
+    <TableLayout
+	    android:orientation="vertical"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:id="@+id/info_table">
+		<TableRow android:layout_margin="5dip">
+		  	<TextView 
+				android:layout_weight="1"
+				android:text="Date"/>
+			<TextView 
+				android:layout_weight="1"
+				android:gravity="right" 
+				android:id="@+id/info1"/>
+		</TableRow>
+		
+		<TableRow android:layout_margin="5dip">
+		  	<TextView 
+				android:layout_weight="1"
+				android:text="Time"/>
+			<TextView 
+				android:layout_weight="1"
+				android:gravity="right" 
+				android:id="@+id/info2"/>
+		</TableRow>
+		
+		<TableRow android:layout_margin="5dip">
+		  	<TextView 
+				android:layout_weight="1"
+				android:text="Current Kilometer"/>
+			<TextView 
+				android:layout_weight="1"
+				android:gravity="right" 
+				android:id="@+id/info3"/>
+		</TableRow>
+		
+		<TableRow android:layout_margin="5dip">
+		  	<TextView 
+				android:layout_weight="1"
+				android:text="Client Name"/>
+			<TextView 
+				android:layout_weight="1"
+				android:gravity="right" 
+				android:id="@+id/info4"/>
+		</TableRow>
+		<View android:background="#f00" android:layout_height="1dip" android:layout_margin="10dip" />
+		<TableRow android:layout_margin="5dip">
+		  	<TextView 
+				android:layout_weight="1"
+				android:text="Customer Type"/>
+			<TextView 
+				android:layout_weight="1"
+				android:gravity="right" 
+				android:id="@+id/info5"/>
+		</TableRow>
+		
+		<TableRow android:layout_margin="5dip">
+		  	<TextView 
+				android:layout_weight="1"
+				android:text="Term of Payment"/>
+			<TextView 
+				android:layout_weight="1"
+				android:gravity="right" 
+				android:id="@+id/info6"/>
+		</TableRow>
+		
+		<TableRow android:layout_margin="5dip">
+		  	<TextView 
+				android:layout_weight="1"
+				android:text="Receivable"/>
+			<TextView 
+				android:layout_weight="1"
+				android:gravity="right" 
+				android:id="@+id/info7"/>
+		</TableRow>
+		
+		<TableRow android:layout_margin="5dip">
+		  	<TextView 
+				android:layout_weight="1"
+				android:text="Limit Credit"/>
+			<TextView 
+				android:layout_weight="1"
+				android:gravity="right" 
+				android:id="@+id/info8"/>
+		</TableRow>
+		
+		<TableRow android:layout_margin="5dip">
+		  	<TextView 
+				android:layout_weight="1"
+				android:text="Last Buy"/>
+			<TextView 
+				android:layout_weight="1"
+				android:gravity="right" 
+				android:id="@+id/info9"/>
+		</TableRow>
+		
+		<TableRow android:layout_margin="5dip">
+	    	<LinearLayout>
+	    	<Button
+	    		style="@style/table_button_style"
+	    		android:text="History"
+	    		android:id="@+id/history" />
+	    	</LinearLayout>
+	    	<LinearLayout
+	    		android:gravity="right">
+	    	<Button 
+	    		style="@style/table_button_style" 
+	    		android:text="Start Kanvasing" 
+	    		android:id="@+id/kanvasing" />
+	    	</LinearLayout>
+	    </TableRow>
+	</TableLayout>
+	</ScrollView>
+</LinearLayout>

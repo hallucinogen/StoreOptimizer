@@ -7,7 +7,7 @@
     >
     <TextView 
 		style="@style/title_style"
-		android:text="Receiving"/>
+		android:text="Kanvasing : Transaction"/>
 	<TableLayout
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content">
@@ -21,12 +21,12 @@
 				android:layout_weight="1"
 				android:gravity="center"
 				android:textStyle="bold"
-				android:text="Request" />
+				android:text="Price" />
 			<TextView 
 				android:layout_weight="1"
 				android:gravity="center"
 				android:textStyle="bold"
-				android:text="Receive" />
+				android:text="Amount" />
 		</TableRow>
 		
 		<TableRow>
@@ -49,11 +49,19 @@
 	</TableLayout>
 	<ScrollView
 		android:layout_width="fill_parent"
-		android:layout_height="wrap_content">
+		android:layout_height="260dip">
 		<TableLayout
 			android:layout_width="fill_parent"
 			android:layout_height="fill_parent"
-			android:id="@+id/stock_table">
+			android:id="@+id/transaction_table">
 		</TableLayout>
 	</ScrollView>
+	<LinearLayout
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content">
+		<Button
+			style="@style/table_button_style"
+			android:id="@+id/confirm"
+			android:text="Confirm" />
+	</LinearLayout>
 </LinearLayout>

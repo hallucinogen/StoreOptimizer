@@ -7,7 +7,7 @@
     >
     <TextView 
 		style="@style/title_style"
-		android:text="Daily News"/>
+		android:text="Kanvasing : Store History"/>
 	<ExpandableListView
 		android:id="@+id/expandable"
 		android:layout_width="fill_parent"
