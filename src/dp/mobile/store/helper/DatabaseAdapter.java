@@ -1,57 +1,163 @@
 package dp.mobile.store.helper;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-
+import android.widget.Toast;
+import dp.mobile.store.helper.tables.DailyNews;
+import dp.mobile.store.helper.tables.Model;
+import dp.mobile.store.helper.tables.TrnRoute;
 
 public class DatabaseAdapter {
 	protected static final String	TAG					= "DatabaseAdapter";
 	protected static final String	DATABASE_NAME		= "artindo";
 	protected static final int		DATABASE_VERSION	= 2;
-
-	public DatabaseAdapter(Context context){
+	
+	private DatabaseAdapter(Context context){
 		mContext = context;
-		Log.d(TAG, "CREATING DATABASE " + DATABASE_NAME + "version " + DATABASE_VERSION);
+		//Log.d(TAG, "CREATING DATABASE " + DATABASE_NAME + "version " + DATABASE_VERSION);
+	}
+	
+	public static DatabaseAdapter instance(Context context){
+		if(mInstance == null)
+			mInstance = new DatabaseAdapter(context);
+		
+		return mInstance;
 	}
 	
 	public DatabaseAdapter open() throws SQLException{
 		mDBHelper = new DatabaseHelper(mContext);
-		mDatabase = mDBHelper.getWritableDatabase();
+		if(mDatabase == null)
+			mDatabase = mDBHelper.getWritableDatabase();
 		
-		Log.d(TAG, "OPENING DATABASE " + DATABASE_NAME + "version " + DATABASE_VERSION);
+		//Log.d(TAG, "OPENING DATABASE " + DATABASE_NAME + "version " + DATABASE_VERSION);
 		return this;
 	}
 	
 	public void close(){
 		mDBHelper.close();
-		Log.d(TAG, "CLOSING DATABASE " + DATABASE_NAME + "version " + DATABASE_VERSION);
+		//Log.d(TAG, "CLOSING DATABASE " + DATABASE_NAME + "version " + DATABASE_VERSION);
 	}
 	
+	public Cursor rawQuery(String selection, String[] selectionArgs){
+		Cursor retval = mDatabase.rawQuery(selection, selectionArgs);
+		
+		if(retval.moveToFirst()){
+			for(String s : retval.getColumnNames()){
+				Log.d(TAG, s + "#" + retval.getString(retval.getColumnIndex(s)));
+			}
+		} else {
+			Log.d(TAG, "NO C");
+		}
+		
+		return retval;
+	}
+	
+	/**
+	 * Insert new record into <tableName>
+	 * 
+	 * @param tableName
+	 * @param args
+	 * @return
+	 */
+    public long insert(String tableName, Model model){
+    	long retval = -1;
+    	
+		retval = mDatabase.insert(tableName, null, model.getContentValues());
+		if(retval == -1){
+			Log.d(TAG, "Error inserting to table " + tableName);
+			Toast.makeText(mContext, "Error inserting to table " + tableName, 5000).show();
+		} else {
+			Log.d(TAG, "Successfully inserted to table " + tableName + " with row ID = " + retval);
+		}
+			
+		return retval;
+    }
+    
+    /**
+     * Delete record with ID <rowID>
+     * 
+     * @param rowID
+     * @return number of rows affected
+     */
+    public long delete(String tableName, long rowID){
+    	return mDatabase.delete(tableName, "id=" + rowID, null);
+    }
+    
+    /**
+     * Return a Cursor over the list of all records in the table 
+     * 
+     * @return Cursor over all notes
+     */
+    public Model[] getAll(String tableName){
+    	Cursor cursor = mDatabase.query(tableName, getTableColumns(tableName), null, null, null, null, null); 
+    	if(cursor != null){
+    		if(tableName.equals(DailyNews.getTableName())){
+    			return DailyNews.extract(cursor);
+    		} else if(tableName.equals(TrnRoute.getTableName())){
+    			return TrnRoute.extract(cursor);
+    		}
+    	}
+    	
+    	return null;
+    }
+    
+    /**
+     * Return a Cursor positioned at record matches the given rowID
+     * 
+     * @param rowID
+     * @return Cursor positioned to matching record(s), if any
+     * @throws SQLException
+     */
+    public Model get(String tableName, String rowID) throws SQLException{
+    	Cursor cursor = mDatabase.query(true, tableName, getTableColumns(tableName), null, null, null, null, null, rowID);
+    	if(cursor != null){
+    		if(tableName.equals(DailyNews.getTableName())){
+    			return DailyNews.extract(cursor)[0];
+    		} else if(tableName.equals(TrnRoute.getTableName())){
+    			return TrnRoute.extract(cursor)[0];
+    		}
+    	}
+    	
+    	return null;
+    }
+    
+    private String[] getTableColumns(String tableName){
+    	if(tableName.equals(DailyNews.getTableName())){
+    		return DailyNews.getColumns();
+    	} else if(tableName.equals(TrnRoute.getTableName())){
+    		return TrnRoute.getColumns();
+    	}
+    	
+    	return null;
+    }
+    
 	//PROPERTIES
-	protected final Context		mContext;
-	protected DatabaseHelper	mDBHelper;
-	protected SQLiteDatabase	mDatabase;
+    private static DatabaseAdapter 	mInstance;
+	private final Context 			mContext;
+	private DatabaseHelper			mDBHelper;
+	private SQLiteDatabase			mDatabase;
 	
 	protected static class DatabaseHelper extends SQLiteOpenHelper {
 		public DatabaseHelper(Context context) {
 			super(context, DATABASE_NAME, null, DATABASE_VERSION);
-			Log.d(TAG, "CREATING DATABASE HELPER");
+			//Log.d(TAG, "CREATING DATABASE HELPER");
 		}
 
 		@Override
 		public void onCreate(SQLiteDatabase db) {
-			db.execSQL("DROP TABLE IF EXISTS mobile_dailynews");
-			db.execSQL("DROP TABLE IF EXISTS mobile_trnroute");
+			db.execSQL("DROP TABLE IF EXISTS " + DailyNews.getTableName());
+			db.execSQL("DROP TABLE IF EXISTS " + TrnRoute.getTableName());
 			db.execSQL("DROP TABLE IF EXISTS mobile_pricelist");
 			db.execSQL("DROP TABLE IF EXISTS mobile_trnreceivable");
 			db.execSQL("DROP TABLE IF EXISTS mobile_trnsales");
 			db.execSQL("DROP TABLE IF EXISTS mobile_dtlsales");
 			
-			db.execSQL(TABLE_CREATE_MOBILE_DAILYNEWS);
-			db.execSQL(TABLE_CREATE_MOBILE_TRNROUTE);
+			db.execSQL(DailyNews.TABLE_CREATE_MOBILE_DAILYNEWS);
+			db.execSQL(TrnRoute.TABLE_CREATE_MOBILE_TRNROUTE);
 			db.execSQL(TABLE_CREATE_MOBILE_PRICELIST);
 			db.execSQL(TABLE_CREATE_MOBILE_TRNRECEIVABLE);
 			db.execSQL(TABLE_CREATE_MOBILE_TRNSALES);
@@ -65,36 +171,16 @@ public class DatabaseAdapter {
 		public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 			Log.w(TAG, "Upgrading database from version " + oldVersion + " to " + newVersion + ", which will destroy all old data");
 			
-			db.execSQL("DROP TABLE IF EXISTS");
-			//TODO : DROP another table
+			db.execSQL("DROP TABLE IF EXISTS " + DailyNews.getTableName());
+			db.execSQL("DROP TABLE IF EXISTS " + TrnRoute.getTableName());
+			db.execSQL("DROP TABLE IF EXISTS mobile_priceslist");
+			db.execSQL("DROP TABLE IF EXISTS mobile_trnreceivable");
+			db.execSQL("DROP TABLE IF EXISTS mobile_trnsales");
+			db.execSQL("DROP TABLE IF EXISTS mobile_dtlsales");
+			
 			onCreate(db);
 		}
 	}
-	
-	protected static final String TABLE_CREATE_MOBILE_DAILYNEWS = 
-		"CREATE TABLE mobile_dailynews (id CHAR(32) PRIMARY KEY NOT NULL DEFAULT '', "
-		+ "trndate		DATETIME, "
-		+ "newsfrom 	VARCHAR(32), "
-		+ "descr_short	VARCHAR(128), "
-		+ "descr		TEXT);";
-	
-	protected static final String TABLE_CREATE_MOBILE_TRNROUTE = 
-		"CREATE TABLE mobile_trnroute (id CHAR(32) PRIMARY KEY NOT NULL DEFAULT '', "
-		+ "trndate				DATETIME, "
-		+ "username				VARCHAR(32), "
-		+ "unitcompany_code		VARCHAR(32), "
-		+ "orderno				NUMERIC(8,0) DEFAULT 0, "
-		+ "customer_code		VARCHAR(32), "
-		+ "customer_name		VARCHAR(128), "
-		+ "customer_address		VARCHAR(128), "
-		+ "customer_postcode	VARCHAR(16), "
-		+ "customer_satellite 	VARCHAR(32), "
-		+ "customer_type 		VARCHAR(32), "
-		+ "customer_termpayment	VARCHAR(128), "
-		+ "credit_limit 		NUMERIC(16,2) DEFAULT 0, "
-		+ "receivable 			NUMERIC(16,2) DEFAULT 0, "
-		+ "lastbuydate 			DATETIME, "
-		+ "descr 				TEXT);";
 	
 	protected static final String TABLE_CREATE_MOBILE_PRICELIST = 
 		"CREATE TABLE mobile_pricelist (id CHAR(32) PRIMARY KEY NOT NULL DEFAULT '', "

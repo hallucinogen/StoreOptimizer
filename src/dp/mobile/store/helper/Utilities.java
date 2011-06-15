@@ -1,5 +1,10 @@
 package dp.mobile.store.helper;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import android.util.Log;
+
 public class Utilities {
 	public static final String PREFERENCES 		= "PREFERENCES";
 	public static final String GET_ACTIVATED 	= "GET_ACTIVATED";
@@ -26,4 +31,23 @@ public class Utilities {
 	public static final int KANVASING_TRANSACTION_RC	= 2;
 	public static final int KANVASING_FINISH_RC			= 3;
 	public static final int KANVASING_STORELIST_RC		= 4;
+	
+	public static final String DATE_FORMAT				= "yyyy-MM-dd hh:mm:ss";
+	
+	public static String formatDate(Date date){
+		return android.text.format.DateFormat.format(DATE_FORMAT, date).toString();
+	}
+	
+	public static Date formatStr(String str){
+		SimpleDateFormat  format = new SimpleDateFormat(DATE_FORMAT);
+		
+		try {  
+			return format.parse(str);
+		} catch (Exception e) { 
+			Log.d("UTILITIES", "Cannot convert string " + str + " to date");
+		    e.printStackTrace();
+		}
+		
+		return null;
+	}
 }

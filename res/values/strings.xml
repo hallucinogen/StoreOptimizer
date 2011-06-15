@@ -2,4 +2,5 @@
 <resources>
     <string name="hello">Hello World!</string>
     <string name="app_name">Store Optimizer</string>
+    <string name="err_insert">Error inserting record to table </string>
 </resources>
