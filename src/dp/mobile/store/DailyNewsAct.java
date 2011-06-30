@@ -1,7 +1,6 @@
 package dp.mobile.store;
 
 import android.app.Activity;
-import android.app.ExpandableListActivity;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -11,6 +10,9 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
+import dp.mobile.store.helper.DatabaseAdapter;
+import dp.mobile.store.helper.Utilities;
+import dp.mobile.store.helper.tables.DailyNews;
 
 public class DailyNewsAct extends Activity {
 
@@ -19,17 +21,24 @@ public class DailyNewsAct extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.daily_news);
-
+        
         // Set up adapter
         mAdapter = new DailyNewsListAdapter();
+        ((DailyNewsListAdapter) mAdapter).setDailyNews();
         
         ExpandableListView elv = (ExpandableListView)findViewById(R.id.expandable);
         elv.setAdapter(mAdapter);
     }
 
     public class DailyNewsListAdapter extends BaseExpandableListAdapter {
-    	/// TODO : not using dummy
-        private String[] groups = { "27 Feb 2011", "25 Feb 2011", "20 Feb 2011", "12 Feb 2011" };
+    	public DailyNewsListAdapter() {
+			
+		}
+    	
+    	private String[] groups;
+    	private String[][] children;
+    	
+        /*private String[] groups = { "27 Feb 2011", "25 Feb 2011", "20 Feb 2011", "12 Feb 2011" };
         private String[][] children = {
                 { "Disini ada berita yang sangat keren sekali, tanggal 27 Februari " +
                 	"tapi saya sendiri pingin nyobain kalo beritanya bakal sangat panjang sekali " +
@@ -39,7 +48,21 @@ public class DailyNewsAct extends Activity {
                 { "Disini ada berita yang sangat keren sekali, tanggal 25 Februari" },
                 { "Disini ada berita yang sangat keren sekali, tanggal 20 Februari" },
                 { "Disini ada berita yang sangat keren sekali, tanggal 12 Februari" }
-        };
+        };*/
+        
+        public void setDailyNews(){
+        	DatabaseAdapter.instance(getBaseContext()).open();
+    		DailyNews[] dailyNewses = (DailyNews[])DatabaseAdapter.instance(getBaseContext()).getAll(DailyNews.getTableName());
+    		DatabaseAdapter.instance(getBaseContext()).close();
+    		
+    		groups = new String[dailyNewses.length];
+    		children = new String[dailyNewses.length][1];
+    		
+    		for(int i=0; i<dailyNewses.length; ++i){
+    			groups[i] = Utilities.formatDate(dailyNewses[i].mTrnDate);
+    			children[i][0] = dailyNewses[i].mDesc;
+    		}
+        }        
 
         public Object getChild(int groupPosition, int childPosition) {
             return children[groupPosition][childPosition];
@@ -54,7 +77,7 @@ public class DailyNewsAct extends Activity {
         }
 
         public TextView getGenericView() {
-            // Layout parameters for the ExpandableListView
+            // Layout parameters for the ExpandableListView`1
             AbsListView.LayoutParams lp = new AbsListView.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
             TextView textView = new TextView(DailyNewsAct.this);

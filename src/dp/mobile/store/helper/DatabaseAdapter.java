@@ -28,21 +28,26 @@ public class DatabaseAdapter {
 		return mInstance;
 	}
 	
-	public DatabaseAdapter open() throws SQLException{
-		mDBHelper = new DatabaseHelper(mContext);
+	public void open() throws SQLException{
+		if(mDBHelper == null)
+			mDBHelper = new DatabaseHelper(mContext);
+		
 		if(mDatabase == null)
 			mDatabase = mDBHelper.getWritableDatabase();
 		
-		//Log.d(TAG, "OPENING DATABASE " + DATABASE_NAME + "version " + DATABASE_VERSION);
-		return this;
+		Log.d(TAG, "OPENING DATABASE " + DATABASE_NAME + "version " + DATABASE_VERSION);
 	}
 	
 	public void close(){
-		mDBHelper.close();
-		//Log.d(TAG, "CLOSING DATABASE " + DATABASE_NAME + "version " + DATABASE_VERSION);
+		if(mDBHelper != null){
+			mDBHelper.close();
+			Log.d(TAG, "CLOSING DATABASE SUCCESS : " + DATABASE_NAME + "version " + DATABASE_VERSION);
+		} else
+			Log.d(TAG, "CLOSING DATABASE FAILED : " + DATABASE_NAME + "version " + DATABASE_VERSION);
 	}
 	
 	public Cursor rawQuery(String selection, String[] selectionArgs){
+		openDatabaseIfNecessary();
 		Cursor retval = mDatabase.rawQuery(selection, selectionArgs);
 		
 		if(retval.moveToFirst()){
@@ -53,6 +58,7 @@ public class DatabaseAdapter {
 			Log.d(TAG, "NO C");
 		}
 		
+		retval.close();
 		return retval;
 	}
 	
@@ -66,6 +72,7 @@ public class DatabaseAdapter {
     public long insert(String tableName, Model model){
     	long retval = -1;
     	
+    	openDatabaseIfNecessary();
 		retval = mDatabase.insert(tableName, null, model.getContentValues());
 		if(retval == -1){
 			Log.d(TAG, "Error inserting to table " + tableName);
@@ -84,6 +91,7 @@ public class DatabaseAdapter {
      * @return number of rows affected
      */
     public long delete(String tableName, long rowID){
+    	openDatabaseIfNecessary();
     	return mDatabase.delete(tableName, "id=" + rowID, null);
     }
     
@@ -93,16 +101,21 @@ public class DatabaseAdapter {
      * @return Cursor over all notes
      */
     public Model[] getAll(String tableName){
-    	Cursor cursor = mDatabase.query(tableName, getTableColumns(tableName), null, null, null, null, null); 
+    	Model[] retval = null;
+    	
+    	openDatabaseIfNecessary();
+    	Cursor cursor = mDatabase.query(tableName, getTableColumns(tableName), null, null, null, null, null);
+    	
     	if(cursor != null){
     		if(tableName.equals(DailyNews.getTableName())){
-    			return DailyNews.extract(cursor);
+    			retval = DailyNews.extract(cursor);
     		} else if(tableName.equals(TrnRoute.getTableName())){
-    			return TrnRoute.extract(cursor);
+    			retval = TrnRoute.extract(cursor);
     		}
     	}
     	
-    	return null;
+    	cursor.close();
+    	return retval;
     }
     
     /**
@@ -113,16 +126,21 @@ public class DatabaseAdapter {
      * @throws SQLException
      */
     public Model get(String tableName, String rowID) throws SQLException{
+    	Model retval = null;
+    	
+    	openDatabaseIfNecessary();
     	Cursor cursor = mDatabase.query(true, tableName, getTableColumns(tableName), null, null, null, null, null, rowID);
+    	
     	if(cursor != null){
     		if(tableName.equals(DailyNews.getTableName())){
-    			return DailyNews.extract(cursor)[0];
+    			retval = DailyNews.extract(cursor)[0];
     		} else if(tableName.equals(TrnRoute.getTableName())){
-    			return TrnRoute.extract(cursor)[0];
+    			retval = TrnRoute.extract(cursor)[0]; 
     		}
     	}
     	
-    	return null;
+    	cursor.close();
+    	return retval;
     }
     
     private String[] getTableColumns(String tableName){
@@ -133,6 +151,11 @@ public class DatabaseAdapter {
     	}
     	
     	return null;
+    }
+    
+    private void openDatabaseIfNecessary(){
+    	if(!mDatabase.isOpen())
+    		mDatabase = mContext.openOrCreateDatabase("/data/data/dp.mobile.store/databases/" + DATABASE_NAME, SQLiteDatabase.OPEN_READWRITE, null);
     }
     
 	//PROPERTIES

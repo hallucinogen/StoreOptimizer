@@ -32,7 +32,7 @@ public class Utilities {
 	public static final int KANVASING_FINISH_RC			= 3;
 	public static final int KANVASING_STORELIST_RC		= 4;
 	
-	public static final String DATE_FORMAT				= "yyyy-MM-dd hh:mm:ss";
+	public static final String DATE_FORMAT				= "yyyy-MMM-dd hh:mm:ss";
 	
 	public static String formatDate(Date date){
 		return android.text.format.DateFormat.format(DATE_FORMAT, date).toString();

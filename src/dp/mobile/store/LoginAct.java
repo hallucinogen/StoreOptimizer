@@ -1,17 +1,14 @@
 package dp.mobile.store;
 
-import java.util.Date;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import dp.mobile.store.helper.DatabaseAdapter;
+import dp.mobile.store.helper.Utilities;
 import dp.mobile.store.helper.tables.DailyNews;
-import dp.mobile.store.helper.tables.TrnRoute;
 
 public class LoginAct extends Activity implements OnClickListener {
 	@Override
@@ -27,7 +24,11 @@ public class LoginAct extends Activity implements OnClickListener {
 		//Tes open database
 		DatabaseAdapter.instance(getBaseContext()).open();
 		
-		//Tes inserting
+		DatabaseAdapter.instance(getBaseContext()).insert(DailyNews.getTableName(), new DailyNews("1", Utilities.formatStr("2011-February-24 12:23:23"), "Dari Pertama", "Ini namanya berita", "Ini namanya deskripsi panjang dari berita pertama"));
+		DatabaseAdapter.instance(getBaseContext()).insert(DailyNews.getTableName(), new DailyNews("2", Utilities.formatStr("2011-July-21 11:23:23"), "Dari Kedua", "Ini namanya bukan berita", "Ini namanya deskripsi panjang dari berita kedua"));
+		DatabaseAdapter.instance(getBaseContext()).insert(DailyNews.getTableName(), new DailyNews("3", Utilities.formatStr("2011-October-15 10:23:23"), "Dari Ketiga", "Ini baru berita yang benar", "Ini namanya deskripsi panjang dari berita ketiga"));
+		
+		/*//Tes inserting
 		DatabaseAdapter.instance(getBaseContext()).insert(DailyNews.getTableName(), new DailyNews("1", new Date(), "newsFrom", "short description", "long descr"));
 		DatabaseAdapter.instance(getBaseContext()).insert(DailyNews.getTableName(), new DailyNews("2", new Date(), "newsFrom2", "1st short description", "2nd long descr"));
 		DatabaseAdapter.instance(getBaseContext()).insert(TrnRoute.getTableName(), new TrnRoute("1", new Date(), "username", "unitCompanyCode", -1, "customerCode", "customerName", "customerAddress", "customerPostCode", "customerSatellite", "customerType", "customerTermPayment", -1, -1, new Date(), "descr"));
@@ -46,7 +47,7 @@ public class LoginAct extends Activity implements OnClickListener {
 		TrnRoute[] trnRoutes = (TrnRoute[])DatabaseAdapter.instance(getBaseContext()).getAll(TrnRoute.getTableName());
 		for(TrnRoute trnRoute : trnRoutes){
 			Log.d("TES TRN ROUTE", trnRoute.mID + "#" + trnRoute.mCustomerCode + "#" + trnRoute.mCustomerName);
-		}
+		}*/
 		
 		//Tes close
 		DatabaseAdapter.instance(getBaseContext()).close();
