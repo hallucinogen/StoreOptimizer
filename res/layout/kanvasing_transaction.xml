@@ -49,7 +49,7 @@
 	</TableLayout>
 	<ScrollView
 		android:layout_width="fill_parent"
-		android:layout_height="260dip">
+		android:layout_height="240dip">
 		<TableLayout
 			android:layout_width="fill_parent"
 			android:layout_height="fill_parent"

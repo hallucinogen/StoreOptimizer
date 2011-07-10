@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -28,23 +29,39 @@ public class KanvasingTransactionAct extends Activity implements OnClickListener
 	private void populateTableWithDummy() {
 		LayoutInflater inflater = getLayoutInflater();
 		
-		for (int i = 0; i < 5; ++i) {
+		for (int i = 0; i < 10; ++i) {
 			TableRow item = (TableRow) inflater.inflate(R.layout.transaction_item, mTransactionTable, false);
 			TextView name = (TextView) item.findViewById(R.id.item);
 			TextView price = (TextView) item.findViewById(R.id.num1);
+			item.setId(i);
 			
 			name.setText("Rokok Jantan");
-			price.setText("Rp 5.000");
+			price.setText("5000");
 			
 			mTransactionTable.addView(item);
 		}
+	}
+	
+	private long calculateCostWithDummy() {
+		long res = 0;
+		
+		for (int i = 0; i < 10; ++i) {
+			TableRow item = (TableRow)mTransactionTable.findViewById(i);
+			EditText textbox 	= (EditText) item.findViewById(R.id.num2);
+			int price 			= Integer.parseInt(((TextView) item.findViewById(R.id.num1)).getText().toString());
+			int count			= Integer.parseInt(textbox.getText().toString());
+			res += count * price;
+		}
+		
+		return res;
 	}
 	
 	@Override
 	public void onClick(View v) {
 		if (v == mConfirmButton) {
 			Intent intent = new Intent(this, KanvasingFinishAct.class);
-			/// TODO : put extra what's bought
+			/// TODO : don't use dummy calculation
+			intent.putExtra(Utilities.INTENT_TOTAL_COST, calculateCostWithDummy());
 			startActivityForResult(intent, Utilities.KANVASING_FINISH_RC);
 		}
 	}
