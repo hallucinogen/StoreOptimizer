@@ -3,7 +3,6 @@ package dp.mobile.store.helper.tables;
 import java.util.Date;
 
 import dp.mobile.store.helper.Utilities;
-
 import android.content.ContentValues;
 import android.database.Cursor;
 

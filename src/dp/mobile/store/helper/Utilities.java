@@ -17,8 +17,8 @@ public class Utilities {
 	public static final String ITEM_LIST_URL	= "http://167.205.32.26/truckserver/index.php/shop/getitemlist";
 	public static final String STORE_LIST_URL	= "http://167.205.32.26/truckserver/index.php/shop/getshoplist";
 	
-	public static final String USERNAME			= "admin";
-	public static final String PASSWORD			= "adminadmin";
+	public static final String USERNAME		= "admin";
+	public static final String PASSWORD		= "adminadmin";
 	
 	public static final String INTENT_STORE_NAME	= "store_name";
 	public static final String INTENT_STORE_ID		= "store_id";
@@ -33,18 +33,18 @@ public class Utilities {
 	public static final int KANVASING_FINISH_RC			= 3;
 	public static final int KANVASING_STORELIST_RC		= 4;
 	
-	public static final String DATE_FORMAT				= "yyyy-MMM-dd hh:mm:ss";
+	public static final String DATE_FORMAT			= "yyyy-MMM-dd hh:mm:ss";
 	
 	public static String formatDate(Date date){
 		return android.text.format.DateFormat.format(DATE_FORMAT, date).toString();
 	}
 	
 	public static Date formatStr(String str){
-		SimpleDateFormat  format = new SimpleDateFormat(DATE_FORMAT);
+	    SimpleDateFormat  format = new SimpleDateFormat(DATE_FORMAT);
 		
-		try {  
-			return format.parse(str);
-		} catch (Exception e) { 
+    	try {  
+    		return format.parse(str);
+		} catch (Exception e) {
 			Log.d("UTILITIES", "Cannot convert string " + str + " to date");
 		    e.printStackTrace();
 		}

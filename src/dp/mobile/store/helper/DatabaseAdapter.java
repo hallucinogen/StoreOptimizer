@@ -9,6 +9,8 @@ import android.util.Log;
 import android.widget.Toast;
 import dp.mobile.store.helper.tables.DailyNews;
 import dp.mobile.store.helper.tables.Model;
+import dp.mobile.store.helper.tables.PriceList;
+import dp.mobile.store.helper.tables.TrnReceivable;
 import dp.mobile.store.helper.tables.TrnRoute;
 
 public class DatabaseAdapter {
@@ -174,15 +176,15 @@ public class DatabaseAdapter {
 		public void onCreate(SQLiteDatabase db) {
 			db.execSQL("DROP TABLE IF EXISTS " + DailyNews.getTableName());
 			db.execSQL("DROP TABLE IF EXISTS " + TrnRoute.getTableName());
-			db.execSQL("DROP TABLE IF EXISTS mobile_pricelist");
-			db.execSQL("DROP TABLE IF EXISTS mobile_trnreceivable");
+			db.execSQL("DROP TABLE IF EXISTS " + PriceList.getTableName());
+			db.execSQL("DROP TABLE IF EXISTS " + TrnReceivable.getTableName());
 			db.execSQL("DROP TABLE IF EXISTS mobile_trnsales");
 			db.execSQL("DROP TABLE IF EXISTS mobile_dtlsales");
 			
 			db.execSQL(DailyNews.TABLE_CREATE_MOBILE_DAILYNEWS);
 			db.execSQL(TrnRoute.TABLE_CREATE_MOBILE_TRNROUTE);
-			db.execSQL(TABLE_CREATE_MOBILE_PRICELIST);
-			db.execSQL(TABLE_CREATE_MOBILE_TRNRECEIVABLE);
+			db.execSQL(PriceList.TABLE_CREATE_MOBILE_PRICELIST);
+			db.execSQL(TrnReceivable.TABLE_CREATE_MOBILE_TRNRECEIVABLE);
 			db.execSQL(TABLE_CREATE_MOBILE_TRNSALES);
 			db.execSQL(TABLE_CREATE_MOBILE_DTLSALES);
 			
@@ -196,34 +198,14 @@ public class DatabaseAdapter {
 			
 			db.execSQL("DROP TABLE IF EXISTS " + DailyNews.getTableName());
 			db.execSQL("DROP TABLE IF EXISTS " + TrnRoute.getTableName());
-			db.execSQL("DROP TABLE IF EXISTS mobile_priceslist");
-			db.execSQL("DROP TABLE IF EXISTS mobile_trnreceivable");
+			db.execSQL("DROP TABLE IF EXISTS " + PriceList.getTableName());
+			db.execSQL("DROP TABLE IF EXISTS " + TrnReceivable.getTableName());
 			db.execSQL("DROP TABLE IF EXISTS mobile_trnsales");
 			db.execSQL("DROP TABLE IF EXISTS mobile_dtlsales");
 			
 			onCreate(db);
 		}
 	}
-	
-	protected static final String TABLE_CREATE_MOBILE_PRICELIST = 
-		"CREATE TABLE mobile_pricelist (id CHAR(32) PRIMARY KEY NOT NULL DEFAULT '', "
-		+ "username 		VARCHAR(32), "
-		+ "unitcompany_code	VARCHAR(32), "
-		+ "customer_code	VARCHAR(32), "
-		+ "product_code		VARCHAR(32), "
-		+ "price			NUMERIC(16,2) DEFAULT 0, "
-		+ "status			NUMERIC(2,0) DEFAULT 0);";
-	
-	protected static final String TABLE_CREATE_MOBILE_TRNRECEIVABLE = 
-		"CREATE TABLE mobile_trnreceivable (id CHAR(32) PRIMARY KEY NOT NULL DEFAULT '', "
-		+ "trndate			DATETIME, "
-		+ "username			VARCHAR(32), "
-		+ "unitcompany_code	VARCHAR(32), "
-		+ "customer_code	VARCHAR(32), "
-		+ "ar_no			VARCHAR(16), "
-		+ "duedate			DATETIME, "
-		+ "amount			NUMERIC(16,2) DEFAULT 0, "
-		+ "descr			TEXT);";
 	
 	protected static final String TABLE_CREATE_MOBILE_TRNSALES = 
 		"CREATE TABLE mobile_trnsales (id CHAR(32) PRIMARY KEY NOT NULL DEFAULT '', "

@@ -15,8 +15,6 @@ import dp.mobile.store.helper.Utilities;
 import dp.mobile.store.helper.tables.DailyNews;
 
 public class DailyNewsAct extends Activity {
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,8 +29,8 @@ public class DailyNewsAct extends Activity {
     }
 
     public class DailyNewsListAdapter extends BaseExpandableListAdapter {
-    	public DailyNewsListAdapter() {
-			
+		public DailyNewsListAdapter() {
+		    
 		}
     	
     	private String[] groups;
@@ -59,8 +57,8 @@ public class DailyNewsAct extends Activity {
     		children = new String[dailyNewses.length][1];
     		
     		for(int i=0; i<dailyNewses.length; ++i){
-    			groups[i] = Utilities.formatDate(dailyNewses[i].mTrnDate);
-    			children[i][0] = dailyNewses[i].mDesc;
+    		    groups[i] = Utilities.formatDate(dailyNewses[i].mTrnDate);
+    		    children[i][0] = dailyNewses[i].mDesc;
     		}
         }        
 
@@ -82,8 +80,10 @@ public class DailyNewsAct extends Activity {
 
             TextView textView = new TextView(DailyNewsAct.this);
             textView.setLayoutParams(lp);
+
             // Center the text vertically
             textView.setGravity(Gravity.CENTER_VERTICAL | Gravity.LEFT);
+            
             // Set the text starting position
             final float scale = DailyNewsAct.this.getResources().getDisplayMetrics().density;
             final int padding = (int)(30 * scale);
