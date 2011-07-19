@@ -22,8 +22,8 @@ public class TrnReceivable extends Model {
     }
     
     public static String[] getColumns(){
-		return new String[]{KEY_ROWID, KEY_TRNDATE, KEY_USERNAME, KEY_UNITCOMPANY_CODE, KEY_CUSTOMER_CODE, KEY_AR_NO,
-				KEY_DUE_DATE, KEY_AMOUNT, KEY_DESCR};
+		return new String[]{KEY_ROWID, KEY_TRNDATE, KEY_USERNAME, KEY_UNITCOMPANY_CODE, KEY_CUSTOMER_CODE,
+				KEY_AR_NO, KEY_DUE_DATE, KEY_AMOUNT, KEY_DESCR};
 	}
     
     public TrnReceivable() {
@@ -34,7 +34,8 @@ public class TrnReceivable extends Model {
     	super(id);
     }
     
-    public TrnReceivable(String id, Date trnDate, String username, String unitCompanyCode, String customerCode, String arNo, Date dueDate, long amount, String descr){
+    public TrnReceivable(String id, Date trnDate, String username, String unitCompanyCode,
+    		String customerCode, String arNo, Date dueDate, long amount, String descr){
     	this(id);
     	
     	mTrnDate			= trnDate;

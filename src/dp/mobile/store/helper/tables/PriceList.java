@@ -17,8 +17,8 @@ public class PriceList extends Model {
     }
     
     public static String[] getColumns(){
-		return new String[]{KEY_ROWID, KEY_USERNAME, KEY_UNITCOMPANY_CODE, KEY_CUSTOMER_CODE, KEY_PRODUCT_CODE,
-				KEY_PRICE, KEY_STATUS};
+		return new String[]{KEY_ROWID, KEY_USERNAME, KEY_UNITCOMPANY_CODE, KEY_CUSTOMER_CODE,
+				KEY_PRODUCT_CODE, KEY_PRICE, KEY_STATUS};
 	}
     
     public PriceList() {
@@ -29,7 +29,8 @@ public class PriceList extends Model {
     	super(id);
     }
     
-    public PriceList(String id, String username, String unitCompanyCode, String customerCode, String productCode, long price, long status){
+    public PriceList(String id, String username, String unitCompanyCode, String customerCode,
+    		String productCode, long price, long status){
     	this(id);
     	
     	mUsername			= username;

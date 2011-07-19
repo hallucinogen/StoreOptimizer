@@ -8,10 +8,12 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 import android.widget.Toast;
 import dp.mobile.store.helper.tables.DailyNews;
+import dp.mobile.store.helper.tables.DtlSales;
 import dp.mobile.store.helper.tables.Model;
 import dp.mobile.store.helper.tables.PriceList;
 import dp.mobile.store.helper.tables.TrnReceivable;
 import dp.mobile.store.helper.tables.TrnRoute;
+import dp.mobile.store.helper.tables.TrnSales;
 
 public class DatabaseAdapter {
 	protected static final String	TAG					= "DatabaseAdapter";
@@ -109,11 +111,12 @@ public class DatabaseAdapter {
     	Cursor cursor = mDatabase.query(tableName, getTableColumns(tableName), null, null, null, null, null);
     	
     	if(cursor != null){
-    		if(tableName.equals(DailyNews.getTableName())){
-    			retval = DailyNews.extract(cursor);
-    		} else if(tableName.equals(TrnRoute.getTableName())){
-    			retval = TrnRoute.extract(cursor);
-    		}
+    		if(tableName.equals(DailyNews.getTableName()))			retval = DailyNews.extract(cursor);
+    		else if(tableName.equals(TrnRoute.getTableName()))		retval = TrnRoute.extract(cursor);
+    		else if(tableName.equals(PriceList.getTableName()))		retval = PriceList.extract(cursor);
+    		else if(tableName.equals(TrnReceivable.getTableName()))	retval = TrnReceivable.extract(cursor);
+    		else if(tableName.equals(TrnSales.getTableName())) 		retval = TrnSales.extract(cursor);
+    		else if(tableName.equals(DtlSales.getTableName())) 		retval = DtlSales.extract(cursor);
     	}
     	
     	cursor.close();
@@ -134,11 +137,12 @@ public class DatabaseAdapter {
     	Cursor cursor = mDatabase.query(true, tableName, getTableColumns(tableName), null, null, null, null, null, rowID);
     	
     	if(cursor != null){
-    		if(tableName.equals(DailyNews.getTableName())){
-    			retval = DailyNews.extract(cursor)[0];
-    		} else if(tableName.equals(TrnRoute.getTableName())){
-    			retval = TrnRoute.extract(cursor)[0]; 
-    		}
+    		if(tableName.equals(DailyNews.getTableName()))			retval = DailyNews.extract(cursor)[0];
+    		else if(tableName.equals(TrnRoute.getTableName()))		retval = TrnRoute.extract(cursor)[0];
+    		else if(tableName.equals(PriceList.getTableName()))		retval = PriceList.extract(cursor)[0];
+    		else if(tableName.equals(TrnReceivable.getTableName()))	retval = TrnReceivable.extract(cursor)[0];
+    		else if(tableName.equals(TrnSales.getTableName())) 		retval = TrnSales.extract(cursor)[0];
+    		else if(tableName.equals(DtlSales.getTableName())) 		retval = DtlSales.extract(cursor)[0];
     	}
     	
     	cursor.close();
@@ -146,11 +150,12 @@ public class DatabaseAdapter {
     }
     
     private String[] getTableColumns(String tableName){
-    	if(tableName.equals(DailyNews.getTableName())){
-    		return DailyNews.getColumns();
-    	} else if(tableName.equals(TrnRoute.getTableName())){
-    		return TrnRoute.getColumns();
-    	}
+    	if(tableName.equals(DailyNews.getTableName()))			return DailyNews.getColumns();
+    	else if(tableName.equals(TrnRoute.getTableName()))		return TrnRoute.getColumns();
+    	else if(tableName.equals(PriceList.getTableName()))		return PriceList.getColumns();
+		else if(tableName.equals(TrnReceivable.getTableName()))	return TrnReceivable.getColumns();
+		else if(tableName.equals(TrnSales.getTableName())) 		return TrnSales.getColumns();
+		else if(tableName.equals(DtlSales.getTableName())) 		return DtlSales.getColumns();
     	
     	return null;
     }
@@ -185,10 +190,10 @@ public class DatabaseAdapter {
 			db.execSQL(TrnRoute.TABLE_CREATE_MOBILE_TRNROUTE);
 			db.execSQL(PriceList.TABLE_CREATE_MOBILE_PRICELIST);
 			db.execSQL(TrnReceivable.TABLE_CREATE_MOBILE_TRNRECEIVABLE);
-			db.execSQL(TABLE_CREATE_MOBILE_TRNSALES);
-			db.execSQL(TABLE_CREATE_MOBILE_DTLSALES);
+			db.execSQL(TrnSales.TABLE_CREATE_MOBILE_TRNSALES);
+			db.execSQL(DtlSales.TABLE_CREATE_MOBILE_DTLSALES);
 			
-			Log.d("DB HELPER", "DBHelper onCreate");
+			Log.d(TAG, "DBHelper onCreate");
 			//TODO: create the view ?
 		}
 
@@ -200,41 +205,12 @@ public class DatabaseAdapter {
 			db.execSQL("DROP TABLE IF EXISTS " + TrnRoute.getTableName());
 			db.execSQL("DROP TABLE IF EXISTS " + PriceList.getTableName());
 			db.execSQL("DROP TABLE IF EXISTS " + TrnReceivable.getTableName());
-			db.execSQL("DROP TABLE IF EXISTS mobile_trnsales");
-			db.execSQL("DROP TABLE IF EXISTS mobile_dtlsales");
+			db.execSQL("DROP TABLE IF EXISTS " + TrnSales.getTableName());
+			db.execSQL("DROP TABLE IF EXISTS " + TrnSales.getTableName());
 			
 			onCreate(db);
 		}
 	}
-	
-	protected static final String TABLE_CREATE_MOBILE_TRNSALES = 
-		"CREATE TABLE mobile_trnsales (id CHAR(32) PRIMARY KEY NOT NULL DEFAULT '', "
-		+ "unitcompany_code		VARCHAR(32), "
-		+ "trncode 				CHAR(5) DEFAULT '', "
-		+ "trndate				DATETIME, "
-		+ "refno				CHAR(16) DEFAULT '', "
-		+ "ar_no				CHAR(16) DEFAULT '', "
-		+ "descr				VARCHAR(128), "
-		+ "checkno				VARCHAR(64) DEFAULT '', "
-		+ "customer_code		VARCHAR(32), "
-		+ "customer_postcode	VARCHAR(32), "
-		+ "customer_satellite	VARCHAR(32), "
-		+ "amount 				NUMERIC(16,2) DEFAULT 0, "
-		+ "status 				NUMERIC(2,0) DEFAULT 0)";
-	
-	protected static final String TABLE_CREATE_MOBILE_DTLSALES = 
-		"CREATE TABLE mobile_dtlsales (id CHAR(32) PRIMARY KEY NOT NULL DEFAULT '', "
-		+ "trnsales_id		CHAR(32) NOT NULL, "
-		+ "product_code		VARCHAR(32) DEFAULT '', "
-		+ "qty 				NUMERIC(16,2) DEFAULT 0, "
-		+ "qty_debit 		NUMERIC(16,2) DEFAULT 0, "
-		+ "qty_credit 		NUMERIC(16,2) DEFAULT 0, "
-		+ "price 			NUMERIC(16,2) DEFAULT 0, "
-		+ "amount 			NUMERIC(16,2) DEFAULT 0, "
-		+ "amount_debit		NUMERIC(16,2) DEFAULT 0, "
-		+ "amount_credit 	NUMERIC(16,2) DEFAULT 0, "
-		+ "amount_cash 		NUMERIC(16,2) DEFAULT 0, "
-		+ "status 			NUMERIC(2,0) DEFAULT 0);";
 	
 	protected static final String VIEW_CREATE_MOBVIEW_PRODUCT = 
 		"CREATE VIEW mobview_product as "
