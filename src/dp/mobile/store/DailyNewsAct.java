@@ -49,6 +49,7 @@ public class DailyNewsAct extends Activity {
         };*/
         
         public void setDailyNews(){
+        	//Fetch DailyNews records from db
         	DatabaseAdapter.instance(getBaseContext()).open();
     		DailyNews[] dailyNewses = (DailyNews[])DatabaseAdapter.instance(getBaseContext()).getAll(DailyNews.getTableName());
     		DatabaseAdapter.instance(getBaseContext()).close();

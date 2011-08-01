@@ -8,17 +8,12 @@
     <TextView 
 		style="@style/title_style"
 		android:text="Kanvasing : Store List"/>
-	<ScrollView
-		android:layout_width="fill_parent"
-	    android:layout_height="wrap_content">
-    <LinearLayout
+    <ListView
     	android:orientation="vertical"
 	    android:layout_width="fill_parent"
 	    android:layout_height="fill_parent"
     	android:gravity="center_horizontal"
-    	android:layout_margin="20dip"
-    	android:id="@+id/storelist_linear">
-    	
-	</LinearLayout>
-	</ScrollView>
+    	android:layout_margin="10dip"
+    	android:id="@+id/storelist_view">
+	</ListView>
 </LinearLayout>

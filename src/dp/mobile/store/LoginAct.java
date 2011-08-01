@@ -9,6 +9,7 @@ import android.widget.Button;
 import dp.mobile.store.helper.DatabaseAdapter;
 import dp.mobile.store.helper.Utilities;
 import dp.mobile.store.helper.tables.DailyNews;
+import dp.mobile.store.helper.tables.TrnRoute;
 
 public class LoginAct extends Activity implements OnClickListener {
 	@Override
@@ -24,9 +25,15 @@ public class LoginAct extends Activity implements OnClickListener {
 		//Tes open database
 		DatabaseAdapter.instance(getBaseContext()).open();
 		
+		//Dummy daily news (DailyNews)
 		DatabaseAdapter.instance(getBaseContext()).insert(DailyNews.getTableName(), new DailyNews("1", Utilities.formatStr("2011-February-24 12:23:23"), "Dari Pertama", "Ini namanya berita", "Ini namanya deskripsi panjang dari berita pertama"));
 		DatabaseAdapter.instance(getBaseContext()).insert(DailyNews.getTableName(), new DailyNews("2", Utilities.formatStr("2011-July-21 11:23:23"), "Dari Kedua", "Ini namanya bukan berita", "Ini namanya deskripsi panjang dari berita kedua"));
 		DatabaseAdapter.instance(getBaseContext()).insert(DailyNews.getTableName(), new DailyNews("3", Utilities.formatStr("2011-October-15 10:23:23"), "Dari Ketiga", "Ini baru berita yang benar", "Ini namanya deskripsi panjang dari berita ketiga"));
+		
+		//Dummy store list (TrnRoute)
+		DatabaseAdapter.instance(getBaseContext()).insert(TrnRoute.getTableName(), new TrnRoute("1", Utilities.formatStr("2011-February-24 12:23:23"), "usernameTest", "unitCompanyCodeTest", 1, "customerCodeTest", "Aneka Jaya", "Jalan Diponegoro 10 Jakarta", "customerPostCodeTest", "customerSatelliteTest", "customerTypeTest", "customerTermpaymentTest", 2, 2, Utilities.formatStr("2011-February-24 12:23:23"), "descrTest"));
+		DatabaseAdapter.instance(getBaseContext()).insert(TrnRoute.getTableName(), new TrnRoute("2", Utilities.formatStr("2011-July-21 11:24:10"), "usernameTest2", "unitCompanyCodeTest2", 2, "customerCodeTest2", "Aneka Tambang", "Jalan Mauni 7 Kediri", "customerPostCodeTest2", "customerSatelliteTest2", "customerTypeTest2", "customerTermpaymentTest2", 3, 4, Utilities.formatStr("2011-July-21 11:24:10"), "descrTest2"));
+		DatabaseAdapter.instance(getBaseContext()).insert(TrnRoute.getTableName(), new TrnRoute("3", Utilities.formatStr("2011-October-15 10:15:07"), "usernameTest3", "unitCompanyCodeTest3", 3, "customerCodeTest3", "Aneka Emas", "7 Ave Maria Street", "customerPostCodeTest3", "customerSatelliteTest3", "customerTypeTest3", "customerTermpaymentTest3", 5, 6, Utilities.formatStr("2011-October-15 10:15:07"), "descrTest3"));
 		
 		/*//Tes inserting
 		DatabaseAdapter.instance(getBaseContext()).insert(DailyNews.getTableName(), new DailyNews("1", new Date(), "newsFrom", "short description", "long descr"));

@@ -1,12 +1,17 @@
 package dp.mobile.store;
 
-import dp.mobile.store.helper.Utilities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.util.Log;
 import android.view.View;
-import android.widget.LinearLayout;
+import android.widget.AdapterView;
+import android.widget.ListView;
+import android.widget.AdapterView.OnItemClickListener;
+import dp.mobile.store.adapter.StoreListAdapter;
+import dp.mobile.store.helper.DatabaseAdapter;
+import dp.mobile.store.helper.Utilities;
+import dp.mobile.store.helper.tables.TrnRoute;
 
 public class KanvasingStoreListAct extends Activity {
 	@Override
@@ -14,29 +19,36 @@ public class KanvasingStoreListAct extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.kanvasing_storelist);
 		
-		mLinear = (LinearLayout) findViewById(R.id.storelist_linear);
+		mStoreListView = (ListView) findViewById(R.id.storelist_view);
 		
 		populateLinearWithDummy();
 	}
 	
-	/// TODO : not using dummy
 	private void populateLinearWithDummy() {
-		LayoutInflater inflater = getLayoutInflater();
+		//Fetch TrnRoute records from db
+		DatabaseAdapter.instance(getBaseContext()).open();
+		TrnRoute[] trnRoutes = (TrnRoute[])DatabaseAdapter.instance(getBaseContext()).getAll(TrnRoute.getTableName());
+		DatabaseAdapter.instance(getBaseContext()).close();
 		
-		for (int i = 0; i < 20; ++i) {
-			LinearLayout item = (LinearLayout)inflater.inflate(R.layout.store_thumb, mLinear, false);
-			final int id = i;
-			item.setOnClickListener(new View.OnClickListener() {
+		if(trnRoutes != null){
+			mStoreListAdpt = new StoreListAdapter(this, trnRoutes);
+			mStoreListView.setAdapter(mStoreListAdpt);
+			
+			mStoreListView.setOnItemClickListener(new OnItemClickListener() {
 				@Override
-				public void onClick(View v) {
-					Intent intent = new Intent(KanvasingStoreListAct.this, KanvasingStoreInformationAct.class);
-					intent.putExtra(Utilities.INTENT_STORE_ID, id);
+				public void onItemClick(AdapterView<?> parentView, View view, int position, long id) {
+					String trnRouteID = ((TrnRoute)mStoreListView.getItemAtPosition(position)).mID;
+					Log.d("StoreList SELECT", position + "#" + id + "=" + trnRouteID);
 					
+					/*Intent intent1 = new Intent(view.getContext(), SendSMSActivity.class);
+	    			intent1.putExtra(GROUP_NAME, m_orgListView.getItemAtPosition(position).toString());
+	    			startActivity(intent1);*/
+					
+					Intent intent = new Intent(KanvasingStoreListAct.this, KanvasingStoreInformationAct.class);
+					intent.putExtra(Utilities.INTENT_STORE_ID, trnRouteID);
 					startActivityForResult(intent, Utilities.KANVASING_STOREINFO_RC);
 				}
 			});
-			
-			mLinear.addView(item);
 		}
 	}
 	
@@ -48,5 +60,6 @@ public class KanvasingStoreListAct extends Activity {
 		}
 	}
 	
-	private LinearLayout mLinear;
+	private ListView			mStoreListView;
+	private StoreListAdapter	mStoreListAdpt; 
 }
