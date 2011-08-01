@@ -17,7 +17,7 @@ import dp.mobile.store.helper.tables.TrnSales;
 
 public class DatabaseAdapter {
 	protected static final String	TAG					= "DatabaseAdapter";
-	protected static final String	DATABASE_NAME		= "artindo";
+	protected static final String	DATABASE_NAME		= "artindo.db";
 	protected static final int		DATABASE_VERSION	= 2;
 	
 	private DatabaseAdapter(Context context){
@@ -45,6 +45,7 @@ public class DatabaseAdapter {
 	public void close(){
 		if(mDBHelper != null){
 			mDBHelper.close();
+			mDatabase.close();
 			Log.d(TAG, "CLOSING DATABASE SUCCESS : " + DATABASE_NAME + "version " + DATABASE_VERSION);
 		} else
 			Log.d(TAG, "CLOSING DATABASE FAILED : " + DATABASE_NAME + "version " + DATABASE_VERSION);
@@ -134,7 +135,9 @@ public class DatabaseAdapter {
     	Model retval = null;
     	
     	openDatabaseIfNecessary();
-    	Cursor cursor = mDatabase.query(true, tableName, getTableColumns(tableName), null, null, null, null, null, rowID);
+    	Cursor cursor = mDatabase.query(true, tableName, getTableColumns(tableName), "id=?", new String[]{rowID}, null, null, null, null);
+    	
+    	Log.d(TAG, "cursor = " + cursor.getCount());
     	
     	if(cursor != null){
     		if(tableName.equals(DailyNews.getTableName()))			retval = DailyNews.extract(cursor)[0];
@@ -183,8 +186,8 @@ public class DatabaseAdapter {
 			db.execSQL("DROP TABLE IF EXISTS " + TrnRoute.getTableName());
 			db.execSQL("DROP TABLE IF EXISTS " + PriceList.getTableName());
 			db.execSQL("DROP TABLE IF EXISTS " + TrnReceivable.getTableName());
-			db.execSQL("DROP TABLE IF EXISTS mobile_trnsales");
-			db.execSQL("DROP TABLE IF EXISTS mobile_dtlsales");
+			db.execSQL("DROP TABLE IF EXISTS " + TrnSales.getTableName());
+			db.execSQL("DROP TABLE IF EXISTS " + DtlSales.getTableName());
 			
 			db.execSQL(DailyNews.TABLE_CREATE_MOBILE_DAILYNEWS);
 			db.execSQL(TrnRoute.TABLE_CREATE_MOBILE_TRNROUTE);

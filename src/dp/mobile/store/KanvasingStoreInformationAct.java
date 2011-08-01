@@ -1,23 +1,28 @@
 package dp.mobile.store;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-
-import dp.mobile.store.helper.Utilities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+import dp.mobile.store.helper.DatabaseAdapter;
+import dp.mobile.store.helper.Utilities;
+import dp.mobile.store.helper.tables.TrnRoute;
 
 public class KanvasingStoreInformationAct extends Activity implements OnClickListener {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.kanvasing_storeinfo);
-		final int storeID = getIntent().getExtras().getInt(Utilities.INTENT_STORE_ID);
+		
+		//final int storeID = getIntent().getExtras().getInt(Utilities.INTENT_STORE_ID);
+		final String storeID = getIntent().getExtras().getString(Utilities.INTENT_STORE_ID);
+		Log.d("STORE ID", storeID);
+		
+		TrnRoute selectedTrnRoute = (TrnRoute)DatabaseAdapter.instance(getBaseContext()).get(TrnRoute.getTableName(), storeID);
 		
 		/// TODO : get store from id [need database]
 		mInfo = new TextView[10];
@@ -31,12 +36,42 @@ public class KanvasingStoreInformationAct extends Activity implements OnClickLis
 		mInfo[7] = (TextView)findViewById(R.id.info8);
 		mInfo[8] = (TextView)findViewById(R.id.info9);
 		
-		Calendar now = new GregorianCalendar();
+		//Calendar now = new GregorianCalendar();
+		/*mInfo[0].setText("" + now.get(Calendar.DAY_OF_MONTH) + "-" + now.get(Calendar.MONTH) + "-" + now.get(Calendar.YEAR));
+		mInfo[1].setText("" + now.get(Calendar.HOUR_OF_DAY) + ":" + now.get(Calendar.MINUTE) + ":" + now.get(Calendar.SECOND));*/
 		
-		mInfo[0].setText("" + now.get(Calendar.DAY_OF_MONTH) + "-" + now.get(Calendar.MONTH) + "-" + now.get(Calendar.YEAR));
-		mInfo[1].setText("" + now.get(Calendar.HOUR_OF_DAY) + ":" + now.get(Calendar.MINUTE) + ":" + now.get(Calendar.SECOND));
+		populateInfo(selectedTrnRoute);
+	}
+	
+	private void populateInfo(TrnRoute selectedTrnRoute){
+		//Date and Time
+		String originalTrnDate = Utilities.formatDate(selectedTrnRoute.mTrnDate);
+			int spaceIdx = originalTrnDate.indexOf(" ");
+			String date = originalTrnDate.substring(0, spaceIdx);
+			String time = originalTrnDate.substring(spaceIdx+1, originalTrnDate.length());
 		
-		/// TODO : populate info lainnya
+		mInfo[0].setText(date);
+		mInfo[1].setText(time);
+		
+		//Current Kilometer
+		
+		//Current Name
+		mInfo[3].setText(selectedTrnRoute.mCustomerName);
+		
+		//Customer Type
+		mInfo[4].setText(selectedTrnRoute.mCustomerType);
+		
+		//Term of Payment
+		mInfo[5].setText(selectedTrnRoute.mCustomerTermPayment);
+		
+		//Receivable
+		mInfo[6].setText(String.valueOf(selectedTrnRoute.mReceivable));
+		
+		//Limit Credit
+		mInfo[7].setText(String.valueOf(selectedTrnRoute.mCreditLimit));
+		
+		//Last Buy
+		mInfo[8].setText(Utilities.formatDate(selectedTrnRoute.mLastBuyDate));
 		
 		mHistoryButton 		= (Button) findViewById(R.id.history);
 		mKanvasingButton 	= (Button) findViewById(R.id.kanvasing);

@@ -49,9 +49,8 @@ public class DailyNewsAct extends Activity {
         };*/
         
         public void setDailyNews(){
-        	DatabaseAdapter.instance(getBaseContext()).open();
+        	//Fetch DailyNews records from db
     		DailyNews[] dailyNewses = (DailyNews[])DatabaseAdapter.instance(getBaseContext()).getAll(DailyNews.getTableName());
-    		DatabaseAdapter.instance(getBaseContext()).close();
     		
     		groups = new String[dailyNewses.length];
     		children = new String[dailyNewses.length][1];

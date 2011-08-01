@@ -49,7 +49,7 @@ public class TrnRoute extends Model {
 			Date lastBuyDate, String descr){
 		this(id);
 		
-		mTrnDate			= (Date) trnDate.clone();
+		mTrnDate			= trnDate;
 		mUsername			= username;
 		mUnitCompanyCode	= unitCompanyCode;
 		mOrderNo			= orderNo;
@@ -90,11 +90,10 @@ public class TrnRoute extends Model {
     }
 	
 	public static Model[] extract(Cursor cursor){
-    	if(cursor != null){
-    		int i = 0;
-    		Model[] retval = new TrnRoute[cursor.getCount()];
+		int i = 0;
+		Model[] retval = new TrnRoute[cursor.getCount()];
 
-    		cursor.moveToFirst();
+		if(cursor.moveToFirst()){
     		do{
     			retval[i++] = new TrnRoute(cursor.getString(0), Utilities.formatStr(cursor.getString(1)),
     					cursor.getString(2), cursor.getString(3), cursor.getLong(4),
@@ -105,9 +104,8 @@ public class TrnRoute extends Model {
     		}while(cursor.moveToNext());
     		
     		return retval;
-    	}
-    	else
-    		return null;
+		} else
+			return null;
     }
     
 	//PROPERTIES
