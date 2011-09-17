@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="fill_parent"
-    android:gravity="center"
+    android:gravity="center_horizontal"
     android:layout_height="fill_parent" >
     
     <TextView 
@@ -12,31 +12,28 @@
 	<TableLayout 
 	    android:orientation="vertical"
 	    android:layout_width="fill_parent"
-	    android:layout_height="fill_parent"
-	    android:stretchColumns="1"
-	    >
+	    android:layout_height="wrap_content"
+	    android:stretchColumns="1">
 	    
 	    <TableRow>
 	    	<TextView
 	    		android:gravity="left"
-	    		android:text="Host Name"
+	    		android:text=" IP Server"
 	    		android:paddingRight="5dip" />
 	    	<EditText
 	    		android:gravity="left"
-	    		android:text=""
-	    		android:inputType="textUri"
-	    		android:id="@+id/host_name" />
+	    		android:inputType="text"
+	    		android:id="@+id/ip_server_edit_txt" />
 	    </TableRow>
 	    <TableRow>
 	    	<TextView
 	    		android:gravity="left"
-	    		android:text="IP Server"
+	    		android:text="IP Public"
 	    		android:paddingRight="5dip" />
 	    	<EditText
 	    		android:gravity="left"
-	    		android:text=""
-	    		android:inputType="textUri"
-	    		android:id="@+id/ip_server" />
+	    		android:inputType="text"
+	    		android:id="@+id/ip_public_edit_txt" />
 	    </TableRow>
 	    
 	    <TableRow>
@@ -46,9 +43,8 @@
 	    		android:paddingRight="5dip" />
 	    	<EditText
 	    		android:gravity="left"
-	    		android:text=""
-	    		android:inputType="textUri"
-	    		android:id="@+id/host_string" />
+	    		android:inputType="text"
+	    		android:id="@+id/host_string_edit_txt" />
 	    </TableRow>
 	    
 	    <TableRow>
@@ -58,47 +54,58 @@
 	    		android:paddingRight="5dip" />
 	    	<EditText
 	    		android:gravity="left"
-	    		android:text=""
-	    		android:id="@+id/default_user" />
+	    		android:inputType="text"
+	    		android:id="@+id/default_user_edit_txt" />
 	    </TableRow>
 	    
-	    <TableRow>
-	    	<TextView
-	    		android:gravity="left"
-	    		android:text="Phone Number"
-	    		android:paddingRight="5dip" />
-	    	<TextView
-	    		android:gravity="left"
-	    		android:text=""
-	    		android:id="@+id/phone_number" />
-	    </TableRow>
-	    
-	    <TableRow>
+	    <TableRow android:layout_marginTop="10dip"
+	    	android:layout_marginBottom="10dip">
 	    	<TextView
 	    		android:gravity="left"
 	    		android:text="IMEI"
 	    		android:paddingRight="5dip" />
-	    	<TextView
+	    	<TextView android:layout_width="wrap_content"
 	    		android:gravity="left"
-	    		android:text=""
-	    		android:id="@+id/imei" />
+	    		android:layout_height="wrap_content"
+	    		android:textStyle="bold"
+	    		android:id="@+id/imei_txt"/>
 	    </TableRow>
 	    
-	    <TableRow>
-	    	
+	    <TableRow android:layout_marginTop="10dip"
+	    	android:layout_marginBottom="10dip">
+	    	<TextView
+	    		android:gravity="left"
+	    		android:text="Phone Number"
+	    		android:paddingRight="5dip"/>
+	    	<TextView android:layout_width="wrap_content"
+	    		android:gravity="left"
+	    		android:layout_height="wrap_content"
+	    		android:textStyle="bold"
+	    		android:id="@+id/phone_number_txt"/>
+	    </TableRow>
+	    
+	    <!-- <TableRow>
 	    	<LinearLayout>
 	    	<Button
 	    		style="@style/table_button_style"
 	    		android:text="Default"
-	    		android:id="@+id/default_setting" />
+	    		android:id="@+id/default_setting"
+	    		android:visibility="gone"/>
 	    	</LinearLayout>
 	    	<LinearLayout
 	    		android:gravity="right">
-	    	<Button
-	    		style="@style/table_button_style"
-	    		android:text="Confirm"
-	    		android:id="@+id/confirm" />
+		    	<Button
+		    		style="@style/table_button_style"
+		    		android:text="Save"
+		    		android:id="@+id/save_btn"/>
 	    	</LinearLayout>
-	    </TableRow>
+	    </TableRow> -->
 	</TableLayout>
+	<Button
+		android:id="@+id/save_btn"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center_horizontal"
+   		style="@style/table_button_style"
+   		android:text="Save"/>
 </LinearLayout>

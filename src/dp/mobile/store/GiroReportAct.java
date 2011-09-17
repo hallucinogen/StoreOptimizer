@@ -23,7 +23,7 @@ public class GiroReportAct extends Activity{
 		LayoutInflater inflater = getLayoutInflater();
 		
 		for (int i = 0; i < 20; ++i) {
-			LinearLayout item 	= (LinearLayout)inflater.inflate(R.layout.store_thumb, mLinear, false);
+			LinearLayout item 	= (LinearLayout)inflater.inflate(R.layout.check_route_adpt, mLinear, false);
 			TextView account	= (TextView) item.findViewById(R.id.store_down);
 			TextView amount		= (TextView) item.findViewById(R.id.store_right);
 			

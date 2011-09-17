@@ -9,18 +9,18 @@ import android.widget.TextView;
 import dp.mobile.store.R;
 import dp.mobile.store.helper.tables.TrnRoute;
 
-public class StoreListAdapter extends ArrayAdapter<TrnRoute> {
-	public StoreListAdapter(Activity context, TrnRoute[] list) {
-		super(context, R.layout.store_thumb, list);
+public class CheckRouteAdapter extends ArrayAdapter<TrnRoute> {
+	public CheckRouteAdapter(Activity context, TrnRoute[] list) {
+		super(context, R.layout.check_route_adpt, list);
 		
 		mContext	= context;
 		mList		= list;
 	}
 	
 	static class ViewHolder{
-		protected TextView	storeName;
-		protected TextView	storeAddr;
-		protected TextView	storeReceivable;
+		protected TextView	customerName;
+		protected TextView	customerAddr;
+		protected TextView	timevisit;
 	}
 	
 	@Override
@@ -30,21 +30,21 @@ public class StoreListAdapter extends ArrayAdapter<TrnRoute> {
 		final TrnRoute currItem		= getItem(position);
 	
 		//Always Override convertView (not efficient but it keeps the ListView item consistent)  
-		convertView	= inflator.inflate(R.layout.store_thumb, null);
+		convertView	= inflator.inflate(R.layout.check_route_adpt, null);
 	
 		//Bind convertView to viewHolder
 		viewHolder	= new ViewHolder();
 		convertView.setTag(viewHolder);
 		
 		//Get the View
-		viewHolder.storeName		= (TextView) convertView.findViewById(R.id.store_name);
-		viewHolder.storeAddr		= (TextView) convertView.findViewById(R.id.store_down);
-		viewHolder.storeReceivable	= (TextView) convertView.findViewById(R.id.store_right);
+		viewHolder.customerName		= (TextView) convertView.findViewById(R.id.store_name);
+		viewHolder.customerAddr		= (TextView) convertView.findViewById(R.id.store_down);
+		viewHolder.timevisit	= (TextView) convertView.findViewById(R.id.store_right);
 		
 		//Set the View
-		viewHolder.storeName.setText(getItem(position).mCustomerName);
-		viewHolder.storeAddr.setText(getItem(position).mCustomerAddress);
-		viewHolder.storeReceivable.setText(String.valueOf(getItem(position).mReceivable));
+		viewHolder.customerName.setText(getItem(position).mCustomerName);
+		viewHolder.customerAddr.setText(getItem(position).mCustomerAddress);
+		viewHolder.timevisit.setText(String.valueOf(getItem(position).mTimeVisit));
 		
 		return convertView;
 	}

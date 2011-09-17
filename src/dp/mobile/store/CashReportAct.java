@@ -18,7 +18,6 @@ public class CashReportAct extends Activity {
 		populateTableWithDummy();
 	}
 	
-	/// TODO : not using dummy
 	private void populateTableWithDummy() {
 		
 		for (int i = 0; i < 10; ++i){

@@ -6,14 +6,17 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-import android.widget.Toast;
+import dp.mobile.store.helper.tables.Counter;
+import dp.mobile.store.helper.tables.Customer;
 import dp.mobile.store.helper.tables.DailyNews;
 import dp.mobile.store.helper.tables.DtlSales;
 import dp.mobile.store.helper.tables.Model;
 import dp.mobile.store.helper.tables.PriceList;
+import dp.mobile.store.helper.tables.Product;
 import dp.mobile.store.helper.tables.TrnReceivable;
 import dp.mobile.store.helper.tables.TrnRoute;
 import dp.mobile.store.helper.tables.TrnSales;
+import dp.mobile.store.helper.tables.User;
 
 public class DatabaseAdapter {
 	protected static final String	TAG					= "DatabaseAdapter";
@@ -63,7 +66,6 @@ public class DatabaseAdapter {
 			Log.d(TAG, "NO C");
 		}
 		
-		retval.close();
 		return retval;
 	}
 	
@@ -81,7 +83,7 @@ public class DatabaseAdapter {
 		retval = mDatabase.insert(tableName, null, model.getContentValues());
 		if(retval == -1){
 			Log.d(TAG, "Error inserting to table " + tableName);
-			Toast.makeText(mContext, "Error inserting to table " + tableName, 5000).show();
+			//Toast.makeText(mContext, "Error inserting to table " + tableName, 5000).show();
 		} else {
 			Log.d(TAG, "Successfully inserted to table " + tableName + " with row ID = " + retval);
 		}
@@ -105,19 +107,23 @@ public class DatabaseAdapter {
      * 
      * @return Cursor over all notes
      */
-    public Model[] getAll(String tableName){
+    public Model[] getAll(String tableName, String groupBy, String orderBy){
     	Model[] retval = null;
     	
     	openDatabaseIfNecessary();
-    	Cursor cursor = mDatabase.query(tableName, getTableColumns(tableName), null, null, null, null, null);
+    	Cursor cursor = mDatabase.query(tableName, getTableColumns(tableName), null, null, groupBy, null, orderBy);
     	
     	if(cursor != null){
-    		if(tableName.equals(DailyNews.getTableName()))			retval = DailyNews.extract(cursor);
-    		else if(tableName.equals(TrnRoute.getTableName()))		retval = TrnRoute.extract(cursor);
-    		else if(tableName.equals(PriceList.getTableName()))		retval = PriceList.extract(cursor);
-    		else if(tableName.equals(TrnReceivable.getTableName()))	retval = TrnReceivable.extract(cursor);
-    		else if(tableName.equals(TrnSales.getTableName())) 		retval = TrnSales.extract(cursor);
+    		if(tableName.equals(Counter.getTableName()))			retval = Counter.extract(cursor);
+    		else if(tableName.equals(Customer.getTableName()))		retval = Customer.extract(cursor);
+    		else if(tableName.equals(DailyNews.getTableName()))		retval = DailyNews.extract(cursor);
     		else if(tableName.equals(DtlSales.getTableName())) 		retval = DtlSales.extract(cursor);
+    		else if(tableName.equals(PriceList.getTableName()))		retval = PriceList.extract(cursor);
+    		else if(tableName.equals(Product.getTableName()))		retval = Product.extract(cursor);
+    		else if(tableName.equals(TrnReceivable.getTableName()))	retval = TrnReceivable.extract(cursor);
+    		else if(tableName.equals(TrnRoute.getTableName()))		retval = TrnRoute.extract(cursor);
+    		else if(tableName.equals(TrnSales.getTableName())) 		retval = TrnSales.extract(cursor);
+    		else if(tableName.equals(User.getTableName()))			retval = User.extract(cursor);
     	}
     	
     	cursor.close();
@@ -182,19 +188,27 @@ public class DatabaseAdapter {
 
 		@Override
 		public void onCreate(SQLiteDatabase db) {
+			db.execSQL("DROP TABLE IF EXISTS " + Counter.getTableName());
+			db.execSQL("DROP TABLE IF EXISTS " + Customer.getTableName());
 			db.execSQL("DROP TABLE IF EXISTS " + DailyNews.getTableName());
-			db.execSQL("DROP TABLE IF EXISTS " + TrnRoute.getTableName());
-			db.execSQL("DROP TABLE IF EXISTS " + PriceList.getTableName());
-			db.execSQL("DROP TABLE IF EXISTS " + TrnReceivable.getTableName());
-			db.execSQL("DROP TABLE IF EXISTS " + TrnSales.getTableName());
 			db.execSQL("DROP TABLE IF EXISTS " + DtlSales.getTableName());
+			db.execSQL("DROP TABLE IF EXISTS " + PriceList.getTableName());
+			db.execSQL("DROP TABLE IF EXISTS " + Product.getTableName());
+			db.execSQL("DROP TABLE IF EXISTS " + TrnReceivable.getTableName());
+			db.execSQL("DROP TABLE IF EXISTS " + TrnRoute.getTableName());
+			db.execSQL("DROP TABLE IF EXISTS " + TrnSales.getTableName());
+			db.execSQL("DROP TABLE IF EXISTS " + User.getTableName());
 			
+			db.execSQL(Counter.TABLE_CREATE_MOBILE_COUNTER);
+			db.execSQL(Customer.TABLE_CREATE_MOBILE_CUSTOMER);
 			db.execSQL(DailyNews.TABLE_CREATE_MOBILE_DAILYNEWS);
-			db.execSQL(TrnRoute.TABLE_CREATE_MOBILE_TRNROUTE);
-			db.execSQL(PriceList.TABLE_CREATE_MOBILE_PRICELIST);
-			db.execSQL(TrnReceivable.TABLE_CREATE_MOBILE_TRNRECEIVABLE);
-			db.execSQL(TrnSales.TABLE_CREATE_MOBILE_TRNSALES);
 			db.execSQL(DtlSales.TABLE_CREATE_MOBILE_DTLSALES);
+			db.execSQL(PriceList.TABLE_CREATE_MOBILE_PRICELIST);
+			db.execSQL(Product.TABLE_CREATE_MOBILE_PRODUCT);
+			db.execSQL(TrnReceivable.TABLE_CREATE_MOBILE_TRNRECEIVABLE);
+			db.execSQL(TrnRoute.TABLE_CREATE_MOBILE_TRNROUTE);
+			db.execSQL(TrnSales.TABLE_CREATE_MOBILE_TRNSALES);
+			db.execSQL(User.TABLE_CREATE_MOBILE_USER);
 			
 			Log.d(TAG, "DBHelper onCreate");
 			//TODO: create the view ?
@@ -204,12 +218,16 @@ public class DatabaseAdapter {
 		public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 			Log.w(TAG, "Upgrading database from version " + oldVersion + " to " + newVersion + ", which will destroy all old data");
 			
+			db.execSQL("DROP TABLE IF EXISTS " + Counter.getTableName());
+			db.execSQL("DROP TABLE IF EXISTS " + Customer.getTableName());
 			db.execSQL("DROP TABLE IF EXISTS " + DailyNews.getTableName());
-			db.execSQL("DROP TABLE IF EXISTS " + TrnRoute.getTableName());
+			db.execSQL("DROP TABLE IF EXISTS " + DtlSales.getTableName());
 			db.execSQL("DROP TABLE IF EXISTS " + PriceList.getTableName());
+			db.execSQL("DROP TABLE IF EXISTS " + Product.getTableName());
 			db.execSQL("DROP TABLE IF EXISTS " + TrnReceivable.getTableName());
+			db.execSQL("DROP TABLE IF EXISTS " + TrnRoute.getTableName());
 			db.execSQL("DROP TABLE IF EXISTS " + TrnSales.getTableName());
-			db.execSQL("DROP TABLE IF EXISTS " + TrnSales.getTableName());
+			db.execSQL("DROP TABLE IF EXISTS " + User.getTableName());
 			
 			onCreate(db);
 		}

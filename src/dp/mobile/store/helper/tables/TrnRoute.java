@@ -23,6 +23,7 @@ public class TrnRoute extends Model {
     public static final String KEY_RECEIVABLE			= "receivable";
     public static final String KEY_LASTBUYDATE			= "lastbuydate";
     public static final String KEY_DESCR				= "descr";
+    public static final String KEY_TIMEVISIT			= "timevisit";
 	
     public static String getTableName(){
     	return "mobile_trnroute";
@@ -32,7 +33,7 @@ public class TrnRoute extends Model {
 		return new String[]{KEY_ROWID, KEY_TRNDATE, KEY_USERNAME, KEY_UNITCOMPANY_CODE, KEY_ORDERNO,
 				KEY_CUSTOMER_CODE, KEY_CUSTOMER_NAME, KEY_CUSTOMER_ADDRESS, KEY_CUSTOMER_POSTCODE,
 				KEY_CUSTOMER_SATELLITE, KEY_CUSTOMER_TYPE, KEY_CUSTOMER_TERMPAYMENT, KEY_CREDIT_LIMIT,
-				KEY_RECEIVABLE, KEY_LASTBUYDATE, KEY_DESCR};
+				KEY_RECEIVABLE, KEY_LASTBUYDATE, KEY_DESCR, KEY_TIMEVISIT};
 	}
     
 	public TrnRoute() {
@@ -46,24 +47,25 @@ public class TrnRoute extends Model {
 	public TrnRoute(String id, Date trnDate, String username, String unitCompanyCode, long orderNo, String customerCode,
 			String customerName, String customerAddress, String customerPostCode, String customerSatellite,
 			String customerType, String customerTermpayment, long creditLimit, long receivable,
-			Date lastBuyDate, String descr){
+			Date lastBuyDate, String descr, String timevisit){
 		this(id);
 		
-		mTrnDate			= trnDate;
-		mUsername			= username;
-		mUnitCompanyCode	= unitCompanyCode;
-		mOrderNo			= orderNo;
-		mCustomerCode		= customerCode;
-		mCustomerName		= customerName;
-		mCustomerAddress	= customerAddress;
-		mCustomerPostCode	= customerPostCode;
-		mCustomerSatellite	= customerSatellite;
-		mCustomerType		= customerType;
-		mCustomerTermPayment= customerTermpayment;
-		mCreditLimit		= creditLimit;
-		mReceivable			= receivable;
-		mLastBuyDate		= lastBuyDate;
-		mDescr				= descr;
+		mTrnDate			= trnDate;				//0
+		mUsername			= username;				//1
+		mUnitCompanyCode	= unitCompanyCode;		//2
+		mOrderNo			= orderNo;				//3
+		mCustomerCode		= customerCode;			//4
+		mCustomerName		= customerName;			//5
+		mCustomerAddress	= customerAddress;		//6
+		mCustomerPostCode	= customerPostCode;		//7
+		mCustomerSatellite	= customerSatellite;	//8
+		mCustomerType		= customerType;			//9
+		mCustomerTermPayment= customerTermpayment;	//10
+		mCreditLimit		= creditLimit;			//11
+		mReceivable			= receivable;			//12
+		mLastBuyDate		= lastBuyDate;			//13
+		mDescr				= descr;				//14
+		mTimeVisit			= timevisit;			//15
 	}
 	
 	public ContentValues getContentValues(){
@@ -85,6 +87,7 @@ public class TrnRoute extends Model {
     	retval.put(KEY_RECEIVABLE,				mReceivable);						//13
     	retval.put(KEY_LASTBUYDATE,				Utilities.formatDate(mLastBuyDate));//14
     	retval.put(KEY_DESCR,					mDescr);							//15
+    	retval.put(KEY_TIMEVISIT,				mTimeVisit);						//16
     	
     	return retval;
     }
@@ -100,7 +103,8 @@ public class TrnRoute extends Model {
     					cursor.getString(5), cursor.getString(6), cursor.getString(7),
     					cursor.getString(8), cursor.getString(9), cursor.getString(10),
     					cursor.getString(11), cursor.getLong(12), cursor.getLong(13),
-    					Utilities.formatStr(cursor.getString(14)), cursor.getString(15));
+    					Utilities.formatStr(cursor.getString(14)), cursor.getString(15),
+    					cursor.getString(16));
     		}while(cursor.moveToNext());
     		
     		return retval;
@@ -115,7 +119,7 @@ public class TrnRoute extends Model {
 	public String	mCustomerCode, mCustomerName, mCustomerAddress, mCustomerPostCode, mCustomerSatellite, mCustomerType, mCustomerTermPayment;
 	public long		mCreditLimit, mReceivable;
 	public Date		mLastBuyDate;
-	public String	mDescr;
+	public String	mDescr, mTimeVisit;
 	
     //TABLE CREATE Query
     public static final String TABLE_CREATE_MOBILE_TRNROUTE = 
@@ -134,5 +138,6 @@ public class TrnRoute extends Model {
 		+ "credit_limit 		NUMERIC(16,2) DEFAULT 0, "
 		+ "receivable 			NUMERIC(16,2) DEFAULT 0, "
 		+ "lastbuydate 			DATETIME, "
-		+ "descr 				TEXT);";
+		+ "descr 				TEXT, "
+    	+ "timevisit 			VARCHAR(32));";
 }

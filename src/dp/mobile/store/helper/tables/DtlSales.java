@@ -1,6 +1,7 @@
 package dp.mobile.store.helper.tables;
 
 import android.content.ContentValues;
+import android.database.Cursor;
 
 public class DtlSales extends Model {
 	public static final String KEY_ROWID			= "id";
@@ -70,6 +71,25 @@ public class DtlSales extends Model {
     	
     	return retval;
 	}
+    
+    public static Model[] extract(Cursor cursor){
+    	if(cursor != null){
+    		int i = 0;
+    		Model[] retval = new DtlSales[cursor.getCount()];
+
+    		cursor.moveToFirst();
+    		do{
+    			retval[i++] = new DtlSales(cursor.getString(0), cursor.getString(1), cursor.getString(2),
+    					cursor.getLong(3), cursor.getLong(4), cursor.getLong(5), cursor.getLong(6),
+    					cursor.getLong(7), cursor.getLong(8), cursor.getLong(9), cursor.getLong(10),
+    					cursor.getLong(11));
+    		}while(cursor.moveToNext());
+    		
+    		return retval;
+    	}
+    	else
+    		return null;
+    }
     
     //PROPERTIES
     public String	mTrnSalesID, mProductCode;

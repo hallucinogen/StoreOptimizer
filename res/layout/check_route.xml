@@ -8,17 +8,11 @@
     <TextView 
 		style="@style/title_style"
 		android:text="Check Route"/>
-	<ScrollView
+	<ListView
+		android:id="@+id/check_route_listview"
 		android:layout_width="fill_parent"
-	    android:layout_height="wrap_content">
-    <LinearLayout
-    	android:orientation="vertical"
-	    android:layout_width="fill_parent"
-	    android:layout_height="fill_parent"
-    	android:gravity="center_horizontal"
-    	android:layout_margin="20dip"
-    	android:id="@+id/route_linear">
-    	
-	</LinearLayout>
-	</ScrollView>
+		android:layout_height="wrap_content"
+		android:layout_gravity="center_horizontal"
+		android:layout_margin="5dip">
+	</ListView>
 </LinearLayout>

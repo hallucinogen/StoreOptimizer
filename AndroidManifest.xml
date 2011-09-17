@@ -34,6 +34,8 @@
 		<activity android:name="StockReportAct" />
 		<activity android:name="StockRequestAct" />
 		<activity android:name="StockTransactionAct" />
-
     </application>
+    
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 </manifest>

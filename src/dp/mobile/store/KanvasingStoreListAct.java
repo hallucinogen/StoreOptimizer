@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
-import dp.mobile.store.adapter.StoreListAdapter;
+import dp.mobile.store.adapter.CheckRouteAdapter;
 import dp.mobile.store.helper.DatabaseAdapter;
 import dp.mobile.store.helper.Utilities;
 import dp.mobile.store.helper.tables.TrnRoute;
@@ -26,10 +26,10 @@ public class KanvasingStoreListAct extends Activity {
 	
 	private void populateLinearWithDummy() {
 		//Fetch TrnRoute records from db
-		TrnRoute[] trnRoutes = (TrnRoute[])DatabaseAdapter.instance(getBaseContext()).getAll(TrnRoute.getTableName());
+		TrnRoute[] trnRoutes = (TrnRoute[])DatabaseAdapter.instance(getBaseContext()).getAll(TrnRoute.getTableName(), null, null);
 		
 		if(trnRoutes != null){
-			mStoreListAdpt = new StoreListAdapter(this, trnRoutes);
+			mStoreListAdpt = new CheckRouteAdapter(this, trnRoutes);
 			mStoreListView.setAdapter(mStoreListAdpt);
 			
 			mStoreListView.setOnItemClickListener(new OnItemClickListener() {
@@ -59,5 +59,5 @@ public class KanvasingStoreListAct extends Activity {
 	}
 	
 	private ListView			mStoreListView;
-	private StoreListAdapter	mStoreListAdpt; 
+	private CheckRouteAdapter	mStoreListAdpt; 
 }

@@ -33,12 +33,12 @@ public class PriceList extends Model {
     		String productCode, long price, long status){
     	this(id);
     	
-    	mUsername			= username;
-    	mUnitCompanyCode	= unitCompanyCode;
-    	mCustomerCode		= customerCode;
-    	mProductCode		= productCode;
-    	mPrice				= price;
-    	mStatus				= status;
+    	mUsername			= username;			//0
+    	mUnitCompanyCode	= unitCompanyCode;	//1
+    	mCustomerCode		= customerCode;		//2
+    	mProductCode		= productCode;		//3
+    	mPrice				= price;			//4
+    	mStatus				= status;			//5
     }
     
     @Override
