@@ -11,76 +11,78 @@
 	<ScrollView
 		android:layout_width="fill_parent"
 	    android:layout_height="wrap_content">
-    <TableLayout
-    	android:layout_width="fill_parent"
-		android:layout_height="fill_parent"
-    	android:id="@+id/transaction_info">
-    	<TableRow android:layout_margin="5dip">
-		  	<TextView 
-				android:layout_weight="1"
-				android:text="Total"/>
-			<TextView 
-				android:layout_weight="1"
-				android:gravity="right"
-				android:text="Rp 2.500.000"
-				android:id="@+id/info1"/>
-		</TableRow>
-		
-		<TableRow android:layout_margin="5dip">
-		  	<TextView 
-				android:layout_weight="1"
-				android:text="Discount"/>
-			<TextView 
-				android:layout_weight="1"
-				android:gravity="right" 
-				android:text="Rp. 0"
-				android:id="@+id/info2"/>
-		</TableRow>
-		
-		<TableRow android:layout_margin="5dip">
-		  	<TextView 
-				android:layout_weight="1"
-				android:text="Netto"/>
-			<TextView 
-				android:layout_weight="1"
-				android:gravity="right" 
-				android:text="Rp 2.500.000"
-				android:id="@+id/info3"/>
-		</TableRow>
-		
-		<TableRow android:layout_margin="5dip">
-		  	<TextView 
-				android:layout_weight="1"
-				android:text="Payment"/>
-			<TextView 
-				android:layout_weight="1"
-				android:gravity="right" 
-				android:text="Rp 2.500.000"
-				android:id="@+id/info4"/>
-		</TableRow>
-		
-		<TableRow android:layout_margin="5dip">
-		  	<TextView 
-				android:layout_weight="1"
-				android:text="Credit Limit"/>
-			<TextView 
-				android:layout_weight="1"
-				android:gravity="right" 
-				android:text="Rp 0"
-				android:id="@+id/info5"/>
-		</TableRow>
-		
-		<TableRow android:layout_margin="5dip">
-		  	<TextView 
-				android:layout_weight="1"
-				android:text="Receivable"/>
-			<TextView 
-				android:layout_weight="1"
-				android:gravity="right" 
-				android:text="Rp 2.500.000"
-				android:id="@+id/info6"/>
-		</TableRow>
-	</TableLayout>
+	    <TableLayout
+	    	android:layout_width="fill_parent"
+			android:layout_height="fill_parent"
+	    	android:id="@+id/transaction_info">
+	    	<TableRow android:layout_margin="5dip">
+			  	<TextView 
+					android:layout_weight="1"
+					android:text="Total"/>
+				<TextView 
+					android:layout_weight="1"
+					android:gravity="right"
+					android:text="Rp 2.500.000"
+					android:id="@+id/info1"/>
+			</TableRow>
+			
+			<TableRow android:layout_margin="5dip">
+			  	<TextView 
+					android:layout_weight="1"
+					android:text="Discount"/>
+				<TextView 
+					android:layout_weight="1"
+					android:gravity="right" 
+					android:text="Rp. 0"
+					android:id="@+id/info2"/>
+			</TableRow>
+			
+			<TableRow android:layout_margin="5dip">
+			  	<TextView 
+					android:layout_weight="1"
+					android:text="Netto"/>
+				<TextView 
+					android:layout_weight="1"
+					android:gravity="right" 
+					android:text="Rp 2.500.000"
+					android:id="@+id/info3"/>
+			</TableRow>
+			
+			<View android:background="#f00" android:layout_height="1dip" android:layout_margin="10dip" />
+			
+			<TableRow android:layout_margin="5dip">
+			  	<TextView 
+					android:layout_weight="1"
+					android:text="Receivable"/>
+				<TextView 
+					android:layout_weight="1"
+					android:gravity="right" 
+					android:text="Rp 2.500.000"
+					android:id="@+id/info6"/>
+			</TableRow>
+			
+			<TableRow android:layout_margin="5dip">
+			  	<TextView 
+					android:layout_weight="1"
+					android:text="Credit Limit"/>
+				<TextView 
+					android:layout_weight="1"
+					android:gravity="right" 
+					android:text="0"
+					android:id="@+id/info5"/>
+			</TableRow>
+			
+			<TableRow android:layout_margin="5dip">
+			  	<TextView 
+					android:layout_weight="1"
+					android:text="Cash Payment"/>
+				<TextView 
+					android:layout_weight="1"
+					android:gravity="right" 
+					android:text="Rp 2.500.000"
+					android:id="@+id/info4"/>
+			</TableRow>
+		</TableLayout>
 	</ScrollView>
 	<LinearLayout
 		android:layout_width="fill_parent"

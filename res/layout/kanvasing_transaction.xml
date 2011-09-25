@@ -1,77 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:gravity="center_horizontal"
-    android:orientation="vertical">
-    <TextView 
+    android:gravity="center_horizontal">
+    
+    <TextView android:id="@+id/kanvas_trans_title"
 		style="@style/title_style"
+		android:layout_centerHorizontal="true"
 		android:text="Transaction Menu"/>
 	
+	<LinearLayout android:id="@+id/kanvas_trans_linear"
+		android:orientation="vertical"
+		android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@id/kanvas_trans_title"
+    	android:layout_marginLeft="5dip">
+    	<TextView 
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="left"
+			android:textStyle="bold"
+			android:text="Customer Info"/>
+    	<TextView android:id="@+id/transaction_cust_code"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Code: "/>
+		<TextView android:id="@+id/transaction_cust_name"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Name: "/>
+		<TextView android:id="@+id/transaction_cust_address"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Address: "/>    	    	    	
+	</LinearLayout>
+	
 	<ScrollView
+		android:layout_below="@id/kanvas_trans_linear"
+		android:layout_centerVertical="true"
 		android:layout_width="fill_parent"
-	    android:layout_height="wrap_content">
-	    
+	    android:layout_height="wrap_content"
+	    android:layout_marginTop="10dip"
+	    android:layout_marginBottom="10dip">
+			
 	    <LinearLayout
-			android:orientation="vertical"
-			android:layout_width="fill_parent"
+	    	android:orientation="vertical"
+		    android:layout_width="fill_parent"
 		    android:layout_height="fill_parent"
-		    android:layout_gravity="left"
-	    	android:layout_marginLeft="15dip">
-			<TextView 
+	    	android:layout_gravity="center"
+	    	android:gravity="center">
+		    <Button 
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				android:id="@+id/sales_transaction"
+				android:text="Sales Transaction"/>
+			<Button 
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				android:id="@+id/retur_transaction"
+				android:text="Other Transaction"/>
+			<Button 
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				android:id="@+id/receivable_payment"
+				android:text="Receivable Payment"/>
+				
+			<Button android:id="@+id/transaction_done_btn"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:layout_gravity="left"
-				android:text="Customer Info"/>
-			<LinearLayout
-				android:orientation="vertical"
-				android:layout_width="wrap_content"
-			    android:layout_height="wrap_content"
-			    android:layout_gravity="left"
-		    	android:layout_marginLeft="5dip">
-		    	<TextView android:id="@+id/transaction_cust_code"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:text="Code: "/>
-				<TextView android:id="@+id/transaction_cust_name"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:text="Name: "/>
-				<TextView android:id="@+id/transaction_cust_address"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:text="Address: "/>    	    	    	
-			</LinearLayout>
-			
-		    <LinearLayout
-		    	android:orientation="vertical"
-			    android:layout_width="fill_parent"
-			    android:layout_height="fill_parent"
-		    	android:layout_gravity="center"
-		    	android:layout_margin="10dip">
-			    <Button 
-					android:layout_width="fill_parent"
-					android:layout_height="wrap_content"
-					android:id="@+id/sales_transaction"
-					android:text="Sales Transaction"/>
-				<Button 
-					android:layout_width="fill_parent"
-					android:layout_height="wrap_content"
-					android:id="@+id/retur_transaction"
-					android:text="Other Transaction"/>
-				<Button 
-					android:layout_width="fill_parent"
-					android:layout_height="wrap_content"
-					android:id="@+id/receivable_payment"
-					android:text="Receivable Payment"/>
-			</LinearLayout>
+				android:text="Done Kanvasing">
+	</Button>
 		</LinearLayout>
 	</ScrollView>
-	
-	<Button android:id="@+id/transaction_done_btn"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_gravity="center_horizontal"
-		android:text="Done Kanvasing">
-	</Button>
-</LinearLayout>
+</RelativeLayout>

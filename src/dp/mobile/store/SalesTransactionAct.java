@@ -24,19 +24,20 @@ public class SalesTransactionAct extends Activity implements OnClickListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.sales_transaction);
-		
 		mStoreID	= getIntent().getExtras().getString(Utilities.INTENT_STORE_ID);
 		
-		mTransactionTable 	= (TableLayout) findViewById(R.id.transaction_table);
-		mConfirmButton		= (Button) findViewById(R.id.confirm);
-		mConfirmButton.setOnClickListener(this);
-		
+		initComp();
 		populateTablePriceList();
 	}
 	
-	private void populateTablePriceList() {
+	private void initComp(){
+		mTransactionTable 	= (TableLayout) findViewById(R.id.transaction_table);
+		mConfirmButton		= (Button) findViewById(R.id.confirm);
+		mConfirmButton.setOnClickListener(this);
+	}
+	
+	private SalesTransactionPriceList[] getSalesTransPriceList(){
 		int i=0;
-		
 		Cursor priceListCur = DatabaseAdapter.instance(getBaseContext()).rawQuery("SELECT " +
 				"mobile_pricelist.customer_code, mobile_pricelist.product_code, " +
 				"mobile_product.product_name, mobile_pricelist.price " +
@@ -45,10 +46,10 @@ public class SalesTransactionAct extends Activity implements OnClickListener {
 				"WHERE mobile_pricelist.customer_code =? " +
 				"ORDER BY mobile_pricelist.product_code ASC", new String[]{mStoreID});
 		
-		mPriceLists = new SalesTransactionPriceList[priceListCur.getCount()];
+		SalesTransactionPriceList[] retval = new SalesTransactionPriceList[priceListCur.getCount()];
 		if(priceListCur.moveToFirst()){
     		do{
-    			mPriceLists[i++] = new SalesTransactionPriceList(priceListCur.getString(0),
+    			retval[i++] = new SalesTransactionPriceList(priceListCur.getString(0),
     					priceListCur.getString(1), priceListCur.getString(2),
     					priceListCur.getLong(3));
     		}while(priceListCur.moveToNext());
@@ -56,9 +57,14 @@ public class SalesTransactionAct extends Activity implements OnClickListener {
     		priceListCur.close();
 		}
 		
+		return retval;
+	}
+	
+	private void populateTablePriceList() {
+		mPriceLists = getSalesTransPriceList();
 		LayoutInflater inflater = getLayoutInflater();
 		
-		for (i = 0; i < mPriceLists.length; ++i) {
+		for (int i = 0; i < mPriceLists.length; ++i) {
 			TableRow item = (TableRow) inflater.inflate(R.layout.transaction_item, mTransactionTable, false);
 			TextView name = (TextView) item.findViewById(R.id.item);
 			TextView price = (TextView) item.findViewById(R.id.num1);
@@ -88,8 +94,6 @@ public class SalesTransactionAct extends Activity implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		if (v == mConfirmButton) {
-			Intent intent = new Intent(this, KanvasingFinishAct.class);
-			
 			//Make JSON Array of product_code, quantity, price
 			JSONArray jsonArray = new JSONArray();
 			for(int i=0; i<mPriceLists.length; ++i){
@@ -101,6 +105,7 @@ public class SalesTransactionAct extends Activity implements OnClickListener {
 					TableRow	item	= (TableRow)mTransactionTable.findViewById(i);
 					EditText	textbox = (EditText) item.findViewById(R.id.num2);
 					String		qty		= textbox.getText().toString();
+					
 					if(qty.equals("0") || qty == null || qty.trim().length() == 0)
 						continue;
 					json.put("quantity", Long.parseLong(textbox.getText().toString()));
@@ -112,6 +117,7 @@ public class SalesTransactionAct extends Activity implements OnClickListener {
 				}
 			}
 			
+			Intent intent = new Intent(this, KanvasingFinishAct.class);
 			intent.putExtra(Utilities.INTENT_STORE_ID, mStoreID);
 			intent.putExtra(Utilities.INTENT_TRANSACTION_DETAILS, jsonArray.toString());
 			startActivityForResult(intent, Utilities.KANVASING_FINISH_RC);

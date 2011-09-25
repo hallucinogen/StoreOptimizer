@@ -1,7 +1,6 @@
 package dp.mobile.store;
 
 import java.text.NumberFormat;
-import java.util.Currency;
 
 import android.app.Activity;
 import android.database.Cursor;

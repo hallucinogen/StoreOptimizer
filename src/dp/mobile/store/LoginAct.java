@@ -75,10 +75,14 @@ public class LoginAct extends Activity implements OnClickListener {
 		Cursor checkUserCur = DatabaseAdapter.instance(getBaseContext()).rawQuery("SELECT username, password " +
 				"FROM mobile_user WHERE username=? AND password=?", new String[]{username, password});
 		
-		if(checkUserCur.getCount() > 0)
+		if(checkUserCur.getCount() > 0){
+			checkUserCur.close();
 			return true;
-		else
+		}
+		else{
+			checkUserCur.close();
 			return false;
+		}
 	}
 	
 	private Button mSettingButton, mLoginButton, mDownloadDataButton;
@@ -89,7 +93,7 @@ public class LoginAct extends Activity implements OnClickListener {
 		DatabaseAdapter.instance(getBaseContext()).open();
 		
 		//Dummy mobile_counter
-		DatabaseAdapter.instance(getBaseContext()).insert(Counter.getTableName(), new Counter("001", "356735040640022", "JKT111", Utilities.formatStr("2011-September-15 00:00:00"), 500, 0));
+		DatabaseAdapter.instance(getBaseContext()).insert(Counter.getTableName(), new Counter("1", "356735040640022", "COUNTER01", Utilities.formatStr("2011-September-15 00:00:00"), 123456, 0));
 		
 		//Dummy mobile_user
 		DatabaseAdapter.instance(getBaseContext()).insert(User.getTableName(), 
@@ -108,25 +112,25 @@ public class LoginAct extends Activity implements OnClickListener {
 		//Dummy mobile_trnroute
 		DatabaseAdapter.instance(getBaseContext()).insert(TrnRoute.getTableName(), 
 				new TrnRoute("1", Utilities.formatStr("2011-February-24 12:23:23"), "usernameTest", 
-						"ARTJKT", 1, "customerCodeTest", "Aneka Jaya", 
+						"ARTJKT", 1, "CUST01", "Aneka Jaya", 
 						"Jalan Diponegoro 10 Jakarta", "customerPostCodeTest", "customerSatelliteTest", 
-						"customerTypeTest", "customerTermpaymentTest", 2, 2, 
+						"customerTypeTest", "customerTermpaymentTest", 4, 2, 
 						Utilities.formatStr("2011-February-24 12:23:23"), "descrTest", "08:30-08:45"));
 		DatabaseAdapter.instance(getBaseContext()).insert(TrnRoute.getTableName(), 
 				new TrnRoute("2", Utilities.formatStr("2011-July-21 11:24:10"), "usernameTest2", 
-						"ARTJKT", 2, "customerCodeTest2", "Merpati Putih", 
+						"ARTJKT", 2, "CUST02", "Merpati Putih", 
 						"Jalan Besar 100 Jakarta", "customerPostCodeTest2", "customerSatelliteTest2", 
 						"customerTypeTest2", "customerTermpaymentTest2", 3, 4, 
 						Utilities.formatStr("2011-July-21 11:24:10"), "descrTest2", "09:00-09:30"));
 		DatabaseAdapter.instance(getBaseContext()).insert(TrnRoute.getTableName(), 
 				new TrnRoute("3", Utilities.formatStr("2011-October-15 10:15:07"), "usernameTest3", 
-						"ARTJKT", 3, "customerCodeTest3", "Photo Indah", 
+						"ARTJKT", 3, "CUST03", "Photo Indah", 
 						"Jalan Wisata 200 Jakarta", "customerPostCodeTest3", "customerSatelliteTest3", 
 						"customerTypeTest3", "customerTermpaymentTest3", 5, 6, 
 						Utilities.formatStr("2011-October-15 10:15:07"), "descrTest3", "Not Yet"));
 		DatabaseAdapter.instance(getBaseContext()).insert(TrnRoute.getTableName(), 
 				new TrnRoute("4", Utilities.formatStr("2011-October-15 10:15:07"), "usernameTest4", 
-						"ARTJKT", 4, "customerCodeTest4", "Duta Perkasa", 
+						"ARTJKT", 4, "CUST04", "Duta Perkasa", 
 						"Jalan Juanda 200 Jakarta", "customerPostCodeTest4", "customerSatelliteTest4", 
 						"customerTypeTest4", "customerTermpaymentTest4", 5, 6, 
 						Utilities.formatStr("2011-October-15 10:15:07"), "descrTest4", "Not Yet"));
@@ -175,31 +179,31 @@ public class LoginAct extends Activity implements OnClickListener {
 		
 		//Dummy mobile_trnsales
 		DatabaseAdapter.instance(getBaseContext()).insert(TrnSales.getTableName(),
-				new TrnSales("1", "ARTJKT", "trnCode", Utilities.formatStr("2011-October-15 10:15:07"),
+				new TrnSales("1", "ARTJKT", "01", Utilities.formatStr("2011-October-15 10:15:07"),
 						"ref01", "ar01", "desc01", "checkNo01", Utilities.formatStr("2011-October-15 10:15:07"),
 						"CUST01", "40115", "SAT01", 10000000, 10000000, 10000000, 0));
 		DatabaseAdapter.instance(getBaseContext()).insert(TrnSales.getTableName(),
-				new TrnSales("2", "ARTJKT", "trnCode", Utilities.formatStr("2011-October-15 10:15:07"),
+				new TrnSales("2", "ARTJKT", "01", Utilities.formatStr("2011-October-15 10:15:07"),
 						"ref02", "ar02", "desc02", "checkNo02", Utilities.formatStr("2011-October-15 10:15:07"),
 						"CUST02", "40115", "SAT02", 15000000, 15000000, 15000000, 0));
 		DatabaseAdapter.instance(getBaseContext()).insert(TrnSales.getTableName(),
-				new TrnSales("3", "ARTJKT", "trnCode", Utilities.formatStr("2011-October-15 10:15:07"),
+				new TrnSales("3", "ARTJKT", "01", Utilities.formatStr("2011-October-15 10:15:07"),
 						"ref03", "ar03", "desc03", "checkNo03", Utilities.formatStr("2011-October-15 10:15:07"),
 						"CUST03", "40115", "SAT03", 0, 0, 0, 0));
 		DatabaseAdapter.instance(getBaseContext()).insert(TrnSales.getTableName(),
-				new TrnSales("4", "ARTJKT", "trnCode", Utilities.formatStr("2011-October-15 10:15:07"),
+				new TrnSales("4", "ARTJKT", "02", Utilities.formatStr("2011-October-15 10:15:07"),
 						"ref04", "ar04", "desc04", "checkNo04", Utilities.formatStr("2011-October-15 10:15:07"),
 						"CUST04", "40115", "SAT04", 0, 0, 0, 0));
 		
 		//Dummy mobile_pricelist
 		DatabaseAdapter.instance(getBaseContext()).insert(PriceList.getTableName(),
-				new PriceList("1", "user1", "ARTJKT", "customerCodeTest", "CIGAR01", 10000, 0));
+				new PriceList("1", "user1", "ARTJKT", "CUST01", "CIGAR01", 10000, 0));
 		DatabaseAdapter.instance(getBaseContext()).insert(PriceList.getTableName(),
-				new PriceList("2", "user1", "ARTJKT", "customerCodeTest", "CIGAR02", 5000, 0));
+				new PriceList("2", "user1", "ARTJKT", "CUST01", "CIGAR02", 5000, 0));
 		DatabaseAdapter.instance(getBaseContext()).insert(PriceList.getTableName(),
-				new PriceList("3", "user1", "ARTJKT", "customerCodeTest", "CIGAR03", 6000, 0));
+				new PriceList("3", "user1", "ARTJKT", "CUST01", "CIGAR03", 6000, 0));
 		DatabaseAdapter.instance(getBaseContext()).insert(PriceList.getTableName(),
-				new PriceList("4", "user1", "ARTJKT", "customerCodeTest", "CIGAR04", 7000, 0));
+				new PriceList("4", "user1", "ARTJKT", "CUST01", "CIGAR04", 7000, 0));
 		
 		//Tes raw/standard query
 		//DatabaseAdapter.instance(getBaseContext()).rawQuery("SELECT * FROM mobile_dailynews JOIN mobile_trnroute ON mobile_dailynews.id = mobile_trnroute.id", null);

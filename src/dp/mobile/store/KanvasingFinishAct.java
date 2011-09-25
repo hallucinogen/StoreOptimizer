@@ -1,28 +1,39 @@
 package dp.mobile.store;
 
+import java.text.NumberFormat;
+import java.util.Date;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import dp.mobile.store.helper.Utilities;
 import android.app.Activity;
+import android.database.Cursor;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+import dp.mobile.store.helper.DatabaseAdapter;
+import dp.mobile.store.helper.Utilities;
+import dp.mobile.store.helper.tables.Counter;
+import dp.mobile.store.helper.tables.DtlSales;
+import dp.mobile.store.helper.tables.TrnRoute;
+import dp.mobile.store.helper.tables.TrnSales;
+import dp.mobile.store.helper.tables.User;
 
 public class KanvasingFinishAct extends Activity implements OnClickListener {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.kanvasing_finish);
-		
 		mStoreID = getIntent().getExtras().getString(Utilities.INTENT_STORE_ID);
-		decodeJSON();
 		
+		initComp();
+	}
+	
+	private void initComp(){
 		mConfirmButton = (Button) findViewById(R.id.confirm);
 		mConfirmButton.setOnClickListener(this);
 		
@@ -33,18 +44,45 @@ public class KanvasingFinishAct extends Activity implements OnClickListener {
 		mCreditLimit	= (TextView)findViewById(R.id.info5);
 		mReceivable		= (TextView)findViewById(R.id.info6);
 		
-		mTotal.setText(String.valueOf(calculateCost()));
+		//Decode JSON to get finished transaction price list
+		mFinishTransPL = decodeJSON();
 		
-		/// TODO : not use dummy discount
-		mDiscount.setText("" + 0);
-		/// TODO : what is credit limit?
-		mCreditLimit.setText("" + 0);
+		//Calculate total cost
+		mTotalNum = calculateTotal(mFinishTransPL);
+		mTotal.setText("Rp " + NumberFormat.getIntegerInstance().format(mTotalNum));
 		
-		dummyCalculate();
+		//Set Receivable and CreditLimit (from TrnRoute where customer_code = mStoreID
+		mCurrTrnRoute = getCurrTrnRoute(mStoreID);
+		mReceivable.setText("Rp " + NumberFormat.getIntegerInstance().format(mCurrTrnRoute.mReceivable));
+		mCreditLimit.setText("Rp " + NumberFormat.getIntegerInstance().format(mCurrTrnRoute.mCreditLimit));
+		
+		/// TODO : Where is 'discount' ?
+		mDiscNum = 0;
+		mDiscount.setText("Rp " + NumberFormat.getIntegerInstance().format(mDiscNum));
+		
+		calculateOthers();
+	}
+	
+	private TrnRoute getCurrTrnRoute(String storeID){
+		Cursor cursor = DatabaseAdapter.instance(getBaseContext()).rawQuery("SELECT * " +
+				"FROM mobile_trnroute " +
+				"WHERE customer_code =?", new String[]{storeID});
+		
+		cursor.moveToFirst();
+		TrnRoute retval = new TrnRoute(cursor.getString(0), Utilities.formatStr(cursor.getString(1)),
+				cursor.getString(2), cursor.getString(3), cursor.getLong(4),
+				cursor.getString(5), cursor.getString(6), cursor.getString(7),
+				cursor.getString(8), cursor.getString(9), cursor.getString(10),
+				cursor.getString(11), cursor.getLong(12), cursor.getLong(13),
+				Utilities.formatStr(cursor.getString(14)), cursor.getString(15),
+				cursor.getString(16)); 
+		cursor.close();
+		
+		return retval;
 	}
 	
 	//Decode JSON to FinishTransactionPriceList array
-	private void decodeJSON(){
+	private FinishTransactionPriceList[] decodeJSON(){
 		String jsonStr = getIntent().getExtras().getString(Utilities.INTENT_TRANSACTION_DETAILS);
 		JSONArray jsonArr = null; 
 		try {
@@ -53,45 +91,102 @@ public class KanvasingFinishAct extends Activity implements OnClickListener {
 			e.printStackTrace();
 		}
 		
-		mFinishTransPL = new FinishTransactionPriceList[jsonArr.length()];
-		for(int i=0; i<mFinishTransPL.length; ++i){
+		FinishTransactionPriceList[] retval = new FinishTransactionPriceList[jsonArr.length()];
+		for(int i=0; i<retval.length; ++i){
 			JSONObject json;
 			try {
 				json = jsonArr.getJSONObject(i);
-				Log.i("JSON DEBUG", json.toString());
-				mFinishTransPL[i] = new FinishTransactionPriceList(json.getString("product_code"), 
+				retval[i] = new FinishTransactionPriceList(json.getString("product_code"), 
 						json.getLong("quantity"), json.getLong("price"));
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
 		}
+		
+		return retval;
 	}
 	
-	private long calculateCost(){
+	private long calculateTotal(FinishTransactionPriceList[] finishTransPL){
 		long cost = 0;		
-		for(int i=0; i<mFinishTransPL.length; ++i){
-			cost += mFinishTransPL[i].mPrice * mFinishTransPL[i].mQuantity;
+		for(int i=0; i<finishTransPL.length; ++i){
+			cost += finishTransPL[i].mPrice * finishTransPL[i].mQuantity;
 		}
 		
 		return cost;
 	}
 	
-	private void dummyCalculate() {
-		long total 	= Long.parseLong(mTotal.getText().toString());
-		long disc	= Long.parseLong(mDiscount.getText().toString());
-		long netto	= total - disc;
+	private void calculateOthers() {
+		mNettoNum = mTotalNum - mDiscNum;
+		mPaymentNum = mNettoNum + mCurrTrnRoute.mReceivable - mCurrTrnRoute.mCreditLimit;
 		
-		mNetto.setText(Long.toString(total - disc));
-		mPayment.setText(Long.toString(netto));
-		mReceivable.setText(Long.toString(netto));
+		mNetto.setText("Rp " + NumberFormat.getIntegerInstance().format(mNettoNum));
+		mPayment.setText("Rp " + NumberFormat.getIntegerInstance().format(mPaymentNum));
+	}
+	
+	private void updateDatabase(){
+		//Get last record of mobile_trnsales
+		Cursor cursor = DatabaseAdapter.instance(getBaseContext()).rawQuery("SELECT id " +
+				"FROM mobile_trnsales " +
+				"ORDER BY id DESC LIMIT 1", null);
+		cursor.moveToFirst();
+		TrnSales lastTrnSales = new TrnSales(cursor.getString(0)); 
+		cursor.close();
+		int lastTrnSalesID = Integer.valueOf(lastTrnSales.mID);
+		
+		//Get mobile_user.unitcompany_code
+		cursor = DatabaseAdapter.instance(getBaseContext()).rawQuery("SELECT unitcompany_code " +
+				"FROM mobile_user " +
+				"LIMIT 1", null);
+		cursor.moveToFirst();
+		User user = new User("dummy ID"); 
+		user.mUnitCompanyCode = cursor.getString(0);
+		cursor.close();
+		
+		//Get mobile_counter.code
+		cursor = DatabaseAdapter.instance(getBaseContext()).rawQuery("SELECT code, counter " +
+				"FROM mobile_counter " +
+				"LIMIT 1", null);
+		cursor.moveToFirst();
+		Counter counter = new Counter("dummy ID"); 
+		counter.mCode = cursor.getString(0);
+		counter.mCounter = cursor.getLong(1);
+		cursor.close();
+		
+		//INSERT into mobile_trnsales
+		String refno = counter.mCode+"/"+Utilities.formatDate(new Date()).substring(0, 2)+"/"+String.valueOf(counter.mCounter); 
+		TrnSales newTrnSales = new TrnSales(String.valueOf(++lastTrnSalesID),
+				user.mUnitCompanyCode, "01", new Date(), refno, "ar01", "sales kanvas "+mCurrTrnRoute.mCustomerName, 
+				"checkNo01", new Date(), mCurrTrnRoute.mCustomerCode, "40115", "SAT01", mNettoNum, mNettoNum, 0, 0);
+		DatabaseAdapter.instance(getBaseContext()).insert(TrnSales.getTableName(), newTrnSales);
+		
+		//Get last record of mobile_dtlsales
+		cursor = DatabaseAdapter.instance(getBaseContext()).rawQuery("SELECT id " +
+				"FROM mobile_dtlsales " +
+				"ORDER BY id DESC LIMIT 1", null);
+		cursor.moveToFirst();
+		DtlSales lastDtlSales = new DtlSales(cursor.getString(0)); 
+		cursor.close();
+		int lastDtlSalesID = Integer.valueOf(lastDtlSales.mID);
+
+		//INSERT into mobile_dtlsales
+		for(int i=0; i<mFinishTransPL.length; ++i){
+			DtlSales newDtlSales = new DtlSales(String.valueOf(++lastDtlSalesID), String.valueOf(lastTrnSalesID),
+					mFinishTransPL[i].mProductCode, mFinishTransPL[i].mQuantity, mFinishTransPL[i].mQuantity,
+					0, mFinishTransPL[i].mPrice, mFinishTransPL[i].mQuantity*mFinishTransPL[i].mPrice, 
+					mFinishTransPL[i].mQuantity*mFinishTransPL[i].mPrice, 0, 
+					mFinishTransPL[i].mQuantity*mFinishTransPL[i].mPrice, 0);
+			DatabaseAdapter.instance(getBaseContext()).insert(DtlSales.getTableName(), newDtlSales);
+		}
 	}
 	
 	@Override
 	public void onClick(View v) {
 		if (v == mConfirmButton) {
-			/// TODO : insert to database, get mobile_trnroute where customer_code = mStoreID to get credit_limit & receivable, trus masukin semuanya ke trnsales dan dtlsales
+			updateDatabase();
+			
 			setResult(RESULT_OK);
 			Toast.makeText(this, "Transaction Complete", 1000).show();
+			
 			finish();
 		}
 	}
@@ -99,6 +194,9 @@ public class KanvasingFinishAct extends Activity implements OnClickListener {
 	private TextView	mTotal, mDiscount, mNetto, mPayment, mCreditLimit, mReceivable;
 	private Button		mConfirmButton;
 	private String		mStoreID;
+	private long		mTotalNum, mDiscNum, mNettoNum, mPaymentNum;
+	
+	private TrnRoute	mCurrTrnRoute;
 	private FinishTransactionPriceList[] mFinishTransPL;
 	
 	private class FinishTransactionPriceList{

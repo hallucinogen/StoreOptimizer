@@ -3,7 +3,6 @@ package dp.mobile.store;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -35,12 +34,7 @@ public class KanvasingStoreListAct extends Activity {
 			mStoreListView.setOnItemClickListener(new OnItemClickListener() {
 				@Override
 				public void onItemClick(AdapterView<?> parentView, View view, int position, long id) {
-					String custCode = ((TrnRoute)mStoreListView.getItemAtPosition(position)).mCustomerCode;
-					Log.d("StoreList SELECT", position + "#" + id + "=" + custCode);
-					
-					/*Intent intent1 = new Intent(view.getContext(), SendSMSActivity.class);
-	    			intent1.putExtra(GROUP_NAME, m_orgListView.getItemAtPosition(position).toString());
-	    			startActivity(intent1);*/
+					String custCode = ((TrnRoute)mStoreListView.getItemAtPosition(position)).mCustomerCode;					
 					
 					Intent intent = new Intent(KanvasingStoreListAct.this, KanvasingStoreInformationAct.class);
 					intent.putExtra(Utilities.INTENT_STORE_ID, custCode);
