@@ -54,7 +54,7 @@ public class SettingAct extends Activity implements OnClickListener{
 	@Override
 	public void onClick(View v) {
 		if(v == mSaveBtn){
-			Utilities.savePref(getBaseContext(), mIPServer.getText().toString(), mIPPublic.getText().toString(), mHostString.getText().toString(), mDefUser.getText().toString());
+			Utilities.savePref(getBaseContext(), mIPPublic.getText().toString(), mIPServer.getText().toString(), mHostString.getText().toString(), mDefUser.getText().toString());
 			finish();
 		}
 	}

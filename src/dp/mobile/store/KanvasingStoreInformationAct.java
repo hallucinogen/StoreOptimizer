@@ -2,6 +2,7 @@ package dp.mobile.store;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -19,10 +20,22 @@ public class KanvasingStoreInformationAct extends Activity implements OnClickLis
 		setContentView(R.layout.kanvasing_storeinfo);
 		
 		//final int storeID = getIntent().getExtras().getInt(Utilities.INTENT_STORE_ID);
-		final String storeID = getIntent().getExtras().getString(Utilities.INTENT_STORE_ID);
-		Log.d("STORE ID", storeID);
+		mStoreID = getIntent().getExtras().getString(Utilities.INTENT_STORE_ID);
+		Log.d("STORE ID", mStoreID);
 		
-		TrnRoute selectedTrnRoute = (TrnRoute)DatabaseAdapter.instance(getBaseContext()).get(TrnRoute.getTableName(), storeID);
+		//Get corresponding mobile_trnroute, WHERE customer_code == mStoreID
+		Cursor cursor = DatabaseAdapter.instance(getBaseContext()).rawQuery("SELECT * " +
+				"FROM mobile_trnroute " +
+				"WHERE customer_code =?", new String[]{mStoreID});
+		cursor.moveToFirst();
+		TrnRoute selectedTrnRoute = new TrnRoute(cursor.getString(0), Utilities.formatStr(cursor.getString(1)),
+				cursor.getString(2), cursor.getString(3), cursor.getLong(4),
+				cursor.getString(5), cursor.getString(6), cursor.getString(7),
+				cursor.getString(8), cursor.getString(9), cursor.getString(10),
+				cursor.getString(11), cursor.getLong(12), cursor.getLong(13),
+				Utilities.formatStr(cursor.getString(14)), cursor.getString(15),
+				cursor.getString(16)); 
+		cursor.close();
 		
 		/// TODO : get store from id [need database]
 		mInfo = new TextView[10];
@@ -85,7 +98,10 @@ public class KanvasingStoreInformationAct extends Activity implements OnClickLis
 		if (v == mHistoryButton) {
 			startActivity(new Intent(this, KanvasingStoreHistoryAct.class));
 		} else if (v == mKanvasingButton) {
-			startActivityForResult(new Intent(this, KanvasingTransactionAct.class), Utilities.KANVASING_TRANSACTION_RC);
+			Intent intent = new Intent(this, KanvasingTransactionAct.class);
+			intent.putExtra(Utilities.INTENT_STORE_ID, mStoreID);
+			
+			startActivityForResult(intent, Utilities.KANVASING_TRANSACTION_RC);
 		}
 	}
 	
@@ -99,4 +115,5 @@ public class KanvasingStoreInformationAct extends Activity implements OnClickLis
 	
 	private TextView[] mInfo;
 	private Button mHistoryButton, mKanvasingButton;
+	private String mStoreID;
 }

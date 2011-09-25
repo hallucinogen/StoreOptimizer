@@ -24,17 +24,13 @@
 		</TableRow>
 	</TableLayout>
 	
-	<ScrollView
+	<ListView
+		android:id="@+id/cash_report_listview"
 		android:layout_width="fill_parent"
-		android:layout_height="280dip">
-		<TableLayout
-			android:layout_width="fill_parent"
-			android:layout_height="fill_parent"
-			android:stretchColumns="1"
-			android:id="@+id/cash_table">
-			
-		</TableLayout>
-	</ScrollView>
+		android:layout_height="wrap_content"
+		android:layout_gravity="center_horizontal"
+		android:layout_margin="5dip">
+	</ListView>
 	
 	<TableLayout
 		android:layout_width="fill_parent"

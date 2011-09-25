@@ -58,13 +58,13 @@ public class DatabaseAdapter {
 		openDatabaseIfNecessary();
 		Cursor retval = mDatabase.rawQuery(selection, selectionArgs);
 		
-		if(retval.moveToFirst()){
+		/*if(retval.moveToFirst()){
 			for(String s : retval.getColumnNames()){
 				Log.d(TAG, s + "#" + retval.getString(retval.getColumnIndex(s)));
 			}
 		} else {
 			Log.d(TAG, "NO C");
-		}
+		}*/
 		
 		return retval;
 	}

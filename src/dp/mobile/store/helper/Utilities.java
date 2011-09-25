@@ -34,6 +34,7 @@ public class Utilities {
 	public static final String INTENT_ITEM_ID		= "item_id";
 	public static final String INTENT_ITEM_COUNT	= "item_count";
 	public static final String INTENT_TOTAL_COST	= "total_cost";
+	public static final String INTENT_TRANSACTION_DETAILS = "transaction_details";
 	
 	public static final int KANVASING_STOREINFO_RC		= 0;
 	public static final int KANVASING_STOREHISTORY_RC	= 1;

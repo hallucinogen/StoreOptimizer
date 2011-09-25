@@ -1,11 +1,15 @@
 package dp.mobile.store;
 
+import java.text.NumberFormat;
+import java.util.Currency;
+
 import android.app.Activity;
+import android.database.Cursor;
 import android.os.Bundle;
-import android.view.Gravity;
-import android.widget.TableLayout;
-import android.widget.TableRow;
+import android.widget.ListView;
 import android.widget.TextView;
+import dp.mobile.store.adapter.CashReportAdapter;
+import dp.mobile.store.helper.DatabaseAdapter;
 
 public class CashReportAct extends Activity {
 	@Override
@@ -13,35 +17,51 @@ public class CashReportAct extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.cash_report);
 		
-		mCashTable = (TableLayout) findViewById(R.id.cash_table);
-		
-		populateTableWithDummy();
+		mCashReportListView = (ListView) findViewById(R.id.cash_report_listview);
+		mTotal				= (TextView) findViewById(R.id.total);
+		populateTableCashReport();
 	}
 	
-	private void populateTableWithDummy() {
+	private void populateTableCashReport() {
+		int i=0;
+		long totalAmountCash=0;
 		
-		for (int i = 0; i < 10; ++i){
-			TableRow row 	= new TableRow(this);
-			TextView item 	= new TextView(this);
-			item.setText("Aneka Jaya");
-			TextView count 	= new TextView(this);
-			count.setText("Rp 10.000.000");
-			count.setGravity(Gravity.RIGHT);
-			row.addView(item);
-			row.addView(count);
-			mCashTable.addView(row);
-			
-			row 	= new TableRow(this);
-			item 	= new TextView(this);
-			item.setText("Merah Putih");
-			count 	= new TextView(this);
-			count.setText("Rp 15.000.000");
-			count.setGravity(Gravity.RIGHT);
-			row.addView(item);
-			row.addView(count);
-			mCashTable.addView(row);
+		Cursor cashReportCur = DatabaseAdapter.instance(getBaseContext()).rawQuery("SELECT " +
+				"mobile_customer.customer_name, " +
+				"mobile_customer.address, mobile_trnsales.amount_cash " +
+				"FROM mobile_trnsales JOIN mobile_customer ON " +
+				"mobile_trnsales.customer_code = mobile_customer.customer_code " +
+				"WHERE mobile_trnsales.amount_cash > 0 " +
+				"ORDER BY mobile_trnsales.refno ASC", null);
+		
+		CashReport[] cashReports = new CashReport[cashReportCur.getCount()];
+		if(cashReportCur.moveToFirst()){
+    		do{
+    			cashReports[i++] = new CashReport(cashReportCur.getString(0), cashReportCur.getString(1),
+    					cashReportCur.getLong(2));
+    			totalAmountCash += cashReportCur.getLong(2);
+    		}while(cashReportCur.moveToNext());
+    		
+    		cashReportCur.close();
 		}
+		
+		mAdpt = new CashReportAdapter(this, cashReports);
+		mCashReportListView.setAdapter(mAdpt);
+		mTotal.setText("Rp " + NumberFormat.getIntegerInstance().format(totalAmountCash));
 	}
 	
-	private TableLayout mCashTable;
+	private ListView mCashReportListView;
+	private	CashReportAdapter mAdpt;
+	private TextView mTotal;
+	
+	public class CashReport{
+		public CashReport(String custName, String custAddr, long amountCash){
+			mCustomerName 	= custName;
+			mCustomerAddr	= custAddr;
+			mAmountCash		= amountCash;
+		}
+		
+		public String	mCustomerName, mCustomerAddr;
+		public long		mAmountCash;
+	}
 }

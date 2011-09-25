@@ -14,10 +14,10 @@ public class CheckRouteAct extends Activity {
 		setContentView(R.layout.check_route);
 		
 		mCheckRouteListView = (ListView) findViewById(R.id.check_route_listview);
-		populateCheckRoute();
+		populateTableCheckRoute();
 	}
 	
-	private void populateCheckRoute() { //Table mobile_trnroute
+	private void populateTableCheckRoute() { //Table mobile_trnroute
 		TrnRoute[] trnRoutes = (TrnRoute[])DatabaseAdapter.instance(getBaseContext()).getAll(TrnRoute.getTableName(), null, TrnRoute.KEY_ORDERNO + " ASC");
 		//LayoutInflater inflater = getLayoutInflater();
 		

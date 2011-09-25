@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:gravity="center_horizontal"
+    android:layout_height="fill_parent" >
+    
+    <TextView 
+		style="@style/title_style"
+		android:text="Download Data"/>
+    
+	<TableLayout 
+	    android:orientation="vertical"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:stretchColumns="1">
+	    
+	    <TableRow>
+	    	<TextView
+	    		android:gravity="left"
+	    		android:text="Host String"
+	    		android:paddingRight="5dip" />
+	    	<EditText
+	    		android:gravity="left"
+	    		android:inputType="text"
+	    		android:id="@+id/host_string_edit_txt" />
+	    </TableRow>
+	    
+	    <TableRow>
+	    	<TextView
+	    		android:gravity="left"
+	    		android:text="Username"
+	    		android:paddingRight="5dip" />
+	    	<EditText
+	    		android:gravity="left"
+	    		android:inputType="text"
+	    		android:id="@+id/username_edit_txt" />
+	    </TableRow>
+	    
+	    <TableRow>
+	    	<TextView
+	    		android:gravity="left"
+	    		android:text="Password"
+	    		android:paddingRight="5dip" />
+	    	<EditText
+	    		android:gravity="left"
+	    		android:inputType="text"
+	    		android:id="@+id/password_edit_txt" />
+	    </TableRow>
+	</TableLayout>
+	
+	<Button
+		android:id="@+id/download_btn"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center_horizontal"
+   		style="@style/table_button_style"
+   		android:text="Download"/>
+</LinearLayout>

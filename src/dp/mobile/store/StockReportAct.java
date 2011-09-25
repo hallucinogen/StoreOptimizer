@@ -17,10 +17,10 @@ public class StockReportAct extends Activity{
 		
 		mStockTable = (TableLayout) findViewById(R.id.stock_table);
 		
-		populateStockReport();
+		populateTableStockReport();
 	}
 	
-	private void populateStockReport() { //Table mobile_dtlsales
+	private void populateTableStockReport() { //Table mobile_dtlsales
 		int i=0;
 		LayoutInflater inflater = getLayoutInflater();
 		Cursor stockReportCur = DatabaseAdapter.instance(getBaseContext()).rawQuery("SELECT " +

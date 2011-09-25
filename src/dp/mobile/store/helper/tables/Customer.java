@@ -79,6 +79,21 @@ public class Customer extends Model {
 		mPricelistGroupCode		= pricelistGroupCode;//18
 		mPricelistGroupName		= pricelistGroupName;//19
 	}
+	
+	public Customer(String id, Date trnDate, String username, String customerCode, String customerName,
+			String address, String postCodeCode, String city, String country, String contact){
+		this(id);
+		
+		mTrnDate				= trnDate;			//0
+		mUsername				= username;			//1
+		mCustomerCode			= customerCode;		//2
+		mCustomerName			= customerName;		//3
+		mAddress				= address;			//4
+		mPostCodeCode			= postCodeCode;		//5
+		mCity					= city;				//6
+		mCountry				= country;			//7
+		mContact 				= contact;			//8
+	}
     
 	@Override
 	public ContentValues getContentValues() {

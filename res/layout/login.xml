@@ -15,7 +15,7 @@
 	    android:layout_height="fill_parent"
 	    android:stretchColumns="1"
 	    >
-	    <TableRow>
+	    <!--<TableRow>
 	    	<TextView
 	    		android:gravity="left"
 	    		android:text="Host String"
@@ -24,7 +24,7 @@
 	    		android:gravity="left"
 	    		android:text="116.90.165.82"
 	    		android:id="@+id/host_string" />
-	    </TableRow>
+	    </TableRow>-->
 	    <TableRow>
 	    	<TextView
 	    		android:gravity="left"
@@ -49,19 +49,23 @@
 	    </TableRow>
 	    
 	    <TableRow>
-	    	
-	    	<LinearLayout>
-	    	<Button
-	    		style="@style/table_button_style"
-	    		android:text="Setting"
-	    		android:id="@+id/setting" />
+	    	<LinearLayout android:orientation="vertical">
+		    	<Button
+		    		style="@style/table_button_style"
+		    		android:text="Setting"
+		    		android:id="@+id/setting" />
+		    	<Button
+		    		android:layout_marginTop="10dip"
+		    		style="@style/table_button_style" 
+					android:id="@+id/download_data"
+					android:text="Download"/>
 	    	</LinearLayout>
 	    	<LinearLayout
 	    		android:gravity="right">
-	    	<Button
-	    		style="@style/table_button_style"
-	    		android:text="Login"
-	    		android:id="@+id/login" />
+		    	<Button
+		    		style="@style/table_button_style"
+		    		android:text="Login"
+		    		android:id="@+id/login" />
 	    	</LinearLayout>
 	    </TableRow>
 	</TableLayout>

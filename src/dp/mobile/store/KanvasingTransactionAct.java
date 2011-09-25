@@ -19,50 +19,31 @@ public class KanvasingTransactionAct extends Activity implements OnClickListener
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.kanvasing_transaction);
 		
-		mTransactionTable 	= (TableLayout) findViewById(R.id.transaction_table);
-		mConfirmButton		= (Button) findViewById(R.id.confirm);
-		mConfirmButton.setOnClickListener(this);
+		mStoreID	= getIntent().getExtras().getString(Utilities.INTENT_STORE_ID);
 		
-		populateTableWithDummy();
-	}
-	
-	private void populateTableWithDummy() {
-		LayoutInflater inflater = getLayoutInflater();
+		mSalesTransactionButton = (Button) findViewById(R.id.sales_transaction);
+		mReturButton			= (Button) findViewById(R.id.retur_transaction);
+		mReceivableButton		= (Button) findViewById(R.id.receivable_payment);
+		mDoneKanvasingButton	= (Button) findViewById(R.id.transaction_done_btn);
 		
-		for (int i = 0; i < 10; ++i) {
-			TableRow item = (TableRow) inflater.inflate(R.layout.transaction_item, mTransactionTable, false);
-			TextView name = (TextView) item.findViewById(R.id.item);
-			TextView price = (TextView) item.findViewById(R.id.num1);
-			item.setId(i);
-			
-			name.setText("Rokok Jantan");
-			price.setText("5000");
-			
-			mTransactionTable.addView(item);
-		}
-	}
-	
-	private long calculateCostWithDummy() {
-		long res = 0;
-		
-		for (int i = 0; i < 10; ++i) {
-			TableRow item = (TableRow)mTransactionTable.findViewById(i);
-			EditText textbox 	= (EditText) item.findViewById(R.id.num2);
-			int price 			= Integer.parseInt(((TextView) item.findViewById(R.id.num1)).getText().toString());
-			int count			= Integer.parseInt(textbox.getText().toString());
-			res += count * price;
-		}
-		
-		return res;
+		mSalesTransactionButton.setOnClickListener(this);
+		mReturButton.setOnClickListener(this);
+		mReceivableButton.setOnClickListener(this);
+		mDoneKanvasingButton.setOnClickListener(this);
 	}
 	
 	@Override
 	public void onClick(View v) {
-		if (v == mConfirmButton) {
-			Intent intent = new Intent(this, KanvasingFinishAct.class);
+		if (v == mSalesTransactionButton) {
+			Intent intent = new Intent(this, SalesTransactionAct.class);
+			intent.putExtra(Utilities.INTENT_STORE_ID, mStoreID);
+			
+			startActivity(intent);
+		} else if(v == mReturButton) {
+			//Intent intent = new Intent(this, KanvasingFinishAct.class);
 			/// TODO : don't use dummy calculation
-			intent.putExtra(Utilities.INTENT_TOTAL_COST, calculateCostWithDummy());
-			startActivityForResult(intent, Utilities.KANVASING_FINISH_RC);
+			//intent.putExtra(Utilities.INTENT_TOTAL_COST, calculateCostWithDummy());
+			//startActivityForResult(intent, Utilities.KANVASING_FINISH_RC);
 		}
 	}
 	
@@ -74,6 +55,7 @@ public class KanvasingTransactionAct extends Activity implements OnClickListener
 		}
 	}
 	
-	private Button mConfirmButton;
-	private TableLayout mTransactionTable;
+	private Button mSalesTransactionButton, mReturButton, mReceivableButton;
+	private Button mDoneKanvasingButton;
+	private String mStoreID;
 }

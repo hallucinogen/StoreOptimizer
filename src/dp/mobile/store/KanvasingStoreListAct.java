@@ -21,10 +21,10 @@ public class KanvasingStoreListAct extends Activity {
 		
 		mStoreListView = (ListView) findViewById(R.id.storelist_view);
 		
-		populateLinearWithDummy();
+		populateTableStoreList();
 	}
 	
-	private void populateLinearWithDummy() {
+	private void populateTableStoreList() {
 		//Fetch TrnRoute records from db
 		TrnRoute[] trnRoutes = (TrnRoute[])DatabaseAdapter.instance(getBaseContext()).getAll(TrnRoute.getTableName(), null, null);
 		
@@ -35,15 +35,15 @@ public class KanvasingStoreListAct extends Activity {
 			mStoreListView.setOnItemClickListener(new OnItemClickListener() {
 				@Override
 				public void onItemClick(AdapterView<?> parentView, View view, int position, long id) {
-					String trnRouteID = ((TrnRoute)mStoreListView.getItemAtPosition(position)).mID;
-					Log.d("StoreList SELECT", position + "#" + id + "=" + trnRouteID);
+					String custCode = ((TrnRoute)mStoreListView.getItemAtPosition(position)).mCustomerCode;
+					Log.d("StoreList SELECT", position + "#" + id + "=" + custCode);
 					
 					/*Intent intent1 = new Intent(view.getContext(), SendSMSActivity.class);
 	    			intent1.putExtra(GROUP_NAME, m_orgListView.getItemAtPosition(position).toString());
 	    			startActivity(intent1);*/
 					
 					Intent intent = new Intent(KanvasingStoreListAct.this, KanvasingStoreInformationAct.class);
-					intent.putExtra(Utilities.INTENT_STORE_ID, trnRouteID);
+					intent.putExtra(Utilities.INTENT_STORE_ID, custCode);
 					startActivityForResult(intent, Utilities.KANVASING_STOREINFO_RC);
 				}
 			});

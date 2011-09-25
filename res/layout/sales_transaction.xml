@@ -7,31 +7,61 @@
     >
     <TextView 
 		style="@style/title_style"
-		android:text="Sales Transaction"/>
+		android:text="Kanvasing : Sales Transaction"/>
+	<TableLayout
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content">
+		<TableRow>
+			<TextView 
+				android:layout_weight="1"
+				android:gravity="center"
+				android:text="Item"
+				android:textStyle="bold" />
+			<TextView 
+				android:layout_weight="1"
+				android:gravity="center"
+				android:textStyle="bold"
+				android:text="Price" />
+			<TextView 
+				android:layout_weight="1"
+				android:gravity="center"
+				android:textStyle="bold"
+				android:text="Amount" />
+		</TableRow>
+		
+		<TableRow>
+			<TextView 
+				android:layout_weight="1"
+				android:gravity="center"
+				android:text="Rokok Merah Jitu"
+				android:height="0dp" />
+			<TextView 
+				android:layout_weight="1"
+				android:gravity="center"
+				android:text="100000"
+				android:height="0dp" />
+			<TextView 
+				android:layout_weight="1"
+				android:gravity="center"
+				android:text="100000"
+				android:height="0dp" />
+		</TableRow>
+	</TableLayout>
 	<ScrollView
 		android:layout_width="fill_parent"
-	    android:layout_height="wrap_content">
-    <LinearLayout
-    	android:orientation="vertical"
-	    android:layout_width="fill_parent"
-	    android:layout_height="fill_parent"
-    	android:layout_gravity="center"
-    	android:layout_margin="20dip">
-    <Button 
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:id="@+id/kanvasing"
-		android:text="Kanvasing"/>
-	<Button 
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:id="@+id/other_transaction"
-		android:text="Other Transaction"/>
-	<Button 
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:id="@+id/receivable_payment"
-		android:text="Receivable Payment"/>
-	</LinearLayout>
+		android:layout_height="240dip">
+		<TableLayout
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent"
+			android:id="@+id/transaction_table">
+		</TableLayout>
 	</ScrollView>
+	<LinearLayout
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content">
+		<Button
+			style="@style/table_button_style"
+			android:id="@+id/confirm"
+			android:text="Confirm" />
+	</LinearLayout>
 </LinearLayout>

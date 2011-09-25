@@ -11,43 +11,37 @@
 	<ScrollView
 		android:layout_width="fill_parent"
 	    android:layout_height="wrap_content">
-    <LinearLayout
-    	android:orientation="vertical"
-	    android:layout_width="fill_parent"
-	    android:layout_height="fill_parent"
-    	android:layout_gravity="center"
-    	android:layout_margin="20dip">
-	
-	<Button 
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:id="@+id/sales_information"
-		android:text="Sales Information"/>
-	<Button 
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:id="@+id/sales_transaction"
-		android:text="Sales Transaction"/>
-	<Button 
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:id="@+id/stock_transaction"
-		android:text="Stock Transaction"/>
-	<Button 
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:id="@+id/daily_news"
-		android:text="Daily News"/>
-	<Button 
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:id="@+id/download_data"
-		android:text="Download Data"/>
-	<Button 
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:id="@+id/setting"
-		android:text="Setting"/>
-	</LinearLayout>
+	    <LinearLayout
+	    	android:orientation="vertical"
+		    android:layout_width="fill_parent"
+		    android:layout_height="fill_parent"
+	    	android:layout_gravity="center"
+	    	android:layout_margin="20dip">
+			<Button 
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				android:id="@+id/sales_information"
+				android:text="Sales Information"/>
+			<Button 
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				android:id="@+id/sales_kanvasing"
+				android:text="Sales Kanvasing"/>
+			<Button 
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				android:id="@+id/stock_transaction"
+				android:text="Stock Transaction"/>
+			<Button 
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				android:id="@+id/daily_news"
+				android:text="Daily News"/>
+			<Button 
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				android:id="@+id/setting"
+				android:text="Setting"/>
+		</LinearLayout>
 	</ScrollView>
 </LinearLayout>
