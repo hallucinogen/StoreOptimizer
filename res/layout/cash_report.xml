@@ -5,10 +5,9 @@
     android:gravity="center_horizontal"
     android:orientation="vertical"
     >
-    <TextView android:id="@+id/cash_report_title"
-    	android:layout_centerHorizontal="true"
-		style="@style/title_style"
-		android:text="Cash Report"/>
+    
+    <include android:id="@+id/cash_report_title" 
+    	layout="@layout/header"/>
 		
 	<TableLayout android:id="@+id/table_upper"
 		android:layout_below="@id/cash_report_title"

@@ -28,30 +28,30 @@ public class MainMenuAct extends Activity implements OnClickListener {
 		switch (mMainMenuStatus) {
 			case Utilities.MAIN_MENU_INITIAL:
 				mSalesInformationButton.setEnabled(true);
-				mSalesKanvasingButton.setEnabled(false);
+				mPenerimaanStockButton.setEnabled(false);
 				mStockTransactionButton.setEnabled(false);
-				mDailyNewsButton.setEnabled(false);
+				mInformasiAwal.setEnabled(false);
 				mSettingButton.setEnabled(false);
 				break;
 			case Utilities.MAIN_MENU_AFTER_INFO:
 				mSalesInformationButton.setEnabled(true);
-				mSalesKanvasingButton.setEnabled(false);
+				mPenerimaanStockButton.setEnabled(false);
 				mStockTransactionButton.setEnabled(true);
-				mDailyNewsButton.setEnabled(false);
+				mInformasiAwal.setEnabled(false);
 				mSettingButton.setEnabled(false);
 				break;
 			case Utilities.MAIN_MENU_AFTER_STOCK:
 				mSalesInformationButton.setEnabled(true);
-				mSalesKanvasingButton.setEnabled(true);
+				mPenerimaanStockButton.setEnabled(true);
 				mStockTransactionButton.setEnabled(true);
-				mDailyNewsButton.setEnabled(true);
+				mInformasiAwal.setEnabled(true);
 				mSettingButton.setEnabled(true);
 				break;
 			case Utilities.MAIN_MENU_NO_TRANSACTION:
 				mSalesInformationButton.setEnabled(true);
-				mSalesKanvasingButton.setEnabled(false);
+				mPenerimaanStockButton.setEnabled(false);
 				mStockTransactionButton.setEnabled(true);
-				mDailyNewsButton.setEnabled(true);
+				mInformasiAwal.setEnabled(true);
 				mSettingButton.setEnabled(true);
 				break;
 		}
@@ -71,28 +71,35 @@ public class MainMenuAct extends Activity implements OnClickListener {
 		userCur.close();
 		
 		mSalesInformationButton = (Button) findViewById(R.id.sales_information);
-		mSalesKanvasingButton 	= (Button) findViewById(R.id.sales_kanvasing);
+		//mSalesKanvasingButton 	= (Button) findViewById(R.id.sales_kanvasing);
+		mPenerimaanStockButton	= (Button) findViewById(R.id.penerimaan_stock);
 		mStockTransactionButton = (Button) findViewById(R.id.stock_transaction);
-		mDailyNewsButton 		= (Button) findViewById(R.id.daily_news);
+		//mDailyNewsButton 		= (Button) findViewById(R.id.daily_news);
 		mSettingButton 			= (Button) findViewById(R.id.setting);
+		mInformasiAwal			= (Button) findViewById(R.id.informasi_awal);
+		mTransaksiSales			= (Button) findViewById(R.id.transaksi_sales);
 		
 		mSalesInformationButton.setOnClickListener(this);
-		mSalesKanvasingButton.setOnClickListener(this);
+		//mSalesKanvasingButton.setOnClickListener(this);
 		mStockTransactionButton.setOnClickListener(this);
-		mDailyNewsButton.setOnClickListener(this);
+		//mDailyNewsButton.setOnClickListener(this);
+		mInformasiAwal.setOnClickListener(this);
 		mSettingButton.setOnClickListener(this);
+		mTransaksiSales.setOnClickListener(this);
 	}
 	
 	@Override
 	public void onClick(View v) {
-		if (v == mSalesInformationButton) {
+		if (v == mSalesInformationButton) {//Informasi Data / Informasi Penjualan / Sales Information
 			startActivityForResult(new Intent(MainMenuAct.this, SalesInformationAct.class), SalesInformationAct.REQUEST_CODE);
-		} else if (v == mSalesKanvasingButton) {
+		} else if (v == mPenerimaanStockButton) { //Terima Stock
+			//startActivityForResult(new Intent(MainMenuAct.this, KanvasingStoreListAct.class), 0);
+		} else if (v == mTransaksiSales){
 			startActivityForResult(new Intent(MainMenuAct.this, KanvasingStoreListAct.class), 0);
-		} else if (v == mStockTransactionButton) {
+		} else if (v == mStockTransactionButton) { //
 			startActivityForResult(new Intent(MainMenuAct.this, StockTransactionAct.class), 0);
-		} else if (v == mDailyNewsButton) {
-			startActivityForResult(new Intent(MainMenuAct.this, DailyNewsAct.class), 0);
+		} else if (v == mInformasiAwal) {
+			startActivityForResult(new Intent(MainMenuAct.this, InformasiAwalAct.class), 0);
 		} else if (v == mSettingButton) {
 			startActivityForResult(new Intent(MainMenuAct.this, SettingAct.class), 0);
 		}
@@ -105,10 +112,14 @@ public class MainMenuAct extends Activity implements OnClickListener {
 	}
 	
 	private Button mSalesInformationButton;
-	private Button mSalesKanvasingButton;
+	//private Button mSalesKanvasingButton;
+	private Button mPenerimaanStockButton;
 	private Button mStockTransactionButton;
-	private Button mDailyNewsButton;
+	//private Button mDailyNewsButton;
 	private Button mSettingButton;
+	private Button mInformasiAwal;
+	private Button mTransaksiSales;
+	
 	private int mMainMenuStatus;
 	private TextView mTitle, mNameTop, mRouteTop;
 }

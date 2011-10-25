@@ -2,6 +2,7 @@ package dp.mobile.store;
 
 import android.app.Activity;
 import android.content.Context;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
 import android.view.View;
@@ -21,6 +22,18 @@ public class SettingAct extends Activity implements OnClickListener{
 	}
 	
 	private void initComp(){
+		mTitle		= (TextView) findViewById(R.id.header_title);
+		mNameTop	= (TextView) findViewById(R.id.header_nametop);
+		mRouteTop	= (TextView) findViewById(R.id.header_routetop);
+		
+		mTitle.setText("Proses Harian");
+		Cursor userCur = Utilities.getUser(getBaseContext());
+		if(userCur.moveToFirst()){
+			mNameTop.setText(userCur.getString(0));
+			mRouteTop.setText(userCur.getString(1));
+		}
+		userCur.close();
+		
 		mIMEI		= (TextView) findViewById(R.id.imei_txt);
 		mPhoneNumber= (TextView) findViewById(R.id.phone_number_txt);
 		mSaveBtn	= (Button) findViewById(R.id.save_btn);
@@ -59,6 +72,7 @@ public class SettingAct extends Activity implements OnClickListener{
 		}
 	}
 	
+	private TextView 	mTitle, mNameTop, mRouteTop;
 	private TextView	mIMEI, mPhoneNumber;
 	private EditText	mIPPublic, mIPServer, mHostString, mDefUser;
 	private Button		mSaveBtn;

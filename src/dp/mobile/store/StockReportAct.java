@@ -9,6 +9,7 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import dp.mobile.store.helper.DatabaseAdapter;
+import dp.mobile.store.helper.Utilities;
 
 public class StockReportAct extends Activity{
 	@Override
@@ -16,9 +17,24 @@ public class StockReportAct extends Activity{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.stock_report);
 		
-		mStockTable = (TableLayout) findViewById(R.id.stock_table);
-		
+		initComp();
 		populateTableStockReport();
+	}
+	
+	private void initComp(){
+		mTitle		= (TextView) findViewById(R.id.header_title);
+		mNameTop	= (TextView) findViewById(R.id.header_nametop);
+		mRouteTop	= (TextView) findViewById(R.id.header_routetop);
+		
+		mTitle.setText("Status Stock");
+		Cursor userCur = Utilities.getUser(getBaseContext());
+		if(userCur.moveToFirst()){
+			mNameTop.setText(userCur.getString(0));
+			mRouteTop.setText(userCur.getString(1));
+		}
+		userCur.close();
+		
+		mStockTable = (TableLayout) findViewById(R.id.stock_table);
 	}
 	
 	private void populateTableStockReport() { //Table mobile_dtlsales
@@ -82,6 +98,7 @@ public class StockReportAct extends Activity{
 		return -1;
 	}
 	
+	private TextView mTitle, mNameTop, mRouteTop;
 	private TableLayout mStockTable;
 	
 	private class StockReport {

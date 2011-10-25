@@ -6,15 +6,12 @@
     android:orientation="vertical"
     >
     
-    <include layout="@layout/header"/> 
-	
+    <include layout="@layout/header"/>
+    
 	<ScrollView
 		android:layout_width="fill_parent"
-	    android:layout_height="fill_parent"
-	    android:gravity="center_horizontal"
-	    android:layout_gravity="center_horizontal"
-	    >
-		<TableLayout 
+	    android:layout_height="wrap_content">
+	    <TableLayout 
 		    android:orientation="vertical"
 		    android:layout_width="fill_parent"
 		    android:layout_height="fill_parent"
@@ -23,41 +20,47 @@
 		    	<Button android:layout_width="fill_parent"
 					android:layout_height="fill_parent"
 					android:layout_marginRight="15dip"
-					android:id="@+id/informasi_awal"
-					android:background="@drawable/information_icon"/>
-				<Button android:layout_width="fill_parent"
-					android:layout_height="fill_parent"
-					android:id="@+id/penerimaan_stock"
-					android:layout_marginLeft="15dip"
-					android:background="@drawable/penerimaan_stock"/>	
-		    </TableRow>
-
-		    <TableRow style="@style/icon_main_menu_style">
-		    	<Button android:layout_width="fill_parent"
-					android:layout_height="fill_parent"
-					android:layout_marginRight="15dip"
-					android:id="@+id/sales_information"
-					android:background="@drawable/informasi_data"/>
+					android:id="@+id/informasi_pelanggan"
+					android:background="@drawable/informasi_pelanggan"/>
 				<Button android:layout_width="fill_parent"
 					android:layout_height="fill_parent"
 					android:layout_marginLeft="15dip"
-					android:id="@+id/transaksi_sales"
-					android:background="@drawable/transaksi_sales"/>	
+					android:id="@+id/pelunasan_piutang"
+					android:background="@drawable/pelunasan_piutang"/>	
 		    </TableRow>
 		    
 		    <TableRow style="@style/icon_main_menu_style">
 		    	<Button android:layout_width="fill_parent"
 					android:layout_height="fill_parent"
 					android:layout_marginRight="15dip"
-					android:id="@+id/stock_transaction"
-					android:background="@drawable/stock_icon"/>
+					android:id="@+id/start_kanvasing"
+					android:background="@drawable/transaksi_penjualan"/>
 		    	<Button android:layout_width="fill_parent"
 					android:layout_height="fill_parent"
 					android:layout_marginLeft="15dip"
-					android:id="@+id/setting"
-					android:background="@drawable/setting_icon"/>
+					android:id="@+id/retur_penjualan"
+					android:background="@drawable/retur_penjualan"/>
 		    </TableRow>
 		    
-		</TableLayout>
-	</ScrollView>	
+		    <TableRow style="@style/icon_main_menu_style">
+		    	<Button android:layout_width="fill_parent"
+					android:layout_height="fill_parent"
+					android:layout_marginRight="15dip"
+					android:id="@+id/saran"
+					android:background="@drawable/saran"/>
+				<Button android:layout_width="fill_parent"
+					android:layout_height="fill_parent"
+					android:layout_marginLeft="15dip"
+					android:id="@+id/survey"
+					android:background="@drawable/survey"/>	
+		    </TableRow>
+		    
+		    <TableRow style="@style/icon_main_menu_style">
+			    <Button android:layout_width="fill_parent"
+					android:layout_height="fill_parent"
+					android:id="@+id/transaction_done_btn"
+					android:text="Done Kanvasing"/>
+			</TableRow>	
+		 </TableLayout>
+	</ScrollView>
 </LinearLayout>

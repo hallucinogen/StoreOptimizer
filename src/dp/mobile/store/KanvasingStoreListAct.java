@@ -29,7 +29,7 @@ public class KanvasingStoreListAct extends Activity {
 		mNameTop				= (TextView) findViewById(R.id.header_nametop);
 		mRouteTop				= (TextView) findViewById(R.id.header_routetop);
 		
-		mTitle.setText("Store List");
+		mTitle.setText("Penerimaan Stock");
 		Cursor userCur = Utilities.getUser(getBaseContext());
 		if(userCur.moveToFirst()){
 			mNameTop.setText(userCur.getString(0));
@@ -66,7 +66,8 @@ public class KanvasingStoreListAct extends Activity {
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == Utilities.KANVASING_STOREINFO_RC) {
-			populateTableStoreList();
+			//populateTableStoreList();
+			finish();
 		}
 	}
 	

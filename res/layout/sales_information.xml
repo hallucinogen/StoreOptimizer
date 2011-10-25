@@ -11,33 +11,49 @@
 	<ScrollView
 		android:layout_width="fill_parent"
 	    android:layout_height="wrap_content">
-    <LinearLayout
-    	android:orientation="vertical"
-	    android:layout_width="fill_parent"
-	    android:layout_height="fill_parent"
-    	android:layout_gravity="center"
-    	android:layout_margin="20dip"
-    	android:id="@+id/news_linear">
-    <Button 
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:id="@+id/check_route"
-		android:text="Check Route"/>
-	<Button 
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:id="@+id/stock_report"
-		android:text="Stock Report"/>
-	<Button 
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:id="@+id/cash_report"
-		android:text="Cash Report"/>
-	<Button 
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:id="@+id/giro_report"
-		android:text="Check / Giro Report"/>
-	</LinearLayout>
+	    <TableLayout 
+		    android:orientation="vertical"
+		    android:layout_width="fill_parent"
+		    android:layout_height="fill_parent"
+		    android:gravity="center_horizontal">
+		    <TableRow style="@style/icon_main_menu_style">
+		    	<Button android:layout_width="fill_parent"
+					android:layout_height="fill_parent"
+					android:layout_marginRight="15dip"
+					android:id="@+id/ringkasan_penjualan"
+					android:background="@drawable/ringkasan_penjualan"/>
+				<Button android:layout_width="fill_parent"
+					android:layout_height="fill_parent"
+					android:layout_marginLeft="15dip"
+					android:id="@+id/detail_penjualan"
+					android:background="@drawable/detail_penjualan"/>	
+		    </TableRow>
+		    
+		    <TableRow style="@style/icon_main_menu_style">
+		    	<Button android:layout_width="fill_parent"
+					android:layout_height="fill_parent"
+					android:layout_marginRight="15dip"
+					android:id="@+id/check_route"
+					android:background="@drawable/check_route"/>
+				<Button android:layout_width="fill_parent"
+					android:layout_height="fill_parent"
+					android:layout_marginLeft="15dip"
+					android:id="@+id/stock_report"
+					android:background="@drawable/status_stock"/>	
+		    </TableRow>
+
+		    <TableRow style="@style/icon_main_menu_style">
+		    	<Button android:layout_width="fill_parent"
+					android:layout_height="fill_parent"
+					android:layout_marginRight="15dip"
+					android:id="@+id/cash_report"
+					android:background="@drawable/status_cash"/>
+				<Button android:layout_width="fill_parent"
+					android:layout_height="fill_parent"
+					android:layout_marginLeft="15dip"
+					android:id="@+id/giro_report"
+					android:background="@drawable/cek_giro"/>	
+		    </TableRow>
+		 </TableLayout>
 	</ScrollView>
 </LinearLayout>

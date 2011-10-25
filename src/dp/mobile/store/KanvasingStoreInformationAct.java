@@ -30,6 +30,18 @@ public class KanvasingStoreInformationAct extends Activity implements OnClickLis
 	}
 	
 	private void initComp(){
+		mTitle		= (TextView) findViewById(R.id.header_title);
+		mNameTop	= (TextView) findViewById(R.id.header_nametop);
+		mRouteTop	= (TextView) findViewById(R.id.header_routetop);
+		
+		mTitle.setText("Status Stock");
+		Cursor userCur = Utilities.getUser(getBaseContext());
+		if(userCur.moveToFirst()){
+			mNameTop.setText(userCur.getString(0));
+			mRouteTop.setText(userCur.getString(1));
+		}
+		userCur.close();
+		
 		mInfo = new TextView[10];
 		mInfo[0] = (TextView)findViewById(R.id.info1);
 		mInfo[1] = (TextView)findViewById(R.id.info2);
@@ -103,7 +115,8 @@ public class KanvasingStoreInformationAct extends Activity implements OnClickLis
 		if (v == mHistoryButton) {
 			startActivity(new Intent(this, KanvasingStoreHistoryAct.class));
 		} else if (v == mKanvasingButton) {
-			Intent intent = new Intent(this, KanvasingTransactionAct.class);
+			//Intent intent = new Intent(this, KanvasingTransactionAct.class);
+			Intent intent = new Intent(this, TransaksiSalesAct.class);
 			intent.putExtra(Utilities.INTENT_STORE_ID, mStoreID);
 			intent.putExtra(Utilities.INTENT_KANVASING_START, Utilities.formatDate(new Date()));
 			
@@ -119,6 +132,7 @@ public class KanvasingStoreInformationAct extends Activity implements OnClickLis
 		}
 	}
 	
+	private TextView mTitle, mNameTop, mRouteTop;
 	private TextView[] mInfo;
 	private Button mHistoryButton, mKanvasingButton;
 	private String mStoreID;

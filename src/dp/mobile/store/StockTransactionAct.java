@@ -5,16 +5,34 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class StockTransactionAct extends Activity implements OnClickListener{
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.stock_transaction);
+		
+		initComp();
+	}
+	
+	private void initComp(){
+		mTitle		= (TextView) findViewById(R.id.header_title);
+		mNameTop	= (TextView) findViewById(R.id.header_nametop);
+		mRouteTop	= (TextView) findViewById(R.id.header_routetop);
+		
+		mTitle.setText("Transaksi Stok");
+		Cursor userCur = Utilities.getUser(getBaseContext());
+		if(userCur.moveToFirst()){
+			mNameTop.setText(userCur.getString(0));
+			mRouteTop.setText(userCur.getString(1));
+		}
+		userCur.close();
 		
 		mStockRequestButton = (Button) findViewById(R.id.stock_request);
 		mReceivingButton	= (Button) findViewById(R.id.receiving);
@@ -45,5 +63,6 @@ public class StockTransactionAct extends Activity implements OnClickListener{
 		}
 	}
 	
+	private TextView mTitle, mNameTop, mRouteTop;
 	private Button mStockRequestButton, mReceivingButton, mReturnButton; 
 }

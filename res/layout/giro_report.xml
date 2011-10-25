@@ -5,9 +5,9 @@
     android:gravity="center_horizontal"
     android:orientation="vertical"
     >
-    <TextView 
-		style="@style/title_style"
-		android:text="Check / Giro Report"/>
+    
+    <include layout="@layout/header"/>
+    
 	<ScrollView
 		android:layout_width="fill_parent"
 		android:background="@drawable/border"

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    >
+    
+    <include layout="@layout/header"/>
+    
+	<ScrollView
+		android:layout_width="fill_parent"
+	    android:layout_height="wrap_content">
+	    <TableLayout 
+		    android:orientation="vertical"
+		    android:layout_width="fill_parent"
+		    android:layout_height="fill_parent"
+		    android:gravity="center_horizontal">
+		    <TableRow style="@style/icon_main_menu_style">
+		    	<Button android:layout_width="fill_parent"
+					android:layout_height="fill_parent"
+					android:layout_marginRight="15dip"
+					android:id="@+id/daily_news"
+					android:background="@drawable/berita_harian"/>
+				<Button android:layout_width="fill_parent"
+					android:layout_height="fill_parent"
+					android:layout_marginLeft="15dip"
+					android:id="@+id/surat_tugas"
+					android:background="@drawable/surat_tugas"/>	
+		    </TableRow>
+		 </TableLayout>
+	</ScrollView>
+</LinearLayout>

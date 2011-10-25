@@ -34,6 +34,8 @@
 		<activity android:name="StockReportAct" android:screenOrientation="portrait"/>
 		<activity android:name="StockRequestAct" android:screenOrientation="portrait"/>
 		<activity android:name="StockTransactionAct" android:screenOrientation="portrait"/>
+		<activity android:name="InformasiAwalAct" android:screenOrientation="portrait"/>
+		<activity android:name="TransaksiSalesAct" android:screenOrientation="portrait"/>
     </application>
     
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>

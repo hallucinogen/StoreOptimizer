@@ -9,6 +9,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import dp.mobile.store.adapter.CashReportAdapter;
 import dp.mobile.store.helper.DatabaseAdapter;
+import dp.mobile.store.helper.Utilities;
 
 public class CashReportAct extends Activity {
 	@Override
@@ -16,9 +17,25 @@ public class CashReportAct extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.cash_report);
 		
+		initComp();
+		populateTableCashReport();
+	}
+	
+	private void initComp(){
+		mTitle		= (TextView) findViewById(R.id.header_title);
+		mNameTop	= (TextView) findViewById(R.id.header_nametop);
+		mRouteTop	= (TextView) findViewById(R.id.header_routetop);
+		
 		mCashReportListView = (ListView) findViewById(R.id.cash_report_listview);
 		mTotal				= (TextView) findViewById(R.id.total);
-		populateTableCashReport();
+		
+		mTitle.setText("Transaksi Stok");
+		Cursor userCur = Utilities.getUser(getBaseContext());
+		if(userCur.moveToFirst()){
+			mNameTop.setText(userCur.getString(0));
+			mRouteTop.setText(userCur.getString(1));
+		}
+		userCur.close();
 	}
 	
 	private void populateTableCashReport() {
@@ -49,6 +66,7 @@ public class CashReportAct extends Activity {
 		mTotal.setText("Rp " + NumberFormat.getIntegerInstance().format(totalAmountCash));
 	}
 	
+	private TextView mTitle, mNameTop, mRouteTop;
 	private ListView mCashReportListView;
 	private	CashReportAdapter mAdpt;
 	private TextView mTotal;

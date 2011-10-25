@@ -1,6 +1,8 @@
 package dp.mobile.store;
 
+import dp.mobile.store.helper.Utilities;
 import android.app.Activity;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.widget.LinearLayout;
@@ -13,9 +15,24 @@ public class GiroReportAct extends Activity{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.giro_report);
 		
-		mLinear = (LinearLayout) findViewById(R.id.giro_linear);
-		
+		initComp();
 		populateLinearWithDummy();
+	}
+	
+	private void initComp(){
+		mTitle		= (TextView) findViewById(R.id.header_title);
+		mNameTop	= (TextView) findViewById(R.id.header_nametop);
+		mRouteTop	= (TextView) findViewById(R.id.header_routetop);
+		
+		mTitle.setText("Transaksi Stok");
+		Cursor userCur = Utilities.getUser(getBaseContext());
+		if(userCur.moveToFirst()){
+			mNameTop.setText(userCur.getString(0));
+			mRouteTop.setText(userCur.getString(1));
+		}
+		userCur.close();
+		
+		mLinear = (LinearLayout) findViewById(R.id.giro_linear);
 	}
 	
 	/// TODO : not using dummy
@@ -34,5 +51,6 @@ public class GiroReportAct extends Activity{
 		}
 	}
 	
+	private TextView mTitle, mNameTop, mRouteTop;
 	private LinearLayout mLinear;
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_enabled="true"
-    	android:drawable="@drawable/kanvasing_icon_enabled"/>
+    	android:drawable="@drawable/transaksi_sales_enabled"/>
     <item android:state_enabled="false"
-    	android:drawable="@drawable/kanvasing_icon_disabled"/>
+    	android:drawable="@drawable/transaksi_sales_disabled"/>
 </selector>
