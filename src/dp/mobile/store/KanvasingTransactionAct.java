@@ -1,17 +1,18 @@
 package dp.mobile.store;
 
+import java.util.Date;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 import dp.mobile.store.helper.DatabaseAdapter;
 import dp.mobile.store.helper.Utilities;
-import dp.mobile.store.helper.tables.Customer;
-import dp.mobile.store.helper.tables.DtlSales;
 
 public class KanvasingTransactionAct extends Activity implements OnClickListener {
 	@Override
@@ -24,6 +25,18 @@ public class KanvasingTransactionAct extends Activity implements OnClickListener
 	}
 	
 	private void initComp(){
+		mTitle					= (TextView) findViewById(R.id.header_title);
+		mNameTop				= (TextView) findViewById(R.id.header_nametop);
+		mRouteTop				= (TextView) findViewById(R.id.header_routetop);
+		
+		mTitle.setText("Main Menu");
+		Cursor userCur = Utilities.getUser(getBaseContext());
+		if(userCur.moveToFirst()){
+			mNameTop.setText(userCur.getString(0));
+			mRouteTop.setText(userCur.getString(1));
+		}
+		userCur.close();
+		
 		mSalesTransactionButton = (Button) findViewById(R.id.sales_transaction);
 		mReturButton			= (Button) findViewById(R.id.retur_transaction);
 		mReceivableButton		= (Button) findViewById(R.id.receivable_payment);
@@ -69,6 +82,39 @@ public class KanvasingTransactionAct extends Activity implements OnClickListener
 			/// TODO : don't use dummy calculation
 			//intent.putExtra(Utilities.INTENT_TOTAL_COST, calculateCostWithDummy());
 			//startActivityForResult(intent, Utilities.KANVASING_FINISH_RC);
+		} else if(v == mDoneKanvasingButton){
+			Log.i("KANVASING", getIntent().getExtras().getString(Utilities.INTENT_KANVASING_START));
+			Log.i("KANVASING", mStoreID);
+			Date startTime = Utilities.formatStr(getIntent().getExtras().getString(Utilities.INTENT_KANVASING_START));
+			Date finishTime = new Date();
+			
+			String[] time = new String[4];
+			
+			time[0]	= String.valueOf(startTime.getHours());
+			time[1]	= String.valueOf(startTime.getMinutes());
+			time[2]	= String.valueOf(finishTime.getHours());
+			time[3]	= String.valueOf(finishTime.getMinutes());
+			for(int i=0; i<4; ++i){
+				if(time[i].length() < 2)
+					time[i] = "0" + time[i];
+			}
+			String timeVisit = time[0] + ":" + time[1] + "-" + time[2] + ":" + time[3];
+			
+			Log.i("KANVASING", timeVisit);
+			Cursor cursor = DatabaseAdapter.instance(getBaseContext()).rawQuery("UPDATE mobile_trnroute "+
+					"SET timevisit='" + timeVisit + "' " +
+					"WHERE customer_code='" + mStoreID + "'", null);
+			
+			if(cursor.moveToFirst()){
+				for(String s : cursor.getColumnNames()){
+					Log.d("KANVASING", s + "#" + cursor.getString(cursor.getColumnIndex(s)));
+				}
+			} else {
+				Log.d("KANVASING", "NO C");
+			}
+			cursor.close();
+			
+			finish();
 		}
 	}
 	
@@ -83,6 +129,7 @@ public class KanvasingTransactionAct extends Activity implements OnClickListener
 	private Button mSalesTransactionButton, mReturButton, mReceivableButton;
 	private Button mDoneKanvasingButton;
 	private TextView mTransCustCode, mTransCustName, mTransCustAddr;
+	private TextView mTitle, mNameTop, mRouteTop;
 	private String mStoreID;
 	
 	private TempCustomer mTempCust;

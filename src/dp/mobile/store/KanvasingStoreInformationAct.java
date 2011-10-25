@@ -1,5 +1,7 @@
 package dp.mobile.store;
 
+import java.util.Date;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
@@ -103,6 +105,7 @@ public class KanvasingStoreInformationAct extends Activity implements OnClickLis
 		} else if (v == mKanvasingButton) {
 			Intent intent = new Intent(this, KanvasingTransactionAct.class);
 			intent.putExtra(Utilities.INTENT_STORE_ID, mStoreID);
+			intent.putExtra(Utilities.INTENT_KANVASING_START, Utilities.formatDate(new Date()));
 			
 			startActivityForResult(intent, Utilities.KANVASING_TRANSACTION_RC);
 		}

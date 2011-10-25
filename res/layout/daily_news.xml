@@ -3,14 +3,47 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:gravity="center_horizontal"
-    android:orientation="vertical"
-    >
-    <TextView 
-		style="@style/title_style"
-		android:text="Daily News"/>
-	<ExpandableListView
-		android:id="@+id/expandable"
+    android:orientation="vertical">
+	
+	<include layout="@layout/header"/>
+   	
+	<LinearLayout android:orientation="vertical"
+		android:layout_width="fill_parent" 
+		android:layout_height="fill_parent"
+		android:layout_weight="1">
+		<ScrollView android:layout_width="fill_parent"
+			android:layout_height="fill_parent"
+			android:layout_weight="1"
+			android:background="@drawable/border"
+			android:layout_margin="10dip">
+			<TextView android:id="@+id/news_textview" 
+				android:layout_width="wrap_content"
+				android:layout_height="fill_parent"
+				android:textColor="#000000"
+				android:typeface="sans"
+				android:textSize="18dip"
+				android:text="lorem ipsum dolores sit amet lorem ipsum dolores sit amet lorem ipsum dolores sit amet 
+				lorem ipsum dolores sit amet lorem ipsum dolores sit amet lorem ipsum dolores sit amet lorem ipsum dolores sit amet 
+				lorem ipsum dolores sit amet lorem ipsum dolores sit amet "/>
+		</ScrollView>
+	</LinearLayout>
+	
+	<LinearLayout android:orientation="horizontal"
 		android:layout_width="fill_parent"
-	    android:layout_height="wrap_content">
-	</ExpandableListView>
+		android:layout_height="wrap_content"
+		android:gravity="center_horizontal"
+		android:layout_gravity="bottom">
+		<Button android:id="@+id/news_prev_btn"
+			android:layout_width="fill_parent" 
+			android:layout_weight="1"
+			style="@style/table_button_style"
+			android:textSize="20dip"
+			android:text="&lt;&lt;"/>
+		<Button android:id="@+id/news_next_btn"
+			android:layout_width="fill_parent"
+			android:layout_weight="1"
+			style="@style/table_button_style"
+			android:textSize="20dip"
+			android:text="&gt;&gt;"/>
+	</LinearLayout>
 </LinearLayout>

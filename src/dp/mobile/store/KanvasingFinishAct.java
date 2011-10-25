@@ -10,6 +10,7 @@ import org.json.JSONObject;
 import android.app.Activity;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -97,7 +98,7 @@ public class KanvasingFinishAct extends Activity implements OnClickListener {
 			try {
 				json = jsonArr.getJSONObject(i);
 				retval[i] = new FinishTransactionPriceList(json.getString("product_code"), 
-						json.getLong("quantity"), json.getLong("price"));
+						json.getLong("quantity"), json.getLong("price"), json.getLong("bonus"));
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
@@ -125,13 +126,16 @@ public class KanvasingFinishAct extends Activity implements OnClickListener {
 	
 	private void updateDatabase(){
 		//Get last record of mobile_trnsales
+		int lastTrnSalesID = 0;
 		Cursor cursor = DatabaseAdapter.instance(getBaseContext()).rawQuery("SELECT id " +
-				"FROM mobile_trnsales " +
-				"ORDER BY id DESC LIMIT 1", null);
+				"FROM mobile_trnsales ", null);
 		cursor.moveToFirst();
-		TrnSales lastTrnSales = new TrnSales(cursor.getString(0)); 
+		do{
+			int temp = Integer.valueOf(cursor.getString(0));
+			if(temp > lastTrnSalesID)
+				lastTrnSalesID = temp;
+		}while(cursor.moveToNext());
 		cursor.close();
-		int lastTrnSalesID = Integer.valueOf(lastTrnSales.mID);
 		
 		//Get mobile_user.unitcompany_code
 		cursor = DatabaseAdapter.instance(getBaseContext()).rawQuery("SELECT unitcompany_code " +
@@ -160,19 +164,22 @@ public class KanvasingFinishAct extends Activity implements OnClickListener {
 		DatabaseAdapter.instance(getBaseContext()).insert(TrnSales.getTableName(), newTrnSales);
 		
 		//Get last record of mobile_dtlsales
+		int lastDtlSalesID = 0;
 		cursor = DatabaseAdapter.instance(getBaseContext()).rawQuery("SELECT id " +
-				"FROM mobile_dtlsales " +
-				"ORDER BY id DESC LIMIT 1", null);
+				"FROM mobile_dtlsales ", null);
 		cursor.moveToFirst();
-		DtlSales lastDtlSales = new DtlSales(cursor.getString(0)); 
+		do{
+			int temp = Integer.valueOf(cursor.getString(0));
+			if(temp > lastTrnSalesID)
+				lastDtlSalesID = temp;
+		}while(cursor.moveToNext()); 
 		cursor.close();
-		int lastDtlSalesID = Integer.valueOf(lastDtlSales.mID);
 
 		//INSERT into mobile_dtlsales
 		for(int i=0; i<mFinishTransPL.length; ++i){
 			DtlSales newDtlSales = new DtlSales(String.valueOf(++lastDtlSalesID), String.valueOf(lastTrnSalesID),
-					mFinishTransPL[i].mProductCode, mFinishTransPL[i].mQuantity, mFinishTransPL[i].mQuantity,
-					0, mFinishTransPL[i].mPrice, mFinishTransPL[i].mQuantity*mFinishTransPL[i].mPrice, 
+					mFinishTransPL[i].mProductCode, mFinishTransPL[i].mQuantity, 0,
+					mFinishTransPL[i].mQuantity, mFinishTransPL[i].mPrice, mFinishTransPL[i].mQuantity*mFinishTransPL[i].mPrice, 
 					mFinishTransPL[i].mQuantity*mFinishTransPL[i].mPrice, 0, 
 					mFinishTransPL[i].mQuantity*mFinishTransPL[i].mPrice, 0);
 			DatabaseAdapter.instance(getBaseContext()).insert(DtlSales.getTableName(), newDtlSales);
@@ -200,13 +207,14 @@ public class KanvasingFinishAct extends Activity implements OnClickListener {
 	private FinishTransactionPriceList[] mFinishTransPL;
 	
 	private class FinishTransactionPriceList{
-		public FinishTransactionPriceList(String productCode, long productQuantity, long price) {
+		public FinishTransactionPriceList(String productCode, long productQuantity, long price, long bonus) {
 			mProductCode	= productCode;
 			mQuantity		= productQuantity;
 			mPrice			= price;
+			mBonus			= bonus;
 		}
 		
 		public String	mProductCode;
-		public long		mQuantity, mPrice;
+		public long		mQuantity, mPrice, mBonus;
 	}
 }

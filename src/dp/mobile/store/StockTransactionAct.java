@@ -1,7 +1,10 @@
 package dp.mobile.store;
 
+import dp.mobile.store.helper.Utilities;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -20,6 +23,15 @@ public class StockTransactionAct extends Activity implements OnClickListener{
 		mStockRequestButton.setOnClickListener(this);
 		mReceivingButton.setOnClickListener(this);
 		mReturnButton.setOnClickListener(this);
+		
+		SharedPreferences sharedPref = getSharedPreferences(Utilities.PREFERENCES, 0);
+		Editor sharedPrefEditor = sharedPref.edit();
+
+		int mainMenuStatus = sharedPref.getInt(Utilities.MAIN_MENU_STATUS, 0);
+		mainMenuStatus = mainMenuStatus < Utilities.MAIN_MENU_AFTER_STOCK ? Utilities.MAIN_MENU_AFTER_STOCK : mainMenuStatus;
+		sharedPrefEditor.putInt(Utilities.MAIN_MENU_STATUS, mainMenuStatus);
+
+		sharedPrefEditor.commit();
 	}
 	
 	@Override

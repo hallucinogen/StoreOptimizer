@@ -6,34 +6,34 @@
     <uses-sdk android:minSdkVersion="7" />
 
     <application android:icon="@drawable/icon" android:label="@string/app_name">
-		<activity android:name=".LoginAct">
+		<activity android:name=".LoginAct" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         
-		<activity android:name="CashReportAct" />
-		<activity android:name="CheckRouteAct" />
-		<activity android:name="DailyNewsAct" />
-		<activity android:name="DownloadDataAct" />
-		<activity android:name="GiroReportAct" />
-		<activity android:name="KanvasingFinishAct" />
-		<activity android:name="KanvasingStoreHistoryAct" />
-		<activity android:name="KanvasingStoreInformationAct" />
-		<activity android:name="KanvasingStoreListAct" />
-		<activity android:name="KanvasingTransactionAct" />
-		<activity android:name="MainMenuAct" />
-		<activity android:name="OtherTransactionAct" />
-		<activity android:name="ReceivablePaymentAct" />
-		<activity android:name="ReceivingAct" />
-		<activity android:name="ReturnAct" />
-		<activity android:name="SalesInformationAct" />
-		<activity android:name="SalesTransactionAct" />
-		<activity android:name="SettingAct" />
-		<activity android:name="StockReportAct" />
-		<activity android:name="StockRequestAct" />
-		<activity android:name="StockTransactionAct" />
+		<activity android:name="CashReportAct" android:screenOrientation="portrait"/>
+		<activity android:name="CheckRouteAct" android:screenOrientation="portrait"/>
+		<activity android:name="DailyNewsAct" android:screenOrientation="portrait"/>
+		<activity android:name="DownloadDataAct" android:screenOrientation="portrait"/>
+		<activity android:name="GiroReportAct" android:screenOrientation="portrait"/>
+		<activity android:name="KanvasingFinishAct" android:screenOrientation="portrait"/>
+		<activity android:name="KanvasingStoreHistoryAct" android:screenOrientation="portrait"/>
+		<activity android:name="KanvasingStoreInformationAct" android:screenOrientation="portrait"/>
+		<activity android:name="KanvasingStoreListAct" android:screenOrientation="portrait"/>
+		<activity android:name="KanvasingTransactionAct" android:screenOrientation="portrait"/>
+		<activity android:name="MainMenuAct" android:screenOrientation="portrait"/>
+		<activity android:name="OtherTransactionAct" android:screenOrientation="portrait"/>
+		<activity android:name="ReceivablePaymentAct" android:screenOrientation="portrait"/>
+		<activity android:name="ReceivingAct" android:screenOrientation="portrait"/>
+		<activity android:name="ReturnAct" android:screenOrientation="portrait"/>
+		<activity android:name="SalesInformationAct" android:screenOrientation="portrait"/>
+		<activity android:name="SalesTransactionAct" android:screenOrientation="portrait"/>
+		<activity android:name="SettingAct" android:screenOrientation="portrait"/>
+		<activity android:name="StockReportAct" android:screenOrientation="portrait"/>
+		<activity android:name="StockRequestAct" android:screenOrientation="portrait"/>
+		<activity android:name="StockTransactionAct" android:screenOrientation="portrait"/>
     </application>
     
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>

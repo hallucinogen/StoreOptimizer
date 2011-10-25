@@ -1,72 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:gravity="center"
-    android:layout_height="fill_parent" >
-    
-    <TextView 
-		style="@style/title_style"
-		android:text="Login"/>
-    
-	<TableLayout 
-	    android:orientation="vertical"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" 
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+	<LinearLayout android:orientation="vertical"
+	    android:background="#FFFFFF"
 	    android:layout_width="fill_parent"
 	    android:layout_height="fill_parent"
-	    android:stretchColumns="1"
-	    >
-	    <!--<TableRow>
-	    	<TextView
-	    		android:gravity="left"
-	    		android:text="Host String"
-	    		android:paddingRight="5dip" />
-	    	<EditText
-	    		android:gravity="left"
-	    		android:text="116.90.165.82"
-	    		android:id="@+id/host_string" />
-	    </TableRow>-->
-	    <TableRow>
-	    	<TextView
-	    		android:gravity="left"
-	    		android:text="Username"
-	    		android:paddingRight="5dip" />
-	    	<EditText
-	    		android:gravity="left"
-	    		android:text=""
-	    		android:id="@+id/username" />
-	    </TableRow>
+	    android:gravity="center"
+	    android:focusable="true"
+	    android:focusableInTouchMode="true">
 	    
-	    <TableRow>
-	    	<TextView
-	    		android:gravity="left"
-	    		android:text="Password"
-	    		android:paddingRight="5dip" />
-	    	<EditText
-	    		android:gravity="left"
-	    		android:text=""
-	    		android:inputType="textPassword"
-	    		android:id="@+id/password" />
-	    </TableRow>
+	    <TextView android:layout_width="fill_parent"
+	    	android:layout_height="wrap_content" 
+	    	android:background="#0208C4"
+	    	android:gravity="center_horizontal"
+	    	android:textSize="8pt"
+	    	android:textStyle="bold"
+	    	android:textColor="#000000"
+	    	android:padding="5dip"
+			android:text="Logon"/>
 	    
-	    <TableRow>
-	    	<LinearLayout android:orientation="vertical">
-		    	<Button
-		    		style="@style/table_button_style"
-		    		android:text="Setting"
-		    		android:id="@+id/setting" />
-		    	<Button
-		    		android:layout_marginTop="10dip"
-		    		style="@style/table_button_style" 
-					android:id="@+id/download_data"
-					android:text="Download"/>
+		<TableLayout 
+		    android:orientation="vertical"
+		    android:layout_width="fill_parent"
+		    android:layout_height="fill_parent"
+		    android:stretchColumns="0"
+		    android:layout_marginTop="10dip"
+		    android:layout_marginBottom="10dip"
+		    android:layout_marginLeft="25dip"
+		    android:layout_marginRight="25dip"
+		    >
+		    
+		    <TableRow android:layout_marginBottom="10dip">
+		    	<EditText android:id="@+id/username"
+		    		android:gravity="left"
+		    		android:textSize="8pt"
+		    		android:text="dummy_user"
+		    		android:hint="Username"/>
+		    </TableRow>
+		    
+		    <TableRow android:layout_marginBottom="10dip">
+		    	<EditText android:id="@+id/password"
+		    		android:gravity="left"
+		    		android:inputType="textPassword"
+		    		android:hint="Password"/>
+		    </TableRow>
+		    
+	    	<LinearLayout android:layout_width="fill_parent"
+	    		android:layout_height="wrap_content"
+	    		android:orientation="vertical"
+	    		android:gravity="center_horizontal">
+	    		<LinearLayout android:layout_width="fill_parent"
+		    		android:layout_height="wrap_content"
+			    	android:orientation="horizontal"
+			    	android:layout_marginBottom="10dip"
+			    	android:gravity="center_horizontal">
+			    	<TextView android:layout_width="wrap_content"
+			    		android:layout_height="wrap_content"
+			    		android:layout_marginRight="10dip"
+			    		android:textColor="#000000" 
+			    		android:text="v3.001.00029.032"/>
+		    		<Button style="@style/table_button_style"
+				    		android:id="@+id/login"
+				    		android:text="Login"/>
+				</LinearLayout>
+			    	
+		    	<ImageView android:layout_width="wrap_content"
+		    		android:layout_height="wrap_content"
+		    		android:layout_marginBottom="10dip"
+		    		android:src="@drawable/company_logo"/>
+			    		
+		    	<LinearLayout android:layout_width="fill_parent"
+		    		android:layout_height="wrap_content"
+			    	android:orientation="horizontal"
+			    	android:layout_marginBottom="10dip"
+			    	android:gravity="center_horizontal">
+		    		<Button style="@style/table_button_style" 
+						android:id="@+id/download_data"
+						android:text="Download"/>
+			    	<Button
+			    		style="@style/table_button_style"
+			    		android:id="@+id/setting"
+			    		android:text="Setting"/>
+		    	</LinearLayout>
 	    	</LinearLayout>
-	    	<LinearLayout
-	    		android:gravity="right">
-		    	<Button
-		    		style="@style/table_button_style"
-		    		android:text="Login"
-		    		android:id="@+id/login" />
-	    	</LinearLayout>
-	    </TableRow>
-	</TableLayout>
-</LinearLayout>
+		</TableLayout>
+	</LinearLayout>
+</ScrollView>

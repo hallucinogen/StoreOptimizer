@@ -2,10 +2,12 @@ package dp.mobile.store;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 import dp.mobile.store.adapter.CheckRouteAdapter;
 import dp.mobile.store.helper.DatabaseAdapter;
@@ -18,12 +20,29 @@ public class KanvasingStoreListAct extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.kanvasing_storelist);
 		
-		mStoreListView = (ListView) findViewById(R.id.storelist_view);
-		
+		initComp();
 		populateTableStoreList();
 	}
 	
+	private void initComp(){
+		mTitle					= (TextView) findViewById(R.id.header_title);
+		mNameTop				= (TextView) findViewById(R.id.header_nametop);
+		mRouteTop				= (TextView) findViewById(R.id.header_routetop);
+		
+		mTitle.setText("Store List");
+		Cursor userCur = Utilities.getUser(getBaseContext());
+		if(userCur.moveToFirst()){
+			mNameTop.setText(userCur.getString(0));
+			mRouteTop.setText(userCur.getString(1));
+		}
+		userCur.close();
+		
+		mStoreListView = (ListView) findViewById(R.id.storelist_view);
+	}
+	
 	private void populateTableStoreList() {
+		mStoreListView.removeAllViewsInLayout();
+		
 		//Fetch TrnRoute records from db
 		TrnRoute[] trnRoutes = (TrnRoute[])DatabaseAdapter.instance(getBaseContext()).getAll(TrnRoute.getTableName(), null, null);
 		
@@ -46,12 +65,14 @@ public class KanvasingStoreListAct extends Activity {
 	
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (requestCode == Utilities.KANVASING_STOREINFO_RC && resultCode == RESULT_OK) {
-			setResult(RESULT_OK);
-			finish();
+		if (requestCode == Utilities.KANVASING_STOREINFO_RC) {
+			populateTableStoreList();
 		}
 	}
 	
 	private ListView			mStoreListView;
 	private CheckRouteAdapter	mStoreListAdpt; 
+	private TextView			mTitle, mNameTop, mRouteTop;
+	
+	public static final int REQUEST_CODE = 0;
 }

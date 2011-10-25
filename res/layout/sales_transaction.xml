@@ -5,9 +5,9 @@
     android:gravity="center_horizontal"
     android:orientation="vertical"
     >
-    <TextView 
-		style="@style/title_style"
-		android:text="Kanvasing : Sales Transaction"/>
+    
+    <include layout="@layout/header"/>
+    
 	<TableLayout
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content">
@@ -27,13 +27,23 @@
 				android:gravity="center"
 				android:textStyle="bold"
 				android:text="Amount" />
+			<TextView 
+				android:layout_weight="1"
+				android:gravity="center"
+				android:textStyle="bold"
+				android:text="Bonus" />
 		</TableRow>
 		
 		<TableRow>
 			<TextView 
 				android:layout_weight="1"
 				android:gravity="center"
-				android:text="Rokok Merah Jitu"
+				android:text="Rokok Merah Jitz"
+				android:height="0dp" />
+			<TextView 
+				android:layout_weight="1"
+				android:gravity="center"
+				android:text="100000"
 				android:height="0dp" />
 			<TextView 
 				android:layout_weight="1"
@@ -49,6 +59,8 @@
 	</TableLayout>
 	<ScrollView
 		android:layout_width="fill_parent"
+		android:background="@drawable/border"
+		android:layout_margin="10dip"
 		android:layout_height="240dip">
 		<TableLayout
 			android:layout_width="fill_parent"

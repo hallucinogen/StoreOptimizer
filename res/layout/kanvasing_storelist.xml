@@ -3,17 +3,17 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:gravity="center_horizontal"
-    android:orientation="vertical"
-    >
-    <TextView 
-		style="@style/title_style"
-		android:text="Kanvasing : Store List"/>
+    android:orientation="vertical">
+    
+    <include layout="@layout/header"/>
+    
     <ListView
     	android:orientation="vertical"
 	    android:layout_width="fill_parent"
 	    android:layout_height="fill_parent"
     	android:gravity="center_horizontal"
     	android:layout_margin="10dip"
+    	android:background="@drawable/border"
     	android:id="@+id/storelist_view">
 	</ListView>
 </LinearLayout>

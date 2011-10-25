@@ -5,43 +5,59 @@
     android:gravity="center_horizontal"
     android:orientation="vertical"
     >
-    <TextView 
-		style="@style/title_style"
-		android:text="Main Menu"/>
+    
+    <include layout="@layout/header"/> 
+	
 	<ScrollView
 		android:layout_width="fill_parent"
-	    android:layout_height="wrap_content">
-	    <LinearLayout
-	    	android:orientation="vertical"
+	    android:layout_height="fill_parent"
+	    android:gravity="center_horizontal"
+	    android:layout_gravity="center_horizontal"
+	    >
+		<TableLayout 
+		    android:orientation="vertical"
 		    android:layout_width="fill_parent"
 		    android:layout_height="fill_parent"
-	    	android:layout_gravity="center"
-	    	android:layout_margin="20dip">
-			<Button 
-				android:layout_width="fill_parent"
-				android:layout_height="wrap_content"
-				android:id="@+id/sales_information"
-				android:text="Sales Information"/>
-			<Button 
-				android:layout_width="fill_parent"
-				android:layout_height="wrap_content"
-				android:id="@+id/sales_kanvasing"
-				android:text="Sales Kanvasing"/>
-			<Button 
-				android:layout_width="fill_parent"
-				android:layout_height="wrap_content"
-				android:id="@+id/stock_transaction"
-				android:text="Stock Transaction"/>
-			<Button 
-				android:layout_width="fill_parent"
-				android:layout_height="wrap_content"
-				android:id="@+id/daily_news"
-				android:text="Daily News"/>
-			<Button 
-				android:layout_width="fill_parent"
-				android:layout_height="wrap_content"
-				android:id="@+id/setting"
-				android:text="Setting"/>
-		</LinearLayout>
-	</ScrollView>
+		    android:gravity="center_horizontal">
+		    <TableRow style="@style/icon_main_menu_style">
+		    	<Button android:layout_width="fill_parent"
+					android:layout_height="fill_parent"
+					android:layout_marginRight="15dip"
+					android:id="@+id/sales_information"
+					android:background="@drawable/information_icon"/>
+				<Button android:layout_width="fill_parent"
+					android:layout_height="fill_parent"
+					android:id="@+id/sales_kanvasing"
+					android:layout_marginLeft="15dip"
+					android:background="@drawable/kanvasing_icon"/>	
+		    </TableRow>
+
+		    <TableRow style="@style/icon_main_menu_style">
+		    	<Button android:layout_width="fill_parent"
+					android:layout_height="fill_parent"
+					android:layout_marginRight="15dip"
+					android:id="@+id/stock_transaction"
+					android:background="@drawable/stock_icon"/>
+				<Button android:layout_width="fill_parent"
+					android:layout_height="fill_parent"
+					android:layout_marginLeft="15dip"
+					android:id="@+id/daily_news"
+					android:background="@drawable/news_icon"/>	
+		    </TableRow>
+		    
+		    <TableRow style="@style/icon_main_menu_style">
+		    	<Button android:layout_width="fill_parent"
+					android:layout_height="fill_parent"
+					android:layout_marginRight="15dip"
+					android:id="@+id/dummy"
+					android:background="@drawable/nothing"/>
+		    	<Button android:layout_width="fill_parent"
+					android:layout_height="fill_parent"
+					android:layout_marginLeft="15dip"
+					android:id="@+id/setting"
+					android:background="@drawable/setting_icon"/>
+		    </TableRow>
+		    
+		</TableLayout>
+	</ScrollView>	
 </LinearLayout>

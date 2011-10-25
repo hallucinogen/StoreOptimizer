@@ -4,10 +4,8 @@
     android:layout_height="fill_parent"
     android:gravity="center_horizontal">
     
-    <TextView android:id="@+id/kanvas_trans_title"
-		style="@style/title_style"
-		android:layout_centerHorizontal="true"
-		android:text="Transaction Menu"/>
+	<include android:id="@+id/kanvas_trans_title"
+		layout="@layout/header"/>
 	
 	<LinearLayout android:id="@+id/kanvas_trans_linear"
 		android:orientation="vertical"

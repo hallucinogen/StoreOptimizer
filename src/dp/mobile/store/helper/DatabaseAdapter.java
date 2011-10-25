@@ -56,6 +56,15 @@ public class DatabaseAdapter {
 	
 	public Cursor rawQuery(String selection, String[] selectionArgs){
 		openDatabaseIfNecessary();
+		if(selection != null)
+			Log.i("DATABASE", "selection = " + selection);
+		
+		if(selectionArgs != null){
+			for(int i=0; i<selectionArgs.length; ++i){
+				Log.i("DATABASE", selectionArgs[i]);
+			}
+		}
+		
 		Cursor retval = mDatabase.rawQuery(selection, selectionArgs);
 		
 		/*if(retval.moveToFirst()){

@@ -36,13 +36,17 @@ public class StockReportAct extends Activity{
     		do{
     			StockReport temp = new StockReport(stockReportCur.getString(0), stockReportCur.getString(1),
     					stockReportCur.getLong(2), stockReportCur.getLong(3));
-    			tempIdx = getIdx(temp.mProductCode, stockReports); 
+    			tempIdx = getIdx(temp.mProductCode, stockReports);
+    			Log.d("TEMPIDX", "tempIdx = " + tempIdx);
     			if(tempIdx == -1)
     				stockReports[i++] = temp;
     			else{
     				stockReports[tempIdx].mQtyCredit	+= temp.mQtyCredit;
     				stockReports[tempIdx].mQtyDebit		+= temp.mQtyDebit;
+    				Log.d("BUKAN -1", stockReports[tempIdx].mQtyCredit + "#" + stockReports[tempIdx].mQtyDebit);
     			}
+    			
+    			
     		}while(stockReportCur.moveToNext());
     		
     		stockReportCur.close();
@@ -71,7 +75,8 @@ public class StockReportAct extends Activity{
 			if(stockReports[i] != null){
 				if(stockReports[i].mProductCode.equals(productCode))
 					return i;
-			}
+			} else
+				return -1;
 		}
 		
 		return -1;

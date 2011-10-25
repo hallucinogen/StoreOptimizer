@@ -39,7 +39,7 @@ public class CheckRouteAdapter extends ArrayAdapter<TrnRoute> {
 		//Get the View
 		viewHolder.customerName		= (TextView) convertView.findViewById(R.id.store_name);
 		viewHolder.customerAddr		= (TextView) convertView.findViewById(R.id.store_down);
-		viewHolder.timevisit	= (TextView) convertView.findViewById(R.id.store_right);
+		viewHolder.timevisit		= (TextView) convertView.findViewById(R.id.store_right);
 		
 		//Set the View
 		viewHolder.customerName.setText(getItem(position).mCustomerName);

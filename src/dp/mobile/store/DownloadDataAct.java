@@ -1,7 +1,10 @@
 package dp.mobile.store;
 
 import dp.mobile.store.helper.DatabaseAdapter;
+import dp.mobile.store.helper.Utilities;
 import android.app.Activity;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
@@ -31,6 +34,12 @@ public class DownloadDataAct extends Activity implements OnClickListener {
 				"FROM mobile_user", null);
 		if(userCur.moveToFirst())
 			mUsername.setText(userCur.getString(0));
+		
+		SharedPreferences sharedPref = getSharedPreferences(Utilities.PREFERENCES, 0);
+		Editor sharedPrefEditor = sharedPref.edit();
+		
+		sharedPrefEditor.putInt(Utilities.MAIN_MENU_STATUS, Utilities.MAIN_MENU_INITIAL);
+		sharedPrefEditor.commit();		
 	}
 	
 	@Override

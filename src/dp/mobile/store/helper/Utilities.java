@@ -6,6 +6,7 @@ import java.util.Date;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.database.Cursor;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -28,6 +29,12 @@ public class Utilities {
 	public static final String HOST_STRING	= "HOST_STRING";
 	public static final String DEFAULT_USER	= "DEFAULT_USER";
 	
+	public static final String MAIN_MENU_STATUS 		= "MAIN_MENU_STATUS";
+	public static final int MAIN_MENU_INITIAL 			= 0;
+	public static final int MAIN_MENU_AFTER_INFO 		= 1;
+	public static final int MAIN_MENU_AFTER_STOCK 		= 2;
+	public static final int MAIN_MENU_NO_TRANSACTION 	= 5;
+	
 	public static final String INTENT_STORE_NAME	= "store_name";
 	public static final String INTENT_STORE_ID		= "store_id";
 	public static final String INTENT_ITEM_NAME		= "item_name";
@@ -35,6 +42,7 @@ public class Utilities {
 	public static final String INTENT_ITEM_COUNT	= "item_count";
 	public static final String INTENT_TOTAL_COST	= "total_cost";
 	public static final String INTENT_TRANSACTION_DETAILS = "transaction_details";
+	public static final String INTENT_KANVASING_START = "kanvasing_start";
 	
 	public static final int KANVASING_STOREINFO_RC		= 0;
 	public static final int KANVASING_STOREHISTORY_RC	= 1;
@@ -42,7 +50,7 @@ public class Utilities {
 	public static final int KANVASING_FINISH_RC			= 3;
 	public static final int KANVASING_STORELIST_RC		= 4;
 	
-	public static final String DATE_FORMAT			= "yyyy-MMM-dd hh:mm:ss";
+	public static final String DATE_FORMAT			= "yyyy-MMM-dd kk:mm:ss";
 	
 	public static String formatDate(Date date){
 		return android.text.format.DateFormat.format(DATE_FORMAT, date).toString();
@@ -84,5 +92,13 @@ public class Utilities {
 		retval[3]	= sharedPref.getString(DEFAULT_USER, "");
 		
 		return retval;
+	}
+	
+	public static Cursor getUser(Context ctx){
+		//Get username with the only one mobile_user record available (supposedly)
+		Cursor userCur = DatabaseAdapter.instance(ctx).rawQuery("SELECT username,descr " +
+				"FROM mobile_user", null);
+		
+		return userCur;
 	}
 }

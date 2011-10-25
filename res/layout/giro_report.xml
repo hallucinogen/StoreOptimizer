@@ -10,6 +10,8 @@
 		android:text="Check / Giro Report"/>
 	<ScrollView
 		android:layout_width="fill_parent"
+		android:background="@drawable/border"
+		android:layout_margin="10dip"
 	    android:layout_height="280dip">
     <LinearLayout
     	android:orientation="vertical"

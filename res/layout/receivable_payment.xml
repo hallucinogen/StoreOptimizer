@@ -10,7 +10,9 @@
 		android:text="Receivable Payment"/>
 	<ScrollView
 		android:layout_width="fill_parent"
-	    android:layout_height="wrap_content">
+		android:background="@drawable/border"
+		android:layout_margin="10dip"
+	    android:layout_height="fill_parent">
     <LinearLayout
     	android:orientation="vertical"
 	    android:layout_width="fill_parent"

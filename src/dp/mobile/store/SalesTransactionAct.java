@@ -31,6 +31,18 @@ public class SalesTransactionAct extends Activity implements OnClickListener {
 	}
 	
 	private void initComp(){
+		mTitle					= (TextView) findViewById(R.id.header_title);
+		mNameTop				= (TextView) findViewById(R.id.header_nametop);
+		mRouteTop				= (TextView) findViewById(R.id.header_routetop);
+		
+		mTitle.setText("Sales Transaction");
+		Cursor userCur = Utilities.getUser(getBaseContext());
+		if(userCur.moveToFirst()){
+			mNameTop.setText(userCur.getString(0));
+			mRouteTop.setText(userCur.getString(1));
+		}
+		userCur.close();
+		
 		mTransactionTable 	= (TableLayout) findViewById(R.id.transaction_table);
 		mConfirmButton		= (Button) findViewById(R.id.confirm);
 		mConfirmButton.setOnClickListener(this);
@@ -104,11 +116,13 @@ public class SalesTransactionAct extends Activity implements OnClickListener {
 					//Get Quantity
 					TableRow	item	= (TableRow)mTransactionTable.findViewById(i);
 					EditText	textbox = (EditText) item.findViewById(R.id.num2);
+					EditText	bonus	= (EditText) item.findViewById(R.id.num3);
 					String		qty		= textbox.getText().toString();
 					
 					if(qty.equals("0") || qty == null || qty.trim().length() == 0)
 						continue;
 					json.put("quantity", Long.parseLong(textbox.getText().toString()));
+					json.put("bonus", Long.parseLong(bonus.getText().toString()));
 					json.put("price", mPriceLists[i].mPrice);
 					
 					jsonArray.put(json);
@@ -136,6 +150,7 @@ public class SalesTransactionAct extends Activity implements OnClickListener {
 	private TableLayout	mTransactionTable; 
 	private String		mStoreID;
 	private SalesTransactionPriceList[]	mPriceLists;
+	private TextView	mTitle, mNameTop, mRouteTop;
 	
 	private class SalesTransactionPriceList{
 		public SalesTransactionPriceList(String customerCode, String productCode, String productName, long price) {

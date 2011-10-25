@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:gravity="center_horizontal"
     android:orientation="vertical"
     >
-    <TextView 
+    <TextView android:id="@+id/cash_report_title"
+    	android:layout_centerHorizontal="true"
 		style="@style/title_style"
 		android:text="Cash Report"/>
 		
-	<TableLayout
+	<TableLayout android:id="@+id/table_upper"
+		android:layout_below="@id/cash_report_title"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
-		android:stretchColumns="1">
+		android:stretchColumns="1"
+		android:layout_margin="5dip">
 		<TableRow>
 			<TextView 
 				android:text="Store"
@@ -22,20 +25,16 @@
 				android:textStyle="bold"
 				android:text="Amount" />
 		</TableRow>
-	</TableLayout>
+	</TableLayout>	
 	
-	<ListView
-		android:id="@+id/cash_report_listview"
+	<TableLayout android:id="@+id/table_below"
+		android:layout_alignParentBottom="true"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
-		android:layout_gravity="center_horizontal"
-		android:layout_margin="5dip">
-	</ListView>
-	
-	<TableLayout
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:stretchColumns="1">
+		android:stretchColumns="1"
+		android:layout_marginLeft="5dip"
+		android:layout_marginRight="5dip"
+		android:layout_marginBottom="10dip">
 		<TableRow>
 			<TextView 
 				android:text="TOTAL"
@@ -47,4 +46,15 @@
 				android:text="Rp 0" />
 		</TableRow>
 	</TableLayout>
-</LinearLayout>
+	
+	<ListView
+		android:id="@+id/cash_report_listview"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:layout_below="@id/table_upper"
+		android:layout_above="@id/table_below"
+		android:background="@drawable/border"
+		android:layout_gravity="center_horizontal"
+		android:layout_margin="10dip">
+	</ListView>
+</RelativeLayout>
