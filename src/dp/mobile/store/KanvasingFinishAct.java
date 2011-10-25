@@ -170,7 +170,7 @@ public class KanvasingFinishAct extends Activity implements OnClickListener {
 		cursor.moveToFirst();
 		do{
 			int temp = Integer.valueOf(cursor.getString(0));
-			if(temp > lastTrnSalesID)
+			if(temp > lastDtlSalesID)
 				lastDtlSalesID = temp;
 		}while(cursor.moveToNext()); 
 		cursor.close();
