@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import dp.mobile.store.R;
-import dp.mobile.store.CashReportAct.CashReport;
 
 public class CashReportAdapter extends ArrayAdapter<CashReport> {
 	public CashReportAdapter(Activity context, CashReport[] list) {

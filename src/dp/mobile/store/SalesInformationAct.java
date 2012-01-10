@@ -36,13 +36,19 @@ public class SalesInformationAct extends Activity implements OnClickListener {
 		
 		mCheckRouteButton 	= (Button) findViewById(R.id.check_route);
 		mStockReportButton 	= (Button) findViewById(R.id.stock_report);
-		mCashReportButton 	= (Button) findViewById(R.id.cash_report);
+		mCashReportButton 	= (Button) findViewById(R.id.detail_penjualan);
 		mGiroReportButton 	= (Button) findViewById(R.id.giro_report);
+		
+		mRingkasanPenjualan	= (Button) findViewById(R.id.ringkasan_penjualan);
+		mStatusCash			= (Button) findViewById(R.id.status_cash);
 		
 		mCheckRouteButton.setOnClickListener(this);
 		mStockReportButton.setOnClickListener(this);
 		mCashReportButton.setOnClickListener(this);
 		mGiroReportButton.setOnClickListener(this);
+		
+		mRingkasanPenjualan.setOnClickListener(this);
+		mStatusCash.setOnClickListener(this);
 		
 		// change clickable
 		SharedPreferences sharedPref = getSharedPreferences(Utilities.PREFERENCES, 0);
@@ -65,8 +71,15 @@ public class SalesInformationAct extends Activity implements OnClickListener {
 			startActivity(new Intent(this, CashReportAct.class));
 		} else if (v == mGiroReportButton) {
 			startActivity(new Intent(this, GiroReportAct.class));
+		} else if (v == mRingkasanPenjualan) {
+			startActivity(new Intent(this, RingkasanPenjualanAct.class));
+		} else if (v == mStatusCash) {
+			startActivity(new Intent(this, StatusCashAct.class));
 		}
 	}
+	
+	private Button mRingkasanPenjualan;
+	private Button mStatusCash;
 	
 	private Button mCheckRouteButton;
 	private Button mStockReportButton;

@@ -34,7 +34,7 @@ public class KanvasingStoreInformationAct extends Activity implements OnClickLis
 		mNameTop	= (TextView) findViewById(R.id.header_nametop);
 		mRouteTop	= (TextView) findViewById(R.id.header_routetop);
 		
-		mTitle.setText("Status Stock");
+		mTitle.setText("Informasi Customer");
 		Cursor userCur = Utilities.getUser(getBaseContext());
 		if(userCur.moveToFirst()){
 			mNameTop.setText(userCur.getString(0));
@@ -51,7 +51,6 @@ public class KanvasingStoreInformationAct extends Activity implements OnClickLis
 		mInfo[5] = (TextView)findViewById(R.id.info6);
 		mInfo[6] = (TextView)findViewById(R.id.info7);
 		mInfo[7] = (TextView)findViewById(R.id.info8);
-		mInfo[8] = (TextView)findViewById(R.id.info9);
 	}
 	
 	//Get corresponding mobile_trnroute, WHERE customer_code == mStoreID
@@ -75,33 +74,34 @@ public class KanvasingStoreInformationAct extends Activity implements OnClickLis
 	
 	private void populateInfo(TrnRoute selectedTrnRoute){
 		//Date and Time
-		String originalTrnDate = Utilities.formatDate(selectedTrnRoute.mTrnDate);
+		/*String originalTrnDate = Utilities.formatDate(selectedTrnRoute.mTrnDate);
 			int spaceIdx = originalTrnDate.indexOf(" ");
 			String date = originalTrnDate.substring(0, spaceIdx);
-			String time = originalTrnDate.substring(spaceIdx+1, originalTrnDate.length());
+			String time = originalTrnDate.substring(spaceIdx+1, originalTrnDate.length());*/
 		
-		mInfo[0].setText(date);
-		mInfo[1].setText(time);
+		//Cust code
+		mInfo[0].setText(selectedTrnRoute.mCustomerCode);
 		
-		//Current Kilometer
+		//Cust name
+		mInfo[1].setText(selectedTrnRoute.mCustomerName);
 		
-		//Current Name
-		mInfo[3].setText(selectedTrnRoute.mCustomerName);
+		//Cust address
+		mInfo[2].setText(selectedTrnRoute.mCustomerAddress);
 		
-		//Customer Type
+		//Customer postcode
+		mInfo[3].setText(selectedTrnRoute.mCustomerPostCode);
+		
+		//Cust type
 		mInfo[4].setText(selectedTrnRoute.mCustomerType);
 		
-		//Term of Payment
-		mInfo[5].setText(selectedTrnRoute.mCustomerTermPayment);
+		//Term payment
+		mInfo[5].setText(String.valueOf(selectedTrnRoute.mCustomerTermPayment));
+		
+		//Credit Limit
+		mInfo[6].setText(String.valueOf(selectedTrnRoute.mCreditLimit));
 		
 		//Receivable
-		mInfo[6].setText(String.valueOf(selectedTrnRoute.mReceivable));
-		
-		//Limit Credit
-		mInfo[7].setText(String.valueOf(selectedTrnRoute.mCreditLimit));
-		
-		//Last Buy
-		mInfo[8].setText(Utilities.formatDate(selectedTrnRoute.mLastBuyDate));
+		mInfo[7].setText(String.valueOf(selectedTrnRoute.mReceivable));
 		
 		mHistoryButton 		= (Button) findViewById(R.id.history);
 		mKanvasingButton 	= (Button) findViewById(R.id.kanvasing);

@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -117,12 +118,19 @@ public class SalesTransactionAct extends Activity implements OnClickListener {
 					TableRow	item	= (TableRow)mTransactionTable.findViewById(i);
 					EditText	textbox = (EditText) item.findViewById(R.id.num2);
 					EditText	bonus	= (EditText) item.findViewById(R.id.num3);
-					String		qty		= textbox.getText().toString();
+					
+					String qty 	= "0";
+					if(!textbox.getText().toString().equals(""))
+						qty = textbox.getText().toString();
+					
+					String bonusQty = "0";
+					if(!bonus.getText().toString().equals(""))
+						bonusQty = bonus.getText().toString();
 					
 					if(qty.equals("0") || qty == null || qty.trim().length() == 0)
 						continue;
-					json.put("quantity", Long.parseLong(textbox.getText().toString()));
-					json.put("bonus", Long.parseLong(bonus.getText().toString()));
+					json.put("quantity", Long.parseLong(qty));
+					json.put("bonus", Long.parseLong(bonusQty));
 					json.put("price", mPriceLists[i].mPrice);
 					
 					jsonArray.put(json);

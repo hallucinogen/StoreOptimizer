@@ -46,7 +46,7 @@
 		    	<Button android:layout_width="fill_parent"
 					android:layout_height="fill_parent"
 					android:layout_marginRight="15dip"
-					android:id="@+id/cash_report"
+					android:id="@+id/status_cash"
 					android:background="@drawable/status_cash"/>
 				<Button android:layout_width="fill_parent"
 					android:layout_height="fill_parent"

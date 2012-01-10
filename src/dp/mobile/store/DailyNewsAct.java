@@ -1,20 +1,12 @@
 package dp.mobile.store;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
-import android.widget.AbsListView;
-import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
-import android.widget.ExpandableListAdapter;
-import android.widget.ExpandableListView;
 import android.widget.TextView;
-import android.widget.Toast;
 import dp.mobile.store.helper.DatabaseAdapter;
 import dp.mobile.store.helper.Utilities;
 import dp.mobile.store.helper.tables.DailyNews;
@@ -40,7 +32,7 @@ public class DailyNewsAct extends Activity implements OnClickListener {
     	mPrevBtn.setOnClickListener(this);
     	mNextBtn.setOnClickListener(this);
     	
-    	mTitle.setText("Daily News");
+    	mTitle.setText("Berita Harian");
     	Cursor userCur = Utilities.getUser(getBaseContext());
     	if(userCur.moveToFirst()){
 			mNameTop.setText(userCur.getString(0));

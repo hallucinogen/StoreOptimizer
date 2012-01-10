@@ -4,76 +4,86 @@
     android:layout_height="fill_parent"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    >
+    android:focusable="true" android:focusableInTouchMode="true">
     
     <include layout="@layout/header"/>
     
-	<TableLayout
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content">
-		<TableRow>
-			<TextView 
-				android:layout_weight="1"
-				android:gravity="center"
-				android:text="Item"
-				android:textStyle="bold" />
-			<TextView 
-				android:layout_weight="1"
-				android:gravity="center"
-				android:textStyle="bold"
-				android:text="Price" />
-			<TextView 
-				android:layout_weight="1"
-				android:gravity="center"
-				android:textStyle="bold"
-				android:text="Amount" />
-			<TextView 
-				android:layout_weight="1"
-				android:gravity="center"
-				android:textStyle="bold"
-				android:text="Bonus" />
-		</TableRow>
-		
-		<TableRow>
-			<TextView 
-				android:layout_weight="1"
-				android:gravity="center"
-				android:text="Rokok Merah Jitz"
-				android:height="0dp" />
-			<TextView 
-				android:layout_weight="1"
-				android:gravity="center"
-				android:text="100000"
-				android:height="0dp" />
-			<TextView 
-				android:layout_weight="1"
-				android:gravity="center"
-				android:text="100000"
-				android:height="0dp" />
-			<TextView 
-				android:layout_weight="1"
-				android:gravity="center"
-				android:text="100000"
-				android:height="0dp" />
-		</TableRow>
-	</TableLayout>
-	<ScrollView
-		android:layout_width="fill_parent"
-		android:background="@drawable/border"
-		android:layout_margin="10dip"
-		android:layout_height="240dip">
+    <ScrollView android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:gravity="center_horizontal"
+	    android:layout_gravity="center_horizontal">
+	<LinearLayout android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:layout_gravity="center_horizontal"
+		android:orientation="vertical">
 		<TableLayout
 			android:layout_width="fill_parent"
-			android:layout_height="fill_parent"
-			android:id="@+id/transaction_table">
+			android:layout_height="wrap_content">
+			<TableRow>
+				<TextView 
+					android:layout_weight="1"
+					android:gravity="center"
+					android:text="Item"
+					android:textStyle="bold" />
+				<TextView 
+					android:layout_weight="1"
+					android:gravity="center"
+					android:textStyle="bold"
+					android:text="Price" />
+				<TextView 
+					android:layout_weight="1"
+					android:gravity="center"
+					android:textStyle="bold"
+					android:text="Amount" />
+				<TextView 
+					android:layout_weight="1"
+					android:gravity="center"
+					android:textStyle="bold"
+					android:text="Bonus" />
+			</TableRow>
+			
+			<TableRow>
+				<TextView 
+					android:layout_weight="1"
+					android:gravity="center"
+					android:text="Rokok Merah Jitz"
+					android:height="0dp" />
+				<TextView 
+					android:layout_weight="1"
+					android:gravity="center"
+					android:text="100000"
+					android:height="0dp" />
+				<TextView 
+					android:layout_weight="1"
+					android:gravity="center"
+					android:text="100000"
+					android:height="0dp" />
+				<TextView 
+					android:layout_weight="1"
+					android:gravity="center"
+					android:text="100000"
+					android:height="0dp" />
+			</TableRow>
 		</TableLayout>
+		<!-- <ScrollView
+			android:layout_width="fill_parent"
+			android:background="@drawable/border"
+			android:layout_margin="10dip"
+			android:layout_height="240dip"> -->
+			<TableLayout
+				android:layout_width="fill_parent"
+				android:layout_height="fill_parent"
+				android:id="@+id/transaction_table">
+			</TableLayout>
+		<!-- </ScrollView>-->
+		<LinearLayout
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content">
+			<Button
+				style="@style/table_button_style"
+				android:id="@+id/confirm"
+				android:text="Confirm" />
+		</LinearLayout>
+		</LinearLayout>
 	</ScrollView>
-	<LinearLayout
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content">
-		<Button
-			style="@style/table_button_style"
-			android:id="@+id/confirm"
-			android:text="Confirm" />
-	</LinearLayout>
 </LinearLayout>

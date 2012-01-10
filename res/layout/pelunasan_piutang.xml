@@ -3,7 +3,8 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:gravity="center_horizontal"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:focusable="true" android:focusableInTouchMode="true">
     
     <include layout="@layout/header"/>
     
@@ -14,57 +15,29 @@
 			<TextView 
 				android:layout_weight="1"
 				android:gravity="center"
-				android:text="Item"
+				android:text="AR Number"
 				android:textStyle="bold" />
 			<TextView 
 				android:layout_weight="1"
 				android:gravity="center"
 				android:textStyle="bold"
-				android:text="In" />
+				android:text="Amount" />
 			<TextView 
 				android:layout_weight="1"
 				android:gravity="center"
 				android:textStyle="bold"
-				android:text="Trans" />
-			<TextView 
-				android:layout_weight="1"
-				android:gravity="center"
-				android:textStyle="bold"
-				android:text="Out" />
-		</TableRow>
-		
-		<TableRow>
-			<TextView 
-				android:layout_weight="1"
-				android:gravity="center"
-				android:text="Rokok Merah Jitu"
-				android:height="0dp" />
-			<TextView 
-				android:layout_weight="1"
-				android:gravity="center"
-				android:text="100000"
-				android:height="0dp" />
-			<TextView 
-				android:layout_weight="1"
-				android:gravity="center"
-				android:text="100000"
-				android:height="0dp" />
-			<TextView 
-				android:layout_weight="1"
-				android:gravity="center"
-				android:text="100000"
-				android:height="0dp" />
+				android:text="Payment" />
 		</TableRow>
 	</TableLayout>
 	<ScrollView
 		android:layout_width="fill_parent"
 		android:background="@drawable/border"
 		android:layout_margin="10dip"
-		android:layout_height="fill_parent">
+		android:layout_height="240dip">
 		<TableLayout
 			android:layout_width="fill_parent"
 			android:layout_height="fill_parent"
-			android:id="@+id/stock_table">
+			android:id="@+id/pelunasanpiutang_table">
 		</TableLayout>
 	</ScrollView>
 </LinearLayout>

@@ -13,8 +13,7 @@ public class StockRequestAct extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.stock_request);
 		
-mStockTable = (TableLayout) findViewById(R.id.stock_table);
-		
+		mStockTable = (TableLayout) findViewById(R.id.stock_table);
 		populateTableWithDummy();
 	}
 	

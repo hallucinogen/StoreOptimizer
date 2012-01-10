@@ -26,7 +26,7 @@ public class SettingAct extends Activity implements OnClickListener{
 		mNameTop	= (TextView) findViewById(R.id.header_nametop);
 		mRouteTop	= (TextView) findViewById(R.id.header_routetop);
 		
-		mTitle.setText("Proses Harian");
+		mTitle.setText("Setting");
 		Cursor userCur = Utilities.getUser(getBaseContext());
 		if(userCur.moveToFirst()){
 			mNameTop.setText(userCur.getString(0));

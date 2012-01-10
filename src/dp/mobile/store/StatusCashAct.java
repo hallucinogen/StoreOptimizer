@@ -12,7 +12,7 @@ import dp.mobile.store.adapter.CashReportAdapter;
 import dp.mobile.store.helper.DatabaseAdapter;
 import dp.mobile.store.helper.Utilities;
 
-public class CashReportAct extends Activity {
+public class StatusCashAct extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -30,7 +30,7 @@ public class CashReportAct extends Activity {
 		mCashReportListView = (ListView) findViewById(R.id.cash_report_listview);
 		mTotal				= (TextView) findViewById(R.id.total);
 		
-		mTitle.setText("Detail Penjualan");
+		mTitle.setText("Status Cash");
 		Cursor userCur = Utilities.getUser(getBaseContext());
 		if(userCur.moveToFirst()){
 			mNameTop.setText(userCur.getString(0));
@@ -48,8 +48,8 @@ public class CashReportAct extends Activity {
 				"mobile_customer.address, mobile_trnsales.amount_cash " +
 				"FROM mobile_trnsales JOIN mobile_customer ON " +
 				"mobile_trnsales.customer_code = mobile_customer.customer_code " +
-				"WHERE mobile_trnsales.amount_cash > 0 AND mobile_trnsales.trncode = ?" +
-				"ORDER BY mobile_trnsales.refno ASC", new String[]{"01"});
+				"WHERE mobile_trnsales.amount_cash > 0 AND mobile_trnsales.trncode = '51'" +
+				"ORDER BY mobile_trnsales.refno ASC", null);
 		
 		CashReport[] cashReports = new CashReport[cashReportCur.getCount()];
 		if(cashReportCur.moveToFirst()){

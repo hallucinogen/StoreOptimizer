@@ -10,11 +10,19 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 import dp.mobile.store.helper.DatabaseAdapter;
 import dp.mobile.store.helper.Utilities;
-import dp.mobile.store.helper.tables.*;
+import dp.mobile.store.helper.tables.Counter;
+import dp.mobile.store.helper.tables.Customer;
+import dp.mobile.store.helper.tables.DailyNews;
+import dp.mobile.store.helper.tables.DtlSales;
+import dp.mobile.store.helper.tables.PriceList;
+import dp.mobile.store.helper.tables.Product;
+import dp.mobile.store.helper.tables.TrnReceivable;
+import dp.mobile.store.helper.tables.TrnRoute;
+import dp.mobile.store.helper.tables.TrnSales;
+import dp.mobile.store.helper.tables.User;
 
 public class LoginAct extends Activity implements OnClickListener {
 	@Override
@@ -393,15 +401,15 @@ public class LoginAct extends Activity implements OnClickListener {
 		DatabaseAdapter.instance(getBaseContext()).insert(TrnSales.getTableName(),
 				new TrnSales("2", "ARTJKT", "01", Utilities.formatStr("2011-October-15 10:15:07"),
 						"ref02", "ar02", "desc02", "checkNo02", Utilities.formatStr("2011-October-15 10:15:07"),
-						"B002", "40115", "SAT02", 15000000, 15000000, 15000000, 0));
+						"B001", "40115", "SAT02", 15000000, 15000000, 15000000, 0));
 		DatabaseAdapter.instance(getBaseContext()).insert(TrnSales.getTableName(),
 				new TrnSales("3", "ARTJKT", "01", Utilities.formatStr("2011-October-15 10:15:07"),
 						"ref03", "ar03", "desc03", "checkNo03", Utilities.formatStr("2011-October-15 10:15:07"),
-						"C003", "40115", "SAT03", 0, 0, 0, 0));
+						"C001", "40115", "SAT03", 0, 0, 0, 0));
 		DatabaseAdapter.instance(getBaseContext()).insert(TrnSales.getTableName(),
-				new TrnSales("4", "ARTJKT", "02", Utilities.formatStr("2011-October-15 10:15:07"),
+				new TrnSales("4", "ARTJKT", "51", Utilities.formatStr("2011-October-15 10:15:07"),
 						"ref04", "ar04", "desc04", "checkNo04", Utilities.formatStr("2011-October-15 10:15:07"),
-						"D004", "40115", "SAT04", 0, 0, 0, 0));
+						"D001", "40115", "SAT04", 20000000, 20000001, 20000002, 0));
 		
 		//Tes raw/standard query
 		//DatabaseAdapter.instance(getBaseContext()).rawQuery("SELECT * FROM mobile_dailynews JOIN mobile_trnroute ON mobile_dailynews.id = mobile_trnroute.id", null);

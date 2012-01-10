@@ -2,8 +2,6 @@ package dp.mobile.store;
 
 import java.util.Date;
 
-import dp.mobile.store.helper.DatabaseAdapter;
-import dp.mobile.store.helper.Utilities;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
@@ -13,6 +11,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+import dp.mobile.store.helper.DatabaseAdapter;
+import dp.mobile.store.helper.Utilities;
 
 public class TransaksiSalesAct extends Activity implements OnClickListener {
 	@Override
@@ -60,8 +60,14 @@ public class TransaksiSalesAct extends Activity implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		if (v == mInfoPelangganBtn) {//Informasi Data / Informasi Penjualan / Sales Information
+			finish();
+		} else if(v == mLunasPiutangBtn){
+			Intent intent = new Intent(this, PelunasanPiutangAct.class);
+			intent.putExtra(Utilities.INTENT_STORE_ID, mStoreID);
 			
-		} else if (v == mTransaksiPenjualanBtn) { //Terima Stock
+			startActivity(intent);
+		}
+		else if (v == mTransaksiPenjualanBtn) { //Terima Stock
 			Intent intent = new Intent(this, SalesTransactionAct.class);
 			intent.putExtra(Utilities.INTENT_STORE_ID, mStoreID);
 			

@@ -18,7 +18,7 @@
 		<TableRow android:layout_margin="5dip">
 		  	<TextView 
 				android:layout_weight="1"
-				android:text="Date"/>
+				android:text="Customer Code"/>
 			<TextView 
 				android:layout_weight="1"
 				android:gravity="right" 
@@ -28,7 +28,7 @@
 		<TableRow android:layout_margin="5dip">
 		  	<TextView 
 				android:layout_weight="1"
-				android:text="Time"/>
+				android:text="Customer Name"/>
 			<TextView 
 				android:layout_weight="1"
 				android:gravity="right" 
@@ -38,7 +38,7 @@
 		<TableRow android:layout_margin="5dip">
 		  	<TextView 
 				android:layout_weight="1"
-				android:text="Current Kilometer"/>
+				android:text="Customer Address"/>
 			<TextView 
 				android:layout_weight="1"
 				android:gravity="right" 
@@ -48,7 +48,7 @@
 		<TableRow android:layout_margin="5dip">
 		  	<TextView 
 				android:layout_weight="1"
-				android:text="Client Name"/>
+				android:text="Customer Postcode"/>
 			<TextView 
 				android:layout_weight="1"
 				android:gravity="right" 
@@ -88,22 +88,12 @@
 		<TableRow android:layout_margin="5dip">
 		  	<TextView 
 				android:layout_weight="1"
-				android:text="Limit Credit"/>
+				android:text="Credit Limit"/>
 			<TextView 
 				android:layout_weight="1"
 				android:gravity="right" 
 				android:id="@+id/info8"/>
-		</TableRow>
-		
-		<TableRow android:layout_margin="5dip">
-		  	<TextView 
-				android:layout_weight="1"
-				android:text="Last Buy"/>
-			<TextView 
-				android:layout_weight="1"
-				android:gravity="right" 
-				android:id="@+id/info9"/>
-		</TableRow>
+		</TableRow>	
 		
 		<TableRow android:layout_margin="5dip">
 	    	<LinearLayout>

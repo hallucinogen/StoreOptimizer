@@ -44,7 +44,7 @@ public class InformasiAwalAct extends Activity implements OnClickListener{
 		if (v == mBeritaHarian) {
 			startActivity(new Intent(this, DailyNewsAct.class));
 		} else if (v == mSuratTugas) {
-			//NEW
+			startActivity(new Intent(this, SuratTugasAct.class));
 		}
 	}
 	

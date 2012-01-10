@@ -1,11 +1,17 @@
 package dp.mobile.store;
 
+import java.text.NumberFormat;
+
+import dp.mobile.store.adapter.CashReport;
+import dp.mobile.store.adapter.CashReportAdapter;
+import dp.mobile.store.helper.DatabaseAdapter;
 import dp.mobile.store.helper.Utilities;
 import android.app.Activity;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 public class GiroReportAct extends Activity{
@@ -13,10 +19,10 @@ public class GiroReportAct extends Activity{
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.giro_report);
+		setContentView(R.layout.cash_report);
 		
 		initComp();
-		populateLinearWithDummy();
+		populateCheckGiroTable();
 	}
 	
 	private void initComp(){
@@ -24,33 +30,48 @@ public class GiroReportAct extends Activity{
 		mNameTop	= (TextView) findViewById(R.id.header_nametop);
 		mRouteTop	= (TextView) findViewById(R.id.header_routetop);
 		
-		mTitle.setText("Transaksi Stok");
+		mCashReportListView = (ListView) findViewById(R.id.cash_report_listview);
+		mTotal				= (TextView) findViewById(R.id.total);
+		
+		mTitle.setText("Check / Giro");
 		Cursor userCur = Utilities.getUser(getBaseContext());
 		if(userCur.moveToFirst()){
 			mNameTop.setText(userCur.getString(0));
 			mRouteTop.setText(userCur.getString(1));
 		}
 		userCur.close();
-		
-		mLinear = (LinearLayout) findViewById(R.id.giro_linear);
 	}
 	
-	/// TODO : not using dummy
-	private void populateLinearWithDummy() {
-		LayoutInflater inflater = getLayoutInflater();
+	private void populateCheckGiroTable() {
+		int i=0;
+		long totalAmountCash=0;
 		
-		for (int i = 0; i < 20; ++i) {
-			LinearLayout item 	= (LinearLayout)inflater.inflate(R.layout.check_route_adpt, mLinear, false);
-			TextView account	= (TextView) item.findViewById(R.id.store_down);
-			TextView amount		= (TextView) item.findViewById(R.id.store_right);
-			
-			account.setText("BCA 123142");
-			amount.setText("Rp 1.500.000");
-			
-			mLinear.addView(item);
+		Cursor cashReportCur = DatabaseAdapter.instance(getBaseContext()).rawQuery("SELECT " +
+				"mobile_customer.customer_name, " +
+				"mobile_customer.address, mobile_trnsales.amount_check " +
+				"FROM mobile_trnsales JOIN mobile_customer ON " +
+				"mobile_trnsales.customer_code = mobile_customer.customer_code " +
+				"WHERE mobile_trnsales.amount_check != 0 AND mobile_trnsales.trncode = '51'" +
+				"ORDER BY mobile_trnsales.refno ASC", null);
+		
+		CashReport[] cashReports = new CashReport[cashReportCur.getCount()];
+		if(cashReportCur.moveToFirst()){
+    		do{
+    			cashReports[i++] = new CashReport(cashReportCur.getString(0), cashReportCur.getString(1),
+    					cashReportCur.getLong(2));
+    			totalAmountCash += cashReportCur.getLong(2);
+    		}while(cashReportCur.moveToNext());
+    		
+    		cashReportCur.close();
 		}
+		
+		mAdpt = new CashReportAdapter(this, cashReports);
+		mCashReportListView.setAdapter(mAdpt);
+		mTotal.setText("Rp " + NumberFormat.getIntegerInstance().format(totalAmountCash));
 	}
 	
 	private TextView mTitle, mNameTop, mRouteTop;
-	private LinearLayout mLinear;
+	private ListView mCashReportListView;
+	private	CashReportAdapter mAdpt;
+	private TextView mTotal;
 }
