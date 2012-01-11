@@ -5,13 +5,16 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TableLayout;
@@ -78,9 +81,14 @@ public class SalesTransactionAct extends Activity implements OnClickListener {
 		LayoutInflater inflater = getLayoutInflater();
 		
 		for (int i = 0; i < mPriceLists.length; ++i) {
-			TableRow item = (TableRow) inflater.inflate(R.layout.transaction_item, mTransactionTable, false);
-			TextView name = (TextView) item.findViewById(R.id.item);
-			TextView price = (TextView) item.findViewById(R.id.num1);
+			TableRow item	= (TableRow) inflater.inflate(R.layout.transaction_item, mTransactionTable, false);
+			TextView name	= (TextView) item.findViewById(R.id.item);
+			TextView price	= (TextView) item.findViewById(R.id.num1);
+			
+			TextView amount = (TextView) item.findViewById(R.id.num2);
+			TextView bonus	= (TextView) item.findViewById(R.id.num3);
+			setDialog(amount);
+			setDialog(bonus);
 			item.setId(i);
 			
 			name.setText(mPriceLists[i].mProductName);
@@ -88,6 +96,40 @@ public class SalesTransactionAct extends Activity implements OnClickListener {
 			
 			mTransactionTable.addView(item);
 		}
+	}
+	
+	private void setDialog(final TextView txtView){
+		txtView.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+                final Dialog dialog = new Dialog(SalesTransactionAct.this);
+                dialog.setContentView(R.layout.counter_dialog);
+                dialog.setTitle("Masukkan jumlah");
+                dialog.setCancelable(true);
+                
+                final EditText	num		= (EditText) dialog.findViewById(R.id.timepicker_input);
+                Button		okBtn		= (Button) dialog.findViewById(R.id.counter_ok);
+                Button		cancelBtn	= (Button) dialog.findViewById(R.id.counter_cancel);
+                num.setText(txtView.getText().toString());
+                
+                okBtn.setOnClickListener(new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						txtView.setText(num.getText().toString());
+						dialog.dismiss();
+					}
+				});
+                
+                cancelBtn.setOnClickListener(new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						dialog.dismiss();
+					}
+				});
+                
+                dialog.show();
+			}
+		});
 	}
 	
 	/*private long calculateCost() {
@@ -115,22 +157,15 @@ public class SalesTransactionAct extends Activity implements OnClickListener {
 					json.put("product_code", mPriceLists[i].mProductCode);
 					
 					//Get Quantity
-					TableRow	item	= (TableRow)mTransactionTable.findViewById(i);
-					EditText	textbox = (EditText) item.findViewById(R.id.num2);
-					EditText	bonus	= (EditText) item.findViewById(R.id.num3);
+					TableRow	item	= (TableRow) mTransactionTable.findViewById(i);
+					TextView	amount	= (TextView) item.findViewById(R.id.num2);
+					TextView	bonus	= (TextView) item.findViewById(R.id.num3);
 					
-					String qty 	= "0";
-					if(!textbox.getText().toString().equals(""))
-						qty = textbox.getText().toString();
-					
-					String bonusQty = "0";
-					if(!bonus.getText().toString().equals(""))
-						bonusQty = bonus.getText().toString();
-					
+					String qty = amount.getText().toString();
 					if(qty.equals("0") || qty == null || qty.trim().length() == 0)
 						continue;
 					json.put("quantity", Long.parseLong(qty));
-					json.put("bonus", Long.parseLong(bonusQty));
+					json.put("bonus", Long.parseLong(bonus.getText().toString()));
 					json.put("price", mPriceLists[i].mPrice);
 					
 					jsonArray.put(json);

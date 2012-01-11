@@ -13,16 +13,18 @@
 		android:gravity="center" 
 		android:text="100000"
 		android:id="@+id/num1"/>
-	<EditText 
+	<TextView 
 		android:layout_weight="1"
 		android:gravity="center"
-		android:inputType="number"
-		android:text=""
+		android:textColor="#0000FF"
+		android:textSize="40dip"
+		android:text="0"
 		android:id="@+id/num2" />
-	<EditText 
+	<TextView 
 		android:layout_weight="1"
 		android:gravity="center"
-		android:inputType="number"
-		android:text=""
+		android:textColor="#0000FF"
+		android:textSize="40dip"
+		android:text="0"
 		android:id="@+id/num3" />
 </TableRow>
