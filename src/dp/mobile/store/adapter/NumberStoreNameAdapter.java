@@ -9,8 +9,8 @@ import android.widget.TextView;
 import dp.mobile.store.R;
 import dp.mobile.store.helper.tables.TrnRoute;
 
-public class CheckRouteAdapter extends ArrayAdapter<TrnRoute> {
-	public CheckRouteAdapter(Activity context, TrnRoute[] list) {
+public class NumberStoreNameAdapter extends ArrayAdapter<TrnRoute> {
+	public NumberStoreNameAdapter(Activity context, TrnRoute[] list) {
 		super(context, R.layout.check_route_adpt, list);
 		
 		mContext	= context;
@@ -18,9 +18,9 @@ public class CheckRouteAdapter extends ArrayAdapter<TrnRoute> {
 	}
 	
 	static class ViewHolder{
+		protected TextView	number;
 		protected TextView	customerName;
 		protected TextView	customerAddr;
-		protected TextView	timevisit;
 	}
 	
 	@Override
@@ -30,7 +30,7 @@ public class CheckRouteAdapter extends ArrayAdapter<TrnRoute> {
 		final TrnRoute currItem		= getItem(position);
 	
 		//Always Override convertView (not efficient but it keeps the ListView item consistent)  
-		convertView	= inflator.inflate(R.layout.check_route_adpt, null);
+		convertView	= inflator.inflate(R.layout.number_store_name_adpt, null);
 	
 		//Bind convertView to viewHolder
 		viewHolder	= new ViewHolder();
@@ -39,17 +39,17 @@ public class CheckRouteAdapter extends ArrayAdapter<TrnRoute> {
 		//Get the View
 		viewHolder.customerName		= (TextView) convertView.findViewById(R.id.store_name);
 		viewHolder.customerAddr		= (TextView) convertView.findViewById(R.id.store_down);
-		viewHolder.timevisit		= (TextView) convertView.findViewById(R.id.store_right);
+		viewHolder.number			= (TextView) convertView.findViewById(R.id.number);
 		
 		//Set the View
 		viewHolder.customerName.setText(getItem(position).mCustomerName);
 		viewHolder.customerAddr.setText(getItem(position).mCustomerAddress);
-		viewHolder.timevisit.setText(String.valueOf(getItem(position).mTimeVisit));
+		viewHolder.number.setText(String.valueOf(String.valueOf(position+1)+"."));
 
 		// set view color
 		viewHolder.customerName.setTextColor(0xff000000);
 		viewHolder.customerAddr.setTextColor(0xff000000);
-		viewHolder.timevisit.setTextColor(0xff000000);
+		viewHolder.number.setTextColor(0xff000000);
 		
 		return convertView;
 	}

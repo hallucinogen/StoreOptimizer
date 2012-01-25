@@ -180,7 +180,7 @@ public class DatabaseAdapter {
     
     private void openDatabaseIfNecessary(){
     	if(!mDatabase.isOpen())
-    		mDatabase = mContext.openOrCreateDatabase("/data/data/dp.mobile.store/databases/" + DATABASE_NAME, SQLiteDatabase.OPEN_READWRITE, null);
+    		mDatabase = mContext.openOrCreateDatabase(DATABASE_NAME, SQLiteDatabase.OPEN_READWRITE, null);
     }
     
 	//PROPERTIES

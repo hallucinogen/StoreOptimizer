@@ -61,8 +61,6 @@ public class StockReportAct extends Activity{
     				stockReports[tempIdx].mQtyDebit		+= temp.mQtyDebit;
     				Log.d("BUKAN -1", stockReports[tempIdx].mQtyCredit + "#" + stockReports[tempIdx].mQtyDebit);
     			}
-    			
-    			
     		}while(stockReportCur.moveToNext());
     		
     		stockReportCur.close();

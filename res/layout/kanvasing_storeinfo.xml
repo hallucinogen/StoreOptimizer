@@ -1,15 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:gravity="center_horizontal"
     android:orientation="vertical">
     
-    <include layout="@layout/header"/>
+    <include layout="@layout/header"
+        android:id="@+id/header"/>
+
+    <LinearLayout 
+        android:id="@+id/buttons"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content">
+	   	<!--<Button
+	   		style="@style/table_button_style"
+	   		android:text="History"
+	   		android:id="@+id/history" /> -->
+	   	<Button 
+	   		style="@style/table_button_style" 
+	   		android:text="Start" 
+	   		android:id="@+id/kanvasing" />
+   	</LinearLayout>
     
 	<ScrollView
+	    android:layout_below="@id/header"
+	    android:layout_above="@id/buttons"
 		android:layout_width="fill_parent"
-	    android:layout_height="wrap_content">
+	    android:layout_height="fill_parent"
+	    android:background="@drawable/border">
     <TableLayout
 	    android:orientation="vertical"
 		android:layout_width="fill_parent"
@@ -18,98 +38,98 @@
 		<TableRow android:layout_margin="5dip">
 		  	<TextView 
 				android:layout_weight="1"
-				android:text="Customer Code"/>
+				android:text="Code"
+				style="@style/font_style"/>
 			<TextView 
-				android:layout_weight="1"
+				android:layout_weight="2"
 				android:gravity="right" 
-				android:id="@+id/info1"/>
+				android:id="@+id/info1"
+				style="@style/font_style"/>
 		</TableRow>
 		
 		<TableRow android:layout_margin="5dip">
 		  	<TextView 
 				android:layout_weight="1"
-				android:text="Customer Name"/>
+				android:text="Name"
+				style="@style/font_style"/>
 			<TextView 
-				android:layout_weight="1"
+				android:layout_weight="2"
 				android:gravity="right" 
-				android:id="@+id/info2"/>
+				android:id="@+id/info2"
+				style="@style/font_style"/>
 		</TableRow>
 		
 		<TableRow android:layout_margin="5dip">
 		  	<TextView 
 				android:layout_weight="1"
-				android:text="Customer Address"/>
+				android:text="Address"
+				style="@style/font_style"/>
 			<TextView 
-				android:layout_weight="1"
+				android:layout_weight="2"
 				android:gravity="right" 
-				android:id="@+id/info3"/>
+				android:id="@+id/info3"
+				style="@style/font_style"/>
 		</TableRow>
 		
 		<TableRow android:layout_margin="5dip">
 		  	<TextView 
 				android:layout_weight="1"
-				android:text="Customer Postcode"/>
+				android:text="Postcode"
+				style="@style/font_style"/>
 			<TextView 
-				android:layout_weight="1"
+				android:layout_weight="2"
 				android:gravity="right" 
-				android:id="@+id/info4"/>
+				android:id="@+id/info4"
+				style="@style/font_style"/>
 		</TableRow>
 		<View android:background="#f00" android:layout_height="1dip" android:layout_margin="10dip" />
 		<TableRow android:layout_margin="5dip">
 		  	<TextView 
 				android:layout_weight="1"
-				android:text="Customer Type"/>
+				android:text="Type"
+				style="@style/font_style"/>
 			<TextView 
-				android:layout_weight="1"
+				android:layout_weight="2"
 				android:gravity="right" 
-				android:id="@+id/info5"/>
+				android:id="@+id/info5"
+				style="@style/font_style"/>
 		</TableRow>
 		
 		<TableRow android:layout_margin="5dip">
 		  	<TextView 
 				android:layout_weight="1"
-				android:text="Term of Payment"/>
+				android:text="Term of Payment"
+				style="@style/font_style"/>
 			<TextView 
-				android:layout_weight="1"
+				android:layout_weight="2"
 				android:gravity="right" 
-				android:id="@+id/info6"/>
+				android:id="@+id/info6"
+				style="@style/font_style"/>
 		</TableRow>
 		
 		<TableRow android:layout_margin="5dip">
 		  	<TextView 
 				android:layout_weight="1"
-				android:text="Receivable"/>
+				android:text="Receivable"
+				style="@style/font_style"/>
 			<TextView 
-				android:layout_weight="1"
+				android:layout_weight="2"
 				android:gravity="right" 
-				android:id="@+id/info7"/>
+				android:id="@+id/info7"
+				style="@style/font_style"/>
 		</TableRow>
 		
 		<TableRow android:layout_margin="5dip">
 		  	<TextView 
 				android:layout_weight="1"
-				android:text="Credit Limit"/>
+				android:text="Credit Limit"
+				style="@style/font_style"/>
 			<TextView 
-				android:layout_weight="1"
+				android:layout_weight="2"
 				android:gravity="right" 
-				android:id="@+id/info8"/>
+				android:id="@+id/info8"
+				style="@style/font_style"/>
 		</TableRow>	
-		
-		<TableRow android:layout_margin="5dip">
-	    	<LinearLayout>
-	    	<Button
-	    		style="@style/table_button_style"
-	    		android:text="History"
-	    		android:id="@+id/history" />
-	    	</LinearLayout>
-	    	<LinearLayout
-	    		android:gravity="right">
-	    	<Button 
-	    		style="@style/table_button_style" 
-	    		android:text="Start Kanvasing" 
-	    		android:id="@+id/kanvasing" />
-	    	</LinearLayout>
-	    </TableRow>
 	</TableLayout>
 	</ScrollView>
-</LinearLayout>
+</RelativeLayout>

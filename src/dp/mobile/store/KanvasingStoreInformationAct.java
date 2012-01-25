@@ -103,18 +103,18 @@ public class KanvasingStoreInformationAct extends Activity implements OnClickLis
 		//Receivable
 		mInfo[7].setText(String.valueOf(selectedTrnRoute.mReceivable));
 		
-		mHistoryButton 		= (Button) findViewById(R.id.history);
+		//mHistoryButton 		= (Button) findViewById(R.id.history);
 		mKanvasingButton 	= (Button) findViewById(R.id.kanvasing);
 		
-		mHistoryButton.setOnClickListener(this);
+		//mHistoryButton.setOnClickListener(this);
 		mKanvasingButton.setOnClickListener(this);
 	}
 	
 	@Override
 	public void onClick(View v) {
-		if (v == mHistoryButton) {
+		/*if (v == mHistoryButton) {
 			startActivity(new Intent(this, KanvasingStoreHistoryAct.class));
-		} else if (v == mKanvasingButton) {
+		} else*/ if (v == mKanvasingButton) {
 			//Intent intent = new Intent(this, KanvasingTransactionAct.class);
 			Intent intent = new Intent(this, TransaksiSalesAct.class);
 			intent.putExtra(Utilities.INTENT_STORE_ID, mStoreID);

@@ -25,7 +25,7 @@ public class CheckRouteAct extends Activity {
 		mNameTop	= (TextView) findViewById(R.id.header_nametop);
 		mRouteTop	= (TextView) findViewById(R.id.header_routetop);
 		
-		mTitle.setText("Cek Rute");
+		mTitle.setText("Check Route");
 		Cursor userCur = Utilities.getUser(getBaseContext());
 		if(userCur.moveToFirst()){
 			mNameTop.setText(userCur.getString(0));

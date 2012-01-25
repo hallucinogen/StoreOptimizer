@@ -9,12 +9,9 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnTouchListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TableLayout;
@@ -95,6 +92,9 @@ public class SalesTransactionAct extends Activity implements OnClickListener {
 			price.setText(String.valueOf(mPriceLists[i].mPrice));
 			
 			mTransactionTable.addView(item);
+			
+			/*TableRow item2 = (TableRow) inflater.inflate(R.layout.table_row_line, mTransactionTable, false);
+			mTransactionTable.addView(item2);*/
 		}
 	}
 	

@@ -1,26 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableRow
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:layout_width="fill_parent"
-  android:layout_height="fill_parent">
-  <TextView 
-		android:layout_weight="1"
-		android:gravity="left"
-		android:text="Rokok Merah Jitu" 
-		android:id="@+id/item"/>
-	<TextView 
-		android:layout_weight="1"
-		android:gravity="center" 
-		android:text="100000"
-		android:id="@+id/num1"/>
-	<TextView 
-		android:layout_weight="1"
-		android:gravity="center" 
-		android:text="100000"
-		android:id="@+id/num2" />
-	<TextView 
-		android:layout_weight="1"
-		android:gravity="center" 
-		android:text="100000"
-		android:id="@+id/num3" />
+<TableRow xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:padding="5dip"
+    android:layout_margin="2dp" android:background="#FFFFFF">
+
+    <TextView
+        android:id="@+id/item"
+        style="@style/tableTextViewStyle"
+        android:layout_weight="3"
+        android:gravity="left"
+        android:text="SAMPLE BINTANG MAS FILTER" />
+
+    <TextView
+        android:id="@+id/num1"
+        android:layout_weight="1"
+        android:gravity="right"
+        android:text="100000"
+        style="@style/tableTextViewStyle" />
+
+    <TextView
+        android:id="@+id/num2"
+        android:layout_weight="1"
+        android:gravity="right"
+        style="@style/tableTextViewStyle"
+        android:textColor="#000000"/>
+
+    <TextView
+        android:id="@+id/num3"
+        android:layout_weight="1"
+        android:gravity="right"
+        android:text="100000"
+        style="@style/tableTextViewStyle" />
+
 </TableRow>

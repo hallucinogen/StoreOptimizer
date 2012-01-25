@@ -12,22 +12,26 @@
 		android:layout_height="wrap_content">
 		<TableRow>
 			<TextView 
-				android:layout_weight="1"
+				android:layout_weight="3"
+				android:width="0dip"
 				android:gravity="center"
-				android:text="Item"
+				android:text="Product"
 				android:textStyle="bold" />
 			<TextView 
 				android:layout_weight="1"
+				android:width="0dip"
 				android:gravity="center"
 				android:textStyle="bold"
 				android:text="In" />
 			<TextView 
 				android:layout_weight="1"
+				android:width="0dip"
 				android:gravity="center"
 				android:textStyle="bold"
 				android:text="Trans" />
 			<TextView 
 				android:layout_weight="1"
+				android:width="0dip"
 				android:gravity="center"
 				android:textStyle="bold"
 				android:text="Out" />
@@ -35,36 +39,42 @@
 		
 		<TableRow>
 			<TextView 
-				android:layout_weight="1"
-				android:gravity="center"
-				android:text="Rokok Merah Jitu"
-				android:height="0dp" />
+				android:layout_weight="3"
+				android:width="0dip"
+				android:gravity="left"
+				android:text="SAMPLE BINTANG MAS FILTER" 
+				android:height="0dip"/>
 			<TextView 
 				android:layout_weight="1"
-				android:gravity="center"
+				android:width="0dip"
+				android:gravity="center" 
 				android:text="100000"
-				android:height="0dp" />
+				android:height="0dip"/>
 			<TextView 
 				android:layout_weight="1"
-				android:gravity="center"
+				android:width="0dip"
+				android:gravity="center" 
 				android:text="100000"
-				android:height="0dp" />
+				android:height="0dip" />
 			<TextView 
 				android:layout_weight="1"
-				android:gravity="center"
+				android:width="0dip"
+				android:gravity="center" 
 				android:text="100000"
-				android:height="0dp" />
+				android:height="0dip" />
 		</TableRow>
 	</TableLayout>
 	<ScrollView
 		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
 		android:background="@drawable/border"
-		android:layout_margin="10dip"
-		android:layout_height="fill_parent">
+		android:cacheColorHint="#00000000"
+		android:layout_margin="10dip">
 		<TableLayout
 			android:layout_width="fill_parent"
 			android:layout_height="fill_parent"
-			android:id="@+id/stock_table">
+			android:id="@+id/stock_table"
+			android:background="#000000">
 		</TableLayout>
 	</ScrollView>
 </LinearLayout>

@@ -125,31 +125,31 @@ public class LoginAct extends Activity implements OnClickListener {
 		
 		//Dummy mobile_product
 		DatabaseAdapter.instance(getBaseContext()).insert(Product.getTableName(),
-				new Product("001", "RKM", "Rokok Merah", "Rkk Merah", "Kretek", "Rokok Kretek", 0));
+				new Product("001", "RKM", "SAMPLE BINTANG MAS FILTER", "Rkk Merah", "Kretek", "Rokok Kretek", 0));
 		DatabaseAdapter.instance(getBaseContext()).insert(Product.getTableName(),
-				new Product("002", "RKB", "Rokok Biru", "Rkk Biru", "Kretek", "Rokok Kretek", 0));
+				new Product("002", "RKB", "NESTLE ROKOK KRETEK", "Rkk Biru", "Kretek", "Rokok Kretek", 0));
 		DatabaseAdapter.instance(getBaseContext()).insert(Product.getTableName(),
-				new Product("003", "RKH", "Rokok Hijau", "Rkk Hijau", "Kretek", "Rokok Kretek", 0));
+				new Product("003", "RKH", "GUDANG GARAM PRIA PUNYA SELERA", "Rkk Hijau", "Kretek", "Rokok Kretek", 0));
 		DatabaseAdapter.instance(getBaseContext()).insert(Product.getTableName(),
-				new Product("004", "RKP", "Rokok Putih", "Rkk Putih", "Filter", "Rokok Filter", 0));
+				new Product("004", "RKP", "ROKOK FILTER KUALITAS DUNIA", "Rkk Putih", "Filter", "Rokok Filter", 0));
 		DatabaseAdapter.instance(getBaseContext()).insert(Product.getTableName(),
-				new Product("005", "RKA", "Rokok Abu Abu", "Rkk Abu Abu", "Filter", "Rokok Filter", 0));
+				new Product("005", "RKA", "ROKOK KRETEK RACIKAN TRADISIONAL", "Rkk Abu Abu", "Filter", "Rokok Filter", 0));
 		
 		//Dummy mobile_trnroute
 		DatabaseAdapter.instance(getBaseContext()).insert(TrnRoute.getTableName(), 
 				new TrnRoute("C1", Utilities.formatStr("2011-January-01 00:00:00"),"user1",
 						"ARTJKT", 101, "A001", "Abadi Jaya",
-						"Jl. Pahlawan 101 Jakarta", "12345", "12",
+						"Jl. Pahlawan 101 Jakarta Alamat Panjang Sekali", "12345", "12",
 						"Retail", "0", 0, 0, Utilities.formatStr("2011-January-01 00:00:00"), "descr", "Not Yet"));
 		DatabaseAdapter.instance(getBaseContext()).insert(TrnRoute.getTableName(), 
 				new TrnRoute("C2", Utilities.formatStr("2011-January-0 00:00:001"),"user1",
 						"ARTJKT", 102, "B001", "Berkat",
-						"Jl. Gajah Mada 201 Jakarta", "12345", "12",
+						"Jl. Gajah Mada 201 Jakarta Alamat Pendek Sekali", "12345", "12",
 						"Retail", "0", 0, 0, Utilities.formatStr("2011-January-01 00:00:00"), "descr", "Not Yet"));
 		DatabaseAdapter.instance(getBaseContext()).insert(TrnRoute.getTableName(), 
 				new TrnRoute("C3", Utilities.formatStr("2011-January-01 00:00:00"),"user1",
 						"ARTJKT", 103, "C001", "Cendana",
-						"Jl. Untung Suropati 301 Jakarta", "12345", "12",
+						"Jl. Untung Suropati 301 Jakarta Alamat Panjang Dua Kali", "12345", "12",
 						"Retail", "0", 0, 0, Utilities.formatStr("2011-January-01 00:00:00"), "descr", "Not Yet"));
 		DatabaseAdapter.instance(getBaseContext()).insert(TrnRoute.getTableName(), 
 				new TrnRoute("C4", Utilities.formatStr("2011-January-01 00:00:00"),"user1",
@@ -317,21 +317,21 @@ public class LoginAct extends Activity implements OnClickListener {
 		//Dummy mobile_customer
 		DatabaseAdapter.instance(getBaseContext()).insert(Customer.getTableName(),
 				new Customer("C1", Utilities.formatStr("2011-January-01 00:00:00"), "user1",
-						"A001", "Abadi Jaya", "Jl. Pahlawan 101 Jakarta", "12345",
+						"A001", "Abadi Jaya", "Jl. Pahlawan 101 Jakarta Alamat Panjang Sekali", "12345",
 						"city", "country", "contact", "customerGroupCode", "group 001",
 						"customerCategoryCode", "Retail", "customerTypeCode", 
 						"type 001", 10000000, 0, "unitCompanyID", 
 						"pricelistGroupCode", "group 001"));
 		DatabaseAdapter.instance(getBaseContext()).insert(Customer.getTableName(),
 				new Customer("C2", Utilities.formatStr("2011-January-01 00:00:00"), "user1",
-						"B001", "Berkat", "Jl. Gajah Mada 201 Jakarta", "12345",
+						"B001", "Berkat", "Jl. Gajah Mada 201 Jakarta  Alamat Pendek Sekali", "12345",
 						"city", "country", "contact", "customerGroupCode", "group 001",
 						"customerCategoryCode", "Retail", "customerTypeCode", 
 						"type 001", 10000000, 0, "unitCompanyID", 
 						"pricelistGroupCode", "group 001"));
 		DatabaseAdapter.instance(getBaseContext()).insert(Customer.getTableName(),
 				new Customer("C3", Utilities.formatStr("2011-January-01 00:00:00"), "user1",
-						"C001", "Cendana", "Jl. Untung Suropati 301 Jakarta", "12345",
+						"C001", "Cendana", "Jl. Untung Suropati 301 Jakarta  Alamat Panjang Dua Kali", "12345",
 						"city", "country", "contact", "customerGroupCode", "group 001",
 						"customerCategoryCode", "Retail", "customerTypeCode", 
 						"type 001", 10000000, 0, "unitCompanyID", 

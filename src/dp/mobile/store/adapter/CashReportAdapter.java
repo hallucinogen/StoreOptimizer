@@ -45,6 +45,11 @@ public class CashReportAdapter extends ArrayAdapter<CashReport> {
 		viewHolder.customerName.setText(getItem(position).mCustomerName);
 		viewHolder.customerAddr.setText(getItem(position).mCustomerAddr);
 		viewHolder.amountCash.setText("Rp " + NumberFormat.getIntegerInstance().format(getItem(position).mAmountCash));
+
+		// set view color
+		viewHolder.customerName.setTextColor(0xff000000);
+		viewHolder.customerAddr.setTextColor(0xff000000);
+		viewHolder.amountCash.setTextColor(0xff000000);
 		
 		return convertView;
 	}

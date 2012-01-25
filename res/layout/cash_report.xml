@@ -9,7 +9,7 @@
     <include android:id="@+id/cash_report_title" 
     	layout="@layout/header"/>
 		
-	<TableLayout android:id="@+id/table_upper"
+	<!--<TableLayout android:id="@+id/table_upper"
 		android:layout_below="@id/cash_report_title"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
@@ -24,7 +24,7 @@
 				android:textStyle="bold"
 				android:text="Amount" />
 		</TableRow>
-	</TableLayout>	
+	</TableLayout>-->	
 	
 	<TableLayout android:id="@+id/table_below"
 		android:layout_alignParentBottom="true"
@@ -50,9 +50,10 @@
 		android:id="@+id/cash_report_listview"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
-		android:layout_below="@id/table_upper"
+		android:layout_below="@id/cash_report_title"
 		android:layout_above="@id/table_below"
 		android:background="@drawable/border"
+		android:cacheColorHint="#00000000"
 		android:layout_gravity="center_horizontal"
 		android:layout_margin="10dip">
 	</ListView>

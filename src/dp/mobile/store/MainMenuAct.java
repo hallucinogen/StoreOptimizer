@@ -81,6 +81,7 @@ public class MainMenuAct extends Activity implements OnClickListener {
 		
 		mSalesInformationButton.setOnClickListener(this);
 		//mSalesKanvasingButton.setOnClickListener(this);
+		mPenerimaanStockButton.setOnClickListener(this);
 		mStockTransactionButton.setOnClickListener(this);
 		//mDailyNewsButton.setOnClickListener(this);
 		mInformasiAwal.setOnClickListener(this);
@@ -93,7 +94,7 @@ public class MainMenuAct extends Activity implements OnClickListener {
 		if (v == mSalesInformationButton) {//Informasi Data / Informasi Penjualan / Sales Information
 			startActivityForResult(new Intent(MainMenuAct.this, SalesInformationAct.class), SalesInformationAct.REQUEST_CODE);
 		} else if (v == mPenerimaanStockButton) { //Terima Stock
-			//startActivityForResult(new Intent(MainMenuAct.this, KanvasingStoreListAct.class), 0);
+			startActivityForResult(new Intent(MainMenuAct.this, StockRequestAct.class), 0);
 		} else if (v == mTransaksiSales){
 			startActivityForResult(new Intent(MainMenuAct.this, KanvasingStoreListAct.class), 0);
 		} else if (v == mStockTransactionButton) { //

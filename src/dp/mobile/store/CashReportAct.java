@@ -30,7 +30,7 @@ public class CashReportAct extends Activity {
 		mCashReportListView = (ListView) findViewById(R.id.cash_report_listview);
 		mTotal				= (TextView) findViewById(R.id.total);
 		
-		mTitle.setText("Detail Penjualan");
+		mTitle.setText("");
 		Cursor userCur = Utilities.getUser(getBaseContext());
 		if(userCur.moveToFirst()){
 			mNameTop.setText(userCur.getString(0));

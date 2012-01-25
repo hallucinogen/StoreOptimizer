@@ -7,20 +7,27 @@
     
     <include layout="@layout/header"/>
     
+    <ScrollView 
+        android:layout_width="fill_parent"
+    	android:layout_height="fill_parent"
+		android:cacheColorHint="#00000000"
+    	android:background="@drawable/border">
     <LinearLayout android:orientation="vertical" 
     	android:layout_width="fill_parent"
-    	android:layout_height="fill_parent"
-    	android:background="@drawable/border">
+    	android:layout_height="fill_parent">
     	<LinearLayout android:orientation="horizontal" 
 	    	android:layout_width="fill_parent"
-	    	android:layout_height="wrap_content">
+	    	android:layout_height="wrap_content"
+	    	android:padding="5dip">
 	    		<TextView android:layout_width="wrap_content"
-		    		android:layout_height="wrap_content" 
+		    		android:layout_height="wrap_content"
+		    		android:textColor="#000000"
 		    		android:text="Penjualan Total"/>
 		    	<TextView android:layout_width="fill_parent"
 		    		android:layout_height="wrap_content" 
 		    		android:id="@+id/penjualan_total_txtview" 
 		    		android:gravity="right"
+		    		android:textColor="#000000"
 		    		android:text="Rp 5.500.00"/>
     	</LinearLayout>
     	<View android:layout_width="fill_parent"
@@ -29,13 +36,16 @@
     	<LinearLayout android:orientation="horizontal" 
 	    	android:layout_width="fill_parent"
 	    	android:layout_height="wrap_content"
-	    	android:gravity="fill_horizontal">
+	    	android:gravity="fill_horizontal"
+	    	android:padding="5dip">
 	    		<TextView android:layout_width="wrap_content"
 		    		android:layout_height="wrap_content" 
+		    		android:textColor="#000000"
 		    		android:text="Cash / Tunai"/>
 		    	<TextView android:layout_width="fill_parent"
 		    		android:layout_height="wrap_content" 
 		    		android:id="@+id/cash_above_txtview" 
+		    		android:textColor="#000000"
 		    		android:gravity="right"
 		    		android:text="Rp 2.500.000"/>
     	</LinearLayout>
@@ -44,13 +54,16 @@
     		android:background="#000000"/>
     	<LinearLayout android:orientation="horizontal" 
 	    	android:layout_width="fill_parent"
-	    	android:layout_height="wrap_content">
+	    	android:layout_height="wrap_content"
+	    	android:padding="5dip">
 	    		<TextView android:layout_width="wrap_content"
 		    		android:layout_height="wrap_content" 
+		    		android:textColor="#000000"
 		    		android:text="Kredit"/>
 		    	<TextView android:layout_width="fill_parent"
 		    		android:layout_height="wrap_content" 
 		    		android:id="@+id/kredit_txtview" 
+		    		android:textColor="#000000"
 		    		android:gravity="right"
 		    		android:text="3.000.000"/>
     	</LinearLayout>
@@ -63,13 +76,16 @@
     		android:background="#000000"/>
    		<LinearLayout android:orientation="horizontal" 
 	    	android:layout_width="fill_parent"
-	    	android:layout_height="wrap_content">
+	    	android:layout_height="wrap_content"
+	    	android:padding="5dip">
 	    		<TextView android:layout_width="wrap_content"
 		    		android:layout_height="wrap_content" 
+		    		android:textColor="#000000"
 		    		android:text="Pelunasan Piutang"/>
 		    	<TextView android:layout_width="fill_parent"
 		    		android:layout_height="wrap_content" 
 		    		android:id="@+id/piutang_txtview" 
+		    		android:textColor="#000000"
 		    		android:gravity="right"
 		    		android:text="3.000.000"/>
     	</LinearLayout>
@@ -78,13 +94,16 @@
     		android:background="#000000"/>
     	<LinearLayout android:orientation="horizontal" 
 	    	android:layout_width="fill_parent"
-	    	android:layout_height="wrap_content">
+	    	android:layout_height="wrap_content"
+	    	android:padding="5dip">
 	    		<TextView android:layout_width="wrap_content"
 		    		android:layout_height="wrap_content" 
+		    		android:textColor="#000000"
 		    		android:text="Cash"/>
 		    	<TextView android:layout_width="fill_parent"
 		    		android:layout_height="wrap_content" 
 		    		android:id="@+id/cash_below_txtview" 
+		    		android:textColor="#000000"
 		    		android:gravity="right"
 		    		android:text="3.000.000"/>
     	</LinearLayout>
@@ -93,13 +112,16 @@
     		android:background="#000000"/>
     	<LinearLayout android:orientation="horizontal" 
 	    	android:layout_width="fill_parent"
-	    	android:layout_height="wrap_content">
+	    	android:layout_height="wrap_content"
+	    	android:padding="5dip">
 	    		<TextView android:layout_width="wrap_content"
 		    		android:layout_height="wrap_content" 
+		    		android:textColor="#000000"
 		    		android:text="Check / Giro"/>
 		    	<TextView android:layout_width="fill_parent"
 		    		android:layout_height="wrap_content" 
 		    		android:id="@+id/cekgiro_txtview" 
+		    		android:textColor="#000000"
 		    		android:gravity="right"
 		    		android:text="3.000.000"/>
     	</LinearLayout>
@@ -107,4 +129,5 @@
     		android:layout_height="1dip"
     		android:background="#000000"/>
     </LinearLayout>
+    </ScrollView>
 </LinearLayout>

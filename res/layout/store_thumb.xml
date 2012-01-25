@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent"
+  android:layout_height="wrap_content">
+  <LinearLayout
+  	android:layout_width="fill_parent"
+  	android:layout_height="wrap_content"
+  	android:layout_weight="1"
+  	android:orientation="vertical">
+  	<TextView android:id="@+id/store_name"
+	  	android:layout_width="wrap_content"
+	  	android:layout_height="wrap_content" 
+	  	android:text="Aneka Jaya"/>
+  	
+  	<TextView android:id="@+id/store_down"
+	  	android:layout_width="wrap_content"
+	  	android:layout_height="wrap_content" 
+	  	android:text="Jalan Diponegoro 10 Jakarta"/>
+  </LinearLayout>
+  
+  <TextView android:id="@+id/store_right"
+  	android:gravity="center_vertical"
+  	android:layout_gravity="right"
+  	android:layout_width="wrap_content"
+  	android:layout_height="fill_parent" 
+  	android:text="Not Yet"/>
+</LinearLayout>

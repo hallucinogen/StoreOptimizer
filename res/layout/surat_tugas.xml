@@ -1,19 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:gravity="center_horizontal"
     android:orientation="vertical">
     
-    <include layout="@layout/header"/>
+    <include layout="@layout/header"
+    	android:id="@+id/surat_tugas_header"
+    	android:layout_alignParentTop="true"/>
     
-    <ListView
+    <Button android:id="@+id/surat_tugas_ok_btn"
+    	android:layout_alignParentBottom="true"
+		android:layout_width="200dip"
+		android:layout_height="wrap_content"
+		android:text="OK"
+		android:layout_centerHorizontal="true"/>
+    
+    <ListView android:layout_below="@id/surat_tugas_header"
+    	android:layout_above="@id/surat_tugas_ok_btn"
     	android:orientation="vertical"
 	    android:layout_width="fill_parent"
 	    android:layout_height="fill_parent"
     	android:gravity="center_horizontal"
     	android:layout_margin="10dip"
     	android:background="@drawable/border"
+    	android:cacheColorHint="#00000000"
     	android:id="@+id/surat_tugas_listview">
 	</ListView>
-</LinearLayout>
+	
+</RelativeLayout>

@@ -2,20 +2,24 @@
 <TableRow
   xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="fill_parent"
-  android:layout_height="fill_parent">
+  android:layout_height="fill_parent"
+  android:padding="5dip">
   	<TextView 
-		android:layout_weight="1"
-		android:gravity="center"
+		android:layout_weight="2"
+        style="@style/tableTextViewStyle"
+		android:gravity="left"
 		android:text="Rokok Merah Jitu" 
 		android:id="@+id/item"/>
 	<TextView 
 		android:layout_weight="1"
-		android:gravity="center" 
+        style="@style/tableTextViewStyle"
+		android:gravity="right" 
 		android:text="100000"
 		android:id="@+id/num1"/>
 	<TextView 
 		android:layout_weight="1"
-		android:gravity="center" 
+        style="@style/tableTextViewStyle"
+		android:gravity="right" 
 		android:text="100000"
 		android:id="@+id/num2" />
 </TableRow>
